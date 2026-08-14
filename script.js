@@ -27,43 +27,191 @@ function preencherLista(idLista, opcoes) {
     });
 }
 
-const classes = {
-    Combatente: [
-        "Berserker",
-        "Vigia",
-        "Fortificado",
-        "Solo",
-        "Aberrante",
-        "Samurai Urbano",
-        "Feiticeiro",
-        "Punho Divergente",
-        "Caçador Desamparado"
-    ],
+function calcularVida() {
 
-    Especialista: [
-        "Técnico de Combate",
-        "Artífice Prodígio",
-        "Socorrista de Campo",
-        "Camper de Elite",
-        "Fantasma",
-        "Negociante Experiente",
-        "Arqueiro"
-    ],
+    const classe = campoClasse.value;
 
-    Profeta: [
-        "Destemido",
-        "Receptáculo",
-        "Alma Iluminada",
-        "Olho Paranormal",
-        "Invasor de Rede",
-        "Replicante"
-    ],
+    const resistencia = Number(
+        document.getElementById("resistencia").value
+    );
 
-    Ascetico: [
-        "Atormentado",
-        "Devorador"
-    ]
+    if (!classes[classe]) {
+        return;
+    }
+
+    const vidaBase = classes[classe].vidaBase;
+
+    const vidaMaxima = vidaBase + resistencia;
+
+    document.getElementById("vida").value = vidaMaxima;
+    document.getElementById("vida-max").textContent = `/ ${vidaMaxima}`;
 }
+
+function calcularPE() {
+    const classe = campoClasse.value;
+
+    const influencia = Number(
+        document.getElementById("influencia").value
+    );
+
+    if (!classes[classe]){
+        return;
+    }
+
+    const peBase = classes[classe].peBase;
+    const peMaximo = peBase + influencia;
+    
+    document.getElementById("pe").value = peMaximo
+    document.getElementById("pe-max").textContent = `/ ${peMaximo}`;
+}
+
+function calcularSanidade() {
+
+    const classe = campoClasse.value;
+
+    if (!classes[classe]) {
+        return;
+    }
+
+    const sanidadeMaxima = classes[classe].sanidadeBase;
+
+    document.getElementById("sanidade").value = sanidadeMaxima;
+    document.getElementById("sanidade-max").textContent = `/ ${sanidadeMaxima}`;
+}
+
+function adicionarPericia() {
+
+    const lista = document.getElementById("lista-pericias");
+
+    const pericia = document.createElement("div");
+
+    pericia.classList.add("skill");
+
+    pericia.innerHTML = `
+        <input
+            type="text"
+            list="lista-pericias-disponiveis"
+            placeholder="Escolha uma perícia"
+        >
+
+        <input
+            type="number"
+            value="5"
+            min="5"
+            max="15"
+            step="5"
+        >
+
+        <button
+            type="button"
+            onclick="this.parentElement.remove()"
+        >
+            🗑
+        </button>
+    `;
+
+    lista.appendChild(pericia);
+}
+
+const classes = {
+    Combatente: {
+        trilhas: [
+            "Berserker",
+            "Vigia",
+            "Fortificado",
+            "Solo",
+            "Aberrante",
+            "Samurai Urbano",
+            "Feiticeiro",
+            "Punho Divergente",
+            "Caçador Desamparado"
+        ],
+
+        vidaBase: 20,
+        peBase: 2,
+        sanidadeBase: 12
+    },
+
+    Especialista: {
+        trilhas: [
+            "Técnico de Combate",
+            "Artífice Prodígio",
+            "Socorrista de Campo",
+            "Camper de Elite",
+            "Fantasma",
+            "Negociante Experiente",
+            "Arqueiro"
+        ],
+
+        vidaBase: 16,
+        peBase: 3,
+        sanidadeBase: 16
+    },
+
+    Profeta: {
+        trilhas: [
+            "Destemido",
+            "Receptáculo",
+            "Alma Iluminada",
+            "Olho Paranormal",
+            "Invasor de Rede",
+            "Replicante"
+        ],
+
+        vidaBase: 13,
+        peBase: 4,
+        sanidadeBase: 20
+    },
+
+    Ascetico: {
+        trilhas: [
+            "Atormentado",
+            "Devorador"
+        ],
+
+        vidaBase: 15,
+        peBase: 3,
+        sanidadeBase: 15
+    }
+};
+
+const periciasDisponiveis = [
+    "Atletismo",
+    "Furtividade",
+    "Investigação",
+    "Acrobacia",
+    "Enganação",
+    "Intimidação",
+    "Percepção",
+    "Diplomacia",
+    "Sobrevivência",
+    "Sedução",
+    "Documentos",
+    "Combate",
+    "Pontaria",
+    "Fortificação",
+    "Iniciativa",
+    "Ofício",
+    "Reflexos",
+    "Resistir",
+    "Tecnologia",
+    "Medicina",
+    "Intuição",
+    "Crime",
+    "Domar"
+];
+
+const listaPericiasDisponiveis =
+    document.getElementById("lista-pericias-disponiveis");
+
+periciasDisponiveis.forEach(pericia => {
+
+    const option = document.createElement("option");
+
+    option.value = pericia;
+
+    listaPericiasDisponiveis.appendChild(option);
+});
 
 const listaClasses = document.getElementById("lista-classes");
 
@@ -93,7 +241,7 @@ campoClasse.addEventListener("change", () => {
         return;
     }
 
-    classes[classeEscolhida].forEach(trilha => {
+    classes[classeEscolhida].trilhas.forEach(trilha => {
 
         const option = document.createElement("option");
 
@@ -103,7 +251,18 @@ campoClasse.addEventListener("change", () => {
     });
 
     campoTrilha.disabled = false;
+    calcularVida();
+    calcularPE();
+    calcularSanidade();
 });
+
+document
+    .getElementById("resistencia")
+    .addEventListener("input", calcularVida);
+
+document
+    .getElementById("influencia")
+    .addEventListener("input", calcularPE);
 
 const origens = [
     "Acadêmico estudioso",

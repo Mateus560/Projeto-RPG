@@ -109,7 +109,7 @@
 
                     <div class="resource-header">
                         <span>Vida</span>
-                        <span>/ 50</span>
+                        <span id="vida-max">/ 50</span>
                     </div>
 
                     <div class="resource-value">
@@ -130,20 +130,20 @@
                 <div class="resource">
 
                     <div class="resource-header">
-                        <span>Mana</span>
-                        <span>/ 30</span>
+                        <span>PE</span>
+                        <span id="pe-max">/ 30</span>
                     </div>
 
                     <div class="resource-value">
-                        <button onclick="alterarRecurso('mana', -1)">−</button>
+                        <button onclick="alterarRecurso('pe', -1)">−</button>
 
                         <input
                             type="number"
-                            id="mana"
+                            id="pe"
                             value="30"
                         >
 
-                        <button onclick="alterarRecurso('mana', 1)">+</button>
+                        <button onclick="alterarRecurso('pe', 1)">+</button>
                     </div>
 
                 </div>
@@ -152,20 +152,20 @@
                 <div class="resource">
 
                     <div class="resource-header">
-                        <span>Energia</span>
-                        <span>/ 20</span>
+                        <span>Sanidade</span>
+                        <span id="sanidade-max">/ 20</span>
                     </div>
 
                     <div class="resource-value">
-                        <button onclick="alterarRecurso('energia', -1)">−</button>
+                        <button onclick="alterarRecurso('sanidade', -1)">−</button>
 
                         <input
                             type="number"
-                            id="energia"
+                            id="sanidade"
                             value="20"
                         >
 
-                        <button onclick="alterarRecurso('energia', 1)">+</button>
+                        <button onclick="alterarRecurso('sanidade', 1)">+</button>
                     </div>
 
                 </div>
@@ -183,23 +183,15 @@
 
             <h2 class="section-title">Perícias</h2>
 
-            <div class="skill">
-                <span>Atletismo</span>
-                <input type="number" value="0">
-                <input type="checkbox">
+            <div id="lista-pericias">
+                <!-- As perícias serão adicionadas aqui pelo JavaScript -->
             </div>
 
-            <div class="skill">
-                <span>Furtividade</span>
-                <input type="number" value="0">
-                <input type="checkbox">
-            </div>
+            <datalist id="lista-pericias-disponiveis"></datalist>
 
-            <div class="skill">
-                <span>Investigação</span>
-                <input type="number" value="0">
-                <input type="checkbox">
-            </div>
+            <button class="button" onclick="adicionarPericia()">
+                + Adicionar perícia
+            </button>
 
         </section>
 
