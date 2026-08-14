@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    
     <title>Ficha de Personagem</title>
 
 </head>
@@ -29,29 +30,26 @@
 
                 <div class="field">
                     <label for="origem">Origem</label>
-                    <input type="text" id="origem" placeholder="Nome da Origem">
+                    <input type="text" id="origem" list="lista-origens" placeholder="Nome da Origem">
+                    <datalist id="lista-origens"></datalist>
                 </div>
 
                 <div class="field">
                     <label for="classe">Classe</label>
-                    <input type="text" id="classe" placeholder="Nome da Classe">
+                    <input type="text" id="classe" placeholder="Nome da Classe" list="lista-classes">
+                    <datalist id="lista-classes"></datalist>
                 </div>
 
                 <div class="field">
                     <label for="trilha">Trilha</label>
-                    <input type="text" id="trilha" placeholder="Nome da trilha">
+                    <input type="text" id="trilha" list="lista-trilhas" placeholder="Nome da trilha" disabled>
+                    <datalist id="lista-trilhas"></datalist>
                 </div>
 
                 <div class="field">
                     <label for="epeem">EPEEM%</label>
-                    <input type="number" id="epeem" min="0" step="5" max="100">
+                    <input type="number" id="epeem" min="0" step="5" max="99">
                 </div>
-
-                <div class="field">
-                    <label for="xp">XP</label>
-                    <input type="number" id="xp" min="0">
-                </div>
-
             </div>
 
         </header>
@@ -354,32 +352,7 @@
             </div>
 
         </section>
-
     </main>
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-
-    <script>
-
-        function alterarRecurso(id, valor) {
-
-            const input = document.getElementById(id);
-
-            let atual = Number(input.value);
-
-            atual += valor;
-
-            if (atual < 0) {
-                atual = 0;
-            }
-
-            input.value = atual;
-        }
-
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
