@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ficha de Personagem</title>
+
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- =========================
+             CABEÇALHO
+        ========================== -->
+
+        <header class="header">
+
+            <h1>Ficha de Personagem</h1>
+
+            <div class="grid grid-2">
+
+                <div class="field">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" placeholder="Nome do personagem">
+                </div>
+
+                <div class="field">
+                    <label for="origem">Origem</label>
+                    <input type="text" id="origem" placeholder="Nome da Origem">
+                </div>
+
+                <div class="field">
+                    <label for="classe">Classe</label>
+                    <input type="text" id="classe" placeholder="Nome da Classe">
+                </div>
+
+                <div class="field">
+                    <label for="trilha">Trilha</label>
+                    <input type="text" id="trilha" placeholder="Nome da trilha">
+                </div>
+
+                <div class="field">
+                    <label for="epeem">EPEEM%</label>
+                    <input type="number" id="epeem" min="0" step="5" max="100">
+                </div>
+
+                <div class="field">
+                    <label for="xp">XP</label>
+                    <input type="number" id="xp" min="0">
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             ATRIBUTOS
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">Atributos</h2>
+
+            <div class="grid grid-2">
+
+                <div class="attribute">
+                    <span>Força</span>
+                    <input type="number" id="forca" min="0" step="1" max="5" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>Agilidade</span>
+                    <input type="number" id="agilidade" min="0" step="1" max="5" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>Resistência</span>
+                    <input type="number" id="resistencia" min="0" step="1" max="5" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>Conhecimento</span>
+                    <input type="number" id="conhecimento" min="0" step="1" max="5" value="1">
+                </div>
+
+                <div class="attribute">
+                    <span>Influência</span>
+                    <input type="number" id="influencia" min="0" step="1" max="5" value="1">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RECURSOS
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">Recursos</h2>
+
+            <div class="grid grid-3">
+
+                <div class="resource">
+
+                    <div class="resource-header">
+                        <span>Vida</span>
+                        <span>/ 50</span>
+                    </div>
+
+                    <div class="resource-value">
+                        <button onclick="alterarRecurso('vida', -1)">−</button>
+
+                        <input
+                            type="number"
+                            id="vida"
+                            value="50"
+                        >
+
+                        <button onclick="alterarRecurso('vida', 1)">+</button>
+                    </div>
+
+                </div>
+
+
+                <div class="resource">
+
+                    <div class="resource-header">
+                        <span>Mana</span>
+                        <span>/ 30</span>
+                    </div>
+
+                    <div class="resource-value">
+                        <button onclick="alterarRecurso('mana', -1)">−</button>
+
+                        <input
+                            type="number"
+                            id="mana"
+                            value="30"
+                        >
+
+                        <button onclick="alterarRecurso('mana', 1)">+</button>
+                    </div>
+
+                </div>
+
+
+                <div class="resource">
+
+                    <div class="resource-header">
+                        <span>Energia</span>
+                        <span>/ 20</span>
+                    </div>
+
+                    <div class="resource-value">
+                        <button onclick="alterarRecurso('energia', -1)">−</button>
+
+                        <input
+                            type="number"
+                            id="energia"
+                            value="20"
+                        >
+
+                        <button onclick="alterarRecurso('energia', 1)">+</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PERÍCIAS
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">Perícias</h2>
+
+            <div class="skill">
+                <span>Atletismo</span>
+                <input type="number" value="0">
+                <input type="checkbox">
+            </div>
+
+            <div class="skill">
+                <span>Furtividade</span>
+                <input type="number" value="0">
+                <input type="checkbox">
+            </div>
+
+            <div class="skill">
+                <span>Investigação</span>
+                <input type="number" value="0">
+                <input type="checkbox">
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             HABILIDADES
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">Habilidades</h2>
+
+            <div class="ability">
+
+                <h3>Bola de Fogo</h3>
+
+                <p>
+                    Custo: 10 Mana
+                </p>
+
+                <p>
+                    Dano: 3d8
+                </p>
+
+                <br>
+
+                <p>
+                    Uma poderosa magia de fogo lançada contra um alvo.
+                </p>
+
+                <br>
+
+                <button class="button">
+                    Usar
+                </button>
+
+            </div>
+
+            <button class="button">
+                + Adicionar habilidade
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             EQUIPAMENTO
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">Equipamento</h2>
+
+            <div class="field">
+
+                <label for="arma">
+                    Arma principal
+                </label>
+
+                <input
+                    type="text"
+                    id="arma"
+                    placeholder="Ex: Espada longa"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="armadura">
+                    Armadura
+                </label>
+
+                <input
+                    type="text"
+                    id="armadura"
+                    placeholder="Ex: Armadura de couro"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVENTÁRIO
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">Inventário</h2>
+
+            <div class="inventory-item">
+                <span>Poção de cura</span>
+                <span>x2</span>
+            </div>
+
+            <div class="inventory-item">
+                <span>Tocha</span>
+                <span>x5</span>
+            </div>
+
+            <br>
+
+            <button class="button">
+                + Adicionar item
+            </button>
+
+        </section>
+
+
+        <!-- =========================
+             ANOTAÇÕES
+        ========================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                Anotações
+            </h2>
+
+            <textarea
+                placeholder="História, informações, objetivos, observações..."
+            ></textarea>
+
+        </section>
+
+
+        <!-- =========================
+             AÇÕES
+        ========================== -->
+
+        <section class="section">
+
+            <div class="actions">
+
+                <button class="button button-primary">
+                    💾 Salvar
+                </button>
+
+                <button class="button">
+                    📂 Carregar
+                </button>
+
+                <button class="button">
+                    ⬇ Exportar
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function alterarRecurso(id, valor) {
+
+            const input = document.getElementById(id);
+
+            let atual = Number(input.value);
+
+            atual += valor;
+
+            if (atual < 0) {
+                atual = 0;
+            }
+
+            input.value = atual;
+        }
+
+    </script>
+
+</body>
+</html>
