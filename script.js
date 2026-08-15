@@ -1,16 +1,26 @@
 function alterarRecurso(id, valor) {
 
-            const input = document.getElementById(id);
+    const input = document.getElementById(id);
 
-            let atual = Number(input.value);
+    let atual = Number(input.value);
 
-            atual += valor;
+    const tipo = id.replace("-atual", "");
 
-            if (atual < 0) {
-                atual = 0;
-            }
+    const maximo = Number(
+        document.getElementById(`${tipo}-max`).textContent
+    );
 
-            input.value = atual;
+    atual += valor;
+
+    if (atual < 0) {
+        atual = 0;
+    }
+
+    if (atual > maximo) {
+        atual = maximo;
+    }
+
+    input.value = atual;
 }
 
 function preencherLista(idLista, opcoes) {
@@ -27,56 +37,65 @@ function preencherLista(idLista, opcoes) {
     });
 }
 
-function calcularVida() {
+function calcularStatus() {
 
     const classe = campoClasse.value;
+
+    if (!classes[classe]) {
+        return;
+    }
+
+    const epeem = Number(
+        document.getElementById("epeem").value
+    );
 
     const resistencia = Number(
         document.getElementById("resistencia").value
     );
 
-    if (!classes[classe]) {
-        return;
-    }
-
-    const vidaBase = classes[classe].vidaBase;
-
-    const vidaMaxima = vidaBase + resistencia;
-
-    document.getElementById("vida").value = vidaMaxima;
-    document.getElementById("vida-max").textContent = `/ ${vidaMaxima}`;
-}
-
-function calcularPE() {
-    const classe = campoClasse.value;
-
     const influencia = Number(
         document.getElementById("influencia").value
     );
 
-    if (!classes[classe]){
-        return;
+    const dadosClasse = classes[classe];
+
+    const progresso = Math.max(0, Math.floor(epeem / 5) - 1);
+    const vidaMaxima =
+        dadosClasse.vidaBase +
+        resistencia +
+        (progresso * (dadosClasse.progressao.vida + resistencia));
+
+    const peMaximo =
+        dadosClasse.peBase +
+        influencia +
+        (progresso * (dadosClasse.progressao.pe + influencia));
+
+    const sanidadeMaxima =
+        dadosClasse.sanidadeBase +
+        (progresso * dadosClasse.progressao.sanidade);
+
+    document.getElementById("vida-max").textContent = vidaMaxima;
+
+    document.getElementById("pe-max").textContent = peMaximo;
+
+    document.getElementById("sanidade-max").textContent = sanidadeMaxima;
+
+    const vidaAtual = document.getElementById("vida-atual");
+    const peAtual = document.getElementById("pe-atual");
+    const sanidadeAtual = document.getElementById("sanidade-atual");
+
+    if (Number(vidaAtual.value) > vidaMaxima) {
+        vidaAtual.value = vidaMaxima;
     }
 
-    const peBase = classes[classe].peBase;
-    const peMaximo = peBase + influencia;
-    
-    document.getElementById("pe").value = peMaximo
-    document.getElementById("pe-max").textContent = `/ ${peMaximo}`;
-}
-
-function calcularSanidade() {
-
-    const classe = campoClasse.value;
-
-    if (!classes[classe]) {
-        return;
+    if (Number(peAtual.value) > peMaximo) {
+        peAtual.value = peMaximo;
     }
 
-    const sanidadeMaxima = classes[classe].sanidadeBase;
+    if (Number(sanidadeAtual.value) > sanidadeMaxima) {
+        sanidadeAtual.value = sanidadeMaxima;
+    }
 
-    document.getElementById("sanidade").value = sanidadeMaxima;
-    document.getElementById("sanidade-max").textContent = `/ ${sanidadeMaxima}`;
 }
 
 function adicionarPericia() {
@@ -110,8 +129,70 @@ function adicionarPericia() {
         </button>
     `;
 
+    const bonus = pericia.querySelector('input[type="number"]');
+
+    bonus.addEventListener("input", () => {
+
+        let valor = Number(bonus.value);
+
+        if (valor < 5) {
+            valor = 5;
+        }
+
+        if (valor > 15) {
+            valor = 15;
+        }
+
+        valor = Math.round(valor / 5) * 5;
+
+        bonus.value = valor;
+    });
+
     lista.appendChild(pericia);
 }
+
+function limitarValor(id, minimo, maximo) {
+    const campo = document.getElementById(id)
+    campo.addEventListener("input", () => {
+        let valor = Number(campo.value);
+
+        if (valor > maximo){
+            campo.value = maximo
+        }
+
+        if (valor < minimo) {
+            campo.value = minimo
+        }
+    });
+}
+
+function limitarRecursoAtual(id) {
+
+    const campo = document.getElementById(id);
+
+    campo.addEventListener("input", () => {
+
+        const tipo = id.replace("-atual", "");
+
+        const maximo = Number(
+            document.getElementById(`${tipo}-max`).textContent
+        );
+
+        let valor = Number(campo.value);
+
+        if (valor < 0) {
+            valor = 0;
+        }
+
+        if (valor > maximo) {
+            valor = maximo;
+        }
+
+        campo.value = valor;
+    });
+}
+
+const campoResistencia = document.getElementById("resistencia")
 
 const classes = {
     Combatente: {
@@ -129,7 +210,13 @@ const classes = {
 
         vidaBase: 20,
         peBase: 2,
-        sanidadeBase: 12
+        sanidadeBase: 12,
+
+        progressao: {
+            vida: 5,
+            pe: 2,
+            sanidade: 3
+        }
     },
 
     Especialista: {
@@ -145,7 +232,13 @@ const classes = {
 
         vidaBase: 16,
         peBase: 3,
-        sanidadeBase: 16
+        sanidadeBase: 16,
+
+        progressao: {
+            vida: 4,
+            pe: 3,
+            sanidade: 4
+        }
     },
 
     Profeta: {
@@ -160,7 +253,13 @@ const classes = {
 
         vidaBase: 13,
         peBase: 4,
-        sanidadeBase: 20
+        sanidadeBase: 20,
+
+        progressao: {
+            vida: 3,
+            pe: 4,
+            sanidade: 5
+        }
     },
 
     Ascetico: {
@@ -171,7 +270,13 @@ const classes = {
 
         vidaBase: 15,
         peBase: 3,
-        sanidadeBase: 15
+        sanidadeBase: 15,
+
+        progressao: {
+            vida: 3,
+            pe: 3,
+            sanidade: 4
+        }
     }
 };
 
@@ -251,18 +356,20 @@ campoClasse.addEventListener("change", () => {
     });
 
     campoTrilha.disabled = false;
-    calcularVida();
-    calcularPE();
-    calcularSanidade();
+    calcularStatus();
 });
 
 document
+    .getElementById("epeem")
+    .addEventListener("input", calcularStatus);
+
+document
     .getElementById("resistencia")
-    .addEventListener("input", calcularVida);
+    .addEventListener("input", calcularStatus);
 
 document
     .getElementById("influencia")
-    .addEventListener("input", calcularPE);
+    .addEventListener("input", calcularStatus);
 
 const origens = [
     "Acadêmico estudioso",
@@ -297,3 +404,14 @@ const origens = [
 ];
 
 preencherLista("lista-origens", origens)
+
+limitarValor("epeem", 0, 99)
+limitarValor("forca", 0, 5)
+limitarValor("agilidade", 0, 5)
+limitarValor("influencia", 0, 5)
+limitarValor("resistencia", 0, 5)
+limitarValor("conhecimento", 0, 5)
+
+limitarRecursoAtual("vida-atual");
+limitarRecursoAtual("pe-atual");
+limitarRecursoAtual("sanidade-atual");

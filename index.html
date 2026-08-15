@@ -105,67 +105,87 @@
 
             <div class="grid grid-3">
 
+                <!-- VIDA -->
                 <div class="resource">
-
                     <div class="resource-header">
                         <span>Vida</span>
-                        <span id="vida-max">/ 50</span>
+                        <span>/ <span id="vida-max">0</span></span>
                     </div>
 
                     <div class="resource-value">
-                        <button onclick="alterarRecurso('vida', -1)">−</button>
+
+                        <button onclick="alterarRecurso('vida-atual', -1)">
+                            −
+                        </button>
 
                         <input
                             type="number"
-                            id="vida"
-                            value="50"
+                            id="vida-atual"
+                            value="0"
                         >
 
-                        <button onclick="alterarRecurso('vida', 1)">+</button>
+                        <button onclick="alterarRecurso('vida-atual', 1)">
+                            +
+                        </button>
+
                     </div>
 
                 </div>
 
 
+                <!-- PE -->
                 <div class="resource">
 
                     <div class="resource-header">
                         <span>PE</span>
-                        <span id="pe-max">/ 30</span>
+                        <span>/ <span id="pe-max">0</span></span>
                     </div>
 
                     <div class="resource-value">
-                        <button onclick="alterarRecurso('pe', -1)">−</button>
+
+                        <button onclick="alterarRecurso('pe-atual', -1)">
+                            −
+                        </button>
 
                         <input
                             type="number"
-                            id="pe"
-                            value="30"
+                            id="pe-atual"
+                            value="0"
                         >
 
-                        <button onclick="alterarRecurso('pe', 1)">+</button>
+                        <button onclick="alterarRecurso('pe-atual', 1)">
+                            +
+                        </button>
+
                     </div>
 
                 </div>
 
 
+                <!-- SANIDADE -->
                 <div class="resource">
 
                     <div class="resource-header">
                         <span>Sanidade</span>
-                        <span id="sanidade-max">/ 20</span>
+                        <span>/ <span id="sanidade-max">0</span></span>
                     </div>
 
                     <div class="resource-value">
-                        <button onclick="alterarRecurso('sanidade', -1)">−</button>
+
+                        <button onclick="alterarRecurso('sanidade-atual', -1)">
+                            −
+                        </button>
 
                         <input
                             type="number"
-                            id="sanidade"
-                            value="20"
+                            id="sanidade-atual"
+                            value="0"
                         >
 
-                        <button onclick="alterarRecurso('sanidade', 1)">+</button>
+                        <button onclick="alterarRecurso('sanidade-atual', 1)">
+                            +
+                        </button>
+
                     </div>
 
                 </div>
