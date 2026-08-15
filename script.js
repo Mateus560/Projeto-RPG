@@ -98,59 +98,6 @@ function calcularStatus() {
 
 }
 
-function adicionarPericia() {
-
-    const lista = document.getElementById("lista-pericias");
-
-    const pericia = document.createElement("div");
-
-    pericia.classList.add("skill");
-
-    pericia.innerHTML = `
-        <input
-            type="text"
-            list="lista-pericias-disponiveis"
-            placeholder="Escolha uma perícia"
-        >
-
-        <input
-            type="number"
-            value="5"
-            min="5"
-            max="15"
-            step="5"
-        >
-
-        <button
-            type="button"
-            onclick="this.parentElement.remove()"
-        >
-            🗑
-        </button>
-    `;
-
-    const bonus = pericia.querySelector('input[type="number"]');
-
-    bonus.addEventListener("input", () => {
-
-        let valor = Number(bonus.value);
-
-        if (valor < 5) {
-            valor = 5;
-        }
-
-        if (valor > 15) {
-            valor = 15;
-        }
-
-        valor = Math.round(valor / 5) * 5;
-
-        bonus.value = valor;
-    });
-
-    lista.appendChild(pericia);
-}
-
 function limitarValor(id, minimo, maximo) {
     const campo = document.getElementById(id)
     campo.addEventListener("input", () => {
@@ -192,6 +139,77 @@ function limitarRecursoAtual(id) {
     });
 }
 
+function carregarPericiasIniciais() {
+
+    const classe = campoClasse.value;
+
+    if (!classes[classe]) {
+        return;
+    }
+
+    const lista = document.getElementById("pericias-iniciais");
+
+    lista.innerHTML = "";
+
+    classes[classe].periciasIniciais.forEach(grupo => {
+
+        const select = document.createElement("select");
+
+        grupo.forEach(pericia => {
+
+            const option = document.createElement("option");
+
+            option.value = pericia;
+            option.textContent = pericia;
+
+            select.appendChild(option);
+        });
+
+        lista.appendChild(select);
+    });
+}
+
+function criarSlotsPericias() {
+
+    const lista = document.getElementById("lista-pericias");
+
+    lista.innerHTML = "";
+
+    const classe = campoClasse.value;
+    const conhecimento = Number(
+        document.getElementById("conhecimento").value
+    );
+
+    if (!classes[classe]) {
+        return;
+    }
+
+    const limite = classes[classe].limitePericias + conhecimento;
+
+    for (let i = 0; i < limite; i++) {
+
+        const pericia = document.createElement("div");
+
+        pericia.classList.add("skill");
+
+        pericia.innerHTML = `
+            <input
+                type="text"
+                list="lista-pericias-disponiveis"
+                placeholder="Escolha uma perícia"
+            >
+
+            <select>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        `;
+
+        lista.appendChild(pericia);
+    }
+}
+
 const campoResistencia = document.getElementById("resistencia")
 
 const classes = {
@@ -216,7 +234,14 @@ const classes = {
             vida: 5,
             pe: 2,
             sanidade: 3
-        }
+        },
+
+        periciasIniciais: [
+            ["Combate", "Pontaria"],
+            ["Reflexos", "Fortificação"]
+        ],
+
+        limitePericias: 2
     },
 
     Especialista: {
@@ -238,7 +263,9 @@ const classes = {
             vida: 4,
             pe: 3,
             sanidade: 4
-        }
+        },
+
+        limitePericias: 7
     },
 
     Profeta: {
@@ -259,7 +286,13 @@ const classes = {
             vida: 3,
             pe: 4,
             sanidade: 5
-        }
+        },
+
+        periciasIniciais: [
+            "Ritualismo", "Resistir"
+        ],
+
+        limitePericias: 3
     },
 
     Ascetico: {
@@ -276,7 +309,13 @@ const classes = {
             vida: 3,
             pe: 3,
             sanidade: 4
-        }
+        },
+
+        periciasIniciais: [
+            "Ritualismo", "Religião"
+        ],
+
+        limitePericias: 3
     }
 };
 
@@ -338,8 +377,8 @@ campoClasse.addEventListener("change", () => {
     const classeEscolhida = campoClasse.value;
 
     listaTrilhas.innerHTML = "";
-
     campoTrilha.value = "";
+    document.getElementById("lista-pericias").innerHTML = "";
 
     if (!classes[classeEscolhida]) {
         campoTrilha.disabled = true;
@@ -357,6 +396,8 @@ campoClasse.addEventListener("change", () => {
 
     campoTrilha.disabled = false;
     calcularStatus();
+    criarSlotsPericias();
+    carregarPericiasIniciais();
 });
 
 document
@@ -370,6 +411,10 @@ document
 document
     .getElementById("influencia")
     .addEventListener("input", calcularStatus);
+
+document
+    .getElementById("conhecimento")
+    .addEventListener("input", criarSlotsPericias);
 
 const origens = [
     "Acadêmico estudioso",
