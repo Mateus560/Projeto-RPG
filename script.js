@@ -139,36 +139,6 @@ function limitarRecursoAtual(id) {
     });
 }
 
-function carregarPericiasIniciais() {
-
-    const classe = campoClasse.value;
-
-    if (!classes[classe]) {
-        return;
-    }
-
-    const lista = document.getElementById("pericias-iniciais");
-
-    lista.innerHTML = "";
-
-    classes[classe].periciasIniciais.forEach(grupo => {
-
-        const select = document.createElement("select");
-
-        grupo.forEach(pericia => {
-
-            const option = document.createElement("option");
-
-            option.value = pericia;
-            option.textContent = pericia;
-
-            select.appendChild(option);
-        });
-
-        lista.appendChild(select);
-    });
-}
-
 function criarSlotsPericias() {
 
     const lista = document.getElementById("lista-pericias");
@@ -176,6 +146,7 @@ function criarSlotsPericias() {
     lista.innerHTML = "";
 
     const classe = campoClasse.value;
+
     const conhecimento = Number(
         document.getElementById("conhecimento").value
     );
@@ -184,15 +155,16 @@ function criarSlotsPericias() {
         return;
     }
 
-    const limite = classes[classe].limitePericias + conhecimento;
+    const limite =
+        classes[classe].limitePericias + conhecimento;
 
     for (let i = 0; i < limite; i++) {
 
-        const pericia = document.createElement("div");
+        const campo = document.createElement("div");
 
-        pericia.classList.add("skill");
+        campo.classList.add("skill");
 
-        pericia.innerHTML = `
+        campo.innerHTML = `
             <input
                 type="text"
                 list="lista-pericias-disponiveis"
@@ -206,11 +178,66 @@ function criarSlotsPericias() {
             </select>
         `;
 
-        lista.appendChild(pericia);
+        lista.appendChild(campo);
     }
 }
 
-const campoResistencia = document.getElementById("resistencia")
+function carregarPericiasIniciais() {
+
+    const classe = campoClasse.value;
+
+    if (!classes[classe]) {
+        return;
+    }
+
+    const lista = document.getElementById("pericias-iniciais");
+
+    lista.innerHTML = "";
+
+    classes[classe].periciasIniciais?.forEach(pericia => {
+
+        const campo = document.createElement("div");
+
+        campo.classList.add("skill");
+
+        if (Array.isArray(pericia)) {
+
+            campo.innerHTML = `
+                <select>
+                    ${pericia.map(opcao => `
+                        <option value="${opcao}">
+                            ${opcao}
+                        </option>
+                    `).join("")}
+                </select>
+
+                <select>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            `;
+
+        } else {
+
+            campo.innerHTML = `
+                <input
+                    type="text"
+                    value="${pericia}"
+                    readonly
+                >
+
+                <select>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            `;
+        }
+
+        lista.appendChild(campo);
+    });
+}
 
 const classes = {
     Combatente: {
@@ -378,10 +405,13 @@ campoClasse.addEventListener("change", () => {
 
     listaTrilhas.innerHTML = "";
     campoTrilha.value = "";
-    document.getElementById("lista-pericias").innerHTML = "";
 
     if (!classes[classeEscolhida]) {
         campoTrilha.disabled = true;
+
+        document.getElementById("lista-pericias").innerHTML = "";
+        document.getElementById("pericias-iniciais").innerHTML = "";
+
         return;
     }
 
@@ -395,9 +425,10 @@ campoClasse.addEventListener("change", () => {
     });
 
     campoTrilha.disabled = false;
+
     calcularStatus();
-    criarSlotsPericias();
     carregarPericiasIniciais();
+    criarSlotsPericias();
 });
 
 document
@@ -450,13 +481,11 @@ const origens = [
 
 preencherLista("lista-origens", origens)
 
-limitarValor("epeem", 0, 99)
-limitarValor("forca", 0, 5)
-limitarValor("agilidade", 0, 5)
-limitarValor("influencia", 0, 5)
-limitarValor("resistencia", 0, 5)
-limitarValor("conhecimento", 0, 5)
-
 limitarRecursoAtual("vida-atual");
 limitarRecursoAtual("pe-atual");
 limitarRecursoAtual("sanidade-atual");
+limitarValor("forca", 0, 5)
+limitarValor("resistencia", 0, 5)
+limitarValor("agilidade", 0, 5)
+limitarValor("influencia", 0, 5)
+limitarValor("conhecimento", 0, 5)
