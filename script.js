@@ -239,6 +239,112 @@ function carregarPericiasIniciais() {
     });
 }
 
+function calcularEspacoInventario() {
+    const forca = Number(
+        document.getElementById("forca").value
+    );
+    if (forca === 0){
+        return 2
+    };
+    return forca * 5
+}
+
+function calcularEspacoUsado() {
+
+    let espacoUsado = 0;
+
+    const espacos = document.querySelectorAll(".espaco-arma");
+
+    espacos.forEach(campo => {
+        espacoUsado += Number(campo.value) || 0;
+    });
+
+    return espacoUsado;
+}
+
+function atualizarInventario() {
+
+    const usado = calcularEspacoUsado();
+    const maximo = calcularEspacoInventario();
+
+    document.getElementById("espaco").textContent =
+        `Espaço: ${usado}/${maximo}`;
+}
+
+function adicionarArma() {
+
+    const lista = document.getElementById("lista-armas");
+
+    const arma = document.createElement("div");
+
+    arma.classList.add("inventory-item");
+
+    arma.innerHTML = `
+        <div class="field">
+
+            <label>Nome da arma</label>
+
+            <input
+                type="text"
+                placeholder="Ex: Espada longa"
+            >
+
+        </div>
+
+        <div class="grid grid-3">
+
+            <div class="field">
+
+                <label>Dano</label>
+
+                <input
+                    type="text"
+                    placeholder="Ex: 1d8"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>Crítico</label>
+
+                <input
+                    type="text"
+                    placeholder="Ex: 19/x2"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>Espaço</label>
+
+                <input
+                    type="number"
+                    min="0"
+                    value="1"
+                    class="espaco-arma"
+                >
+
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="button-remover"
+            onclick="this.parentElement.remove(); atualizarInventario();"
+        >
+            Remover
+        </button>
+    `;
+
+    lista.appendChild(arma);
+    const campoEspaco = arma.querySelector(".espaco-arma");
+    campoEspaco.addEventListener("input", atualizarInventario);
+    atualizarInventario();
+}
+
 const classes = {
     Combatente: {
         trilhas: [
@@ -372,6 +478,16 @@ const periciasDisponiveis = [
     "Domar"
 ];
 
+const armas = [
+
+];
+
+const itens = [
+    
+];
+
+const inventario = [];
+
 const listaPericiasDisponiveis =
     document.getElementById("lista-pericias-disponiveis");
 
@@ -489,3 +605,9 @@ limitarValor("resistencia", 0, 5)
 limitarValor("agilidade", 0, 5)
 limitarValor("influencia", 0, 5)
 limitarValor("conhecimento", 0, 5)
+
+document
+    .getElementById("forca")
+    .addEventListener("input", atualizarInventario);
+
+atualizarInventario();

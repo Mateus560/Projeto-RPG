@@ -18,7 +18,7 @@ body {
 button,
 input,
 textarea {
-    font: inherit;
+    font: inarialerit;
 }
 
 input,
@@ -44,6 +44,11 @@ button {
     cursor: pointer;
 }
 
+.button-remover{
+    background-color: red;
+    color: white;
+    margin-top: 10px;
+}
 
 /* =========================
     CONTAINER
@@ -260,12 +265,19 @@ button {
 ========================= */
 
 .inventory-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
     padding: 0.75rem 0;
     border-bottom: 1px solid #333;
+}
+
+.arma {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #1c1c1c;
 }
 
 .inventory-item:last-child {
@@ -303,6 +315,10 @@ textarea {
 }
 
 @media (min-width: 600px) {
+
+    .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
     .grid-attributes {
         grid-template-columns: repeat(6, 1fr);
