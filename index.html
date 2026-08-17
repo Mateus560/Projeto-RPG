@@ -227,33 +227,9 @@
 
             <h2 class="section-title">Habilidades</h2>
 
-            <div class="ability">
+            <div id="lista-habilidades"></div>
 
-                <h3>Bola de Fogo</h3>
-
-                <p>
-                    Custo: 10 Mana
-                </p>
-
-                <p>
-                    Dano: 3d8
-                </p>
-
-                <br>
-
-                <p>
-                    Uma poderosa magia de fogo lançada contra um alvo.
-                </p>
-
-                <br>
-
-                <button class="button">
-                    Usar
-                </button>
-
-            </div>
-
-            <button class="button">
+            <button type="button" class="adicionar" onclick="adicionarHabilidade()">
                 + Adicionar habilidade
             </button>
 
@@ -277,7 +253,7 @@
 
                 <button
                     type="button"
-                    class="button"
+                    class="adicionar"
                     onclick="adicionarArma()"
                 >
                     + Adicionar arma
@@ -291,7 +267,7 @@
                 <div id="lista-itens">
 
                 </div>
-                <button class="button" onclick="adicionarItem()">
+                <button class="adicionar" onclick="adicionarItem()">
                     + Adicionar item
                 </button>
             </div>

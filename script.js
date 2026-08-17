@@ -345,6 +345,150 @@ function adicionarArma() {
     atualizarInventario();
 }
 
+function adicionarItem(){
+    const lista = document.getElementById("lista-itens");
+    const item = document.createElement("div");
+
+    item.classList.add("inventory-items");
+    item.innerHTML = `
+        <div class="field">
+
+            <label>Nome do item</label>
+
+            <input
+                type="text"
+                placeholder="Ex: Corda"
+            >
+
+            <div class="field">
+
+                <label>Espaço</label>
+
+                <input
+                    type="number"
+                    min="0"
+                    value="1"
+                    class="espaco-arma"
+                >
+            </div>
+            <div class="field">
+                <label>Descrição<label>
+                <textarea>
+                </textarea>
+            </div>
+        </div>
+
+        <button
+            type="button"
+            class="button-remover"
+            onclick="this.parentElement.remove(); atualizarInventario();"
+        >
+            Remover
+        </button>
+    `;
+
+    lista.appendChild(item);
+    const campoEspaco = item.querySelector(".espaco-arma");
+    campoEspaco.addEventListener("input", atualizarInventario);
+    atualizarInventario();
+}
+
+function adicionarHabilidade() {
+
+    const lista = document.getElementById("lista-habilidades");
+
+    const habilidade = document.createElement("div");
+
+    habilidade.classList.add("ability");
+
+    habilidade.innerHTML = `
+        <h3>Nova habilidade</h3>
+
+        <div class="field">
+            <label>Nome</label>
+            <input
+                type="text"
+                placeholder="Nome da habilidade"
+            >
+        </div>
+
+        <div class="grid grid-2">
+
+            <div class="field">
+                <label>Custo em PE</label>
+                <input
+                    type="number"
+                    class="custo-habilidade"
+                    min="1"
+                    value="1"
+                >
+            </div>
+
+            <div class="field">
+                <label>Dano/Efeito</label>
+                <input
+                    type="text"
+                    placeholder="Ex: 2d8"
+                >
+            </div>
+
+        </div>
+
+        <div class="field">
+            <label>Descrição</label>
+            <textarea
+                placeholder="Descreva o efeito da habilidade..."
+            ></textarea>
+        </div>
+            <div class="ability-actions">
+                <button
+                    type="button"
+                    class="button usar-habilidade"
+                    >
+                    Usar
+                </button>
+
+                <button
+                    type="button"
+                    class="button-remover"
+                    >
+                    Remover
+                </button>
+            </div>
+    `;
+
+    lista.appendChild(habilidade);
+
+    const botaoUsar = habilidade.querySelector(".usar-habilidade");
+    const botaoRemover = habilidade.querySelector(".button-remover");
+
+    botaoUsar.addEventListener("click", () => {
+        usarHabilidade(habilidade);
+    });
+
+    botaoRemover.addEventListener("click", () => {
+        habilidade.remove();
+    });
+}
+
+function usarHabilidade(habilidade) {
+
+    const custo = Number(
+        habilidade.querySelector(".custo-habilidade").value
+    );
+
+    const pe = document.getElementById("pe-atual");
+
+    const atual = Number(pe.value);
+
+    if (atual < custo) {
+        alert("PE insuficiente!");
+        return;
+    }
+
+    alterarRecurso("pe-atual", -custo);
+}
+
 const classes = {
     Combatente: {
         trilhas: [

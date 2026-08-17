@@ -44,10 +44,27 @@ button {
     cursor: pointer;
 }
 
+.adicionar{
+    background-color: white;
+    margin-top: 10px;
+}
+
+.usar-habilidade{
+    background-color: rgb(68, 68, 147);
+}
+
 .button-remover{
     background-color: red;
     color: white;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.ability-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
 }
 
 /* =========================
