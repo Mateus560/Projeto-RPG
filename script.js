@@ -443,7 +443,7 @@ function adicionarHabilidade() {
             <div class="ability-actions">
                 <button
                     type="button"
-                    class="button usar-habilidade"
+                    class="usar-habilidade"
                     >
                     Usar
                 </button>

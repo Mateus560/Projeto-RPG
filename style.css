@@ -50,7 +50,8 @@ button {
 }
 
 .usar-habilidade{
-    background-color: rgb(68, 68, 147);
+    background-color: rgb(0, 132, 255);
+    color: white;
 }
 
 .button-remover{
