@@ -16,6 +16,23 @@
         <!-- =========================
              CABEÇALHO
         ========================== -->
+        <div id="modal-alerta" class="modal">
+            <div class="modal-content">
+                <h3>PE insuficiente</h3>
+
+                <p>
+                    Você não possui PE suficiente para usar esta habilidade.
+                </p>
+
+                <button
+                    type="button"
+                    class="button"
+                    onclick="fecharAlerta()"
+                >
+                    Entendi
+                </button>
+            </div>
+        </div>
 
         <header class="header">
 
@@ -114,7 +131,7 @@
 
                     <div class="resource-value">
 
-                        <button onclick="alterarRecurso('vida-atual', -1)">
+                        <button class="menos" onclick="alterarRecurso('vida-atual', -1)">
                             −
                         </button>
 
@@ -124,7 +141,7 @@
                             value="0"
                         >
 
-                        <button onclick="alterarRecurso('vida-atual', 1)">
+                        <button class="mais" onclick="alterarRecurso('vida-atual', 1)">
                             +
                         </button>
 
@@ -143,7 +160,7 @@
 
                     <div class="resource-value">
 
-                        <button onclick="alterarRecurso('pe-atual', -1)">
+                        <button class="menos" onclick="alterarRecurso('pe-atual', -1)">
                             −
                         </button>
 
@@ -153,7 +170,7 @@
                             value="0"
                         >
 
-                        <button onclick="alterarRecurso('pe-atual', 1)">
+                        <button class="mais" onclick="alterarRecurso('pe-atual', 1)">
                             +
                         </button>
 
@@ -172,7 +189,7 @@
 
                     <div class="resource-value">
 
-                        <button onclick="alterarRecurso('sanidade-atual', -1)">
+                        <button class="menos" onclick="alterarRecurso('sanidade-atual', -1)">
                             −
                         </button>
 
@@ -182,7 +199,7 @@
                             value="0"
                         >
 
-                        <button onclick="alterarRecurso('sanidade-atual', 1)">
+                        <button class="mais" onclick="alterarRecurso('sanidade-atual', 1)">
                             +
                         </button>
 

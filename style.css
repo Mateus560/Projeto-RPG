@@ -198,19 +198,30 @@ button {
     text-align: center;
 }
 
-.resource-value button {
+.resource-value .menos {
     width: 40px;
     height: 40px;
     padding: 0;
-    background: #444;
+    background: #ff0000;
     color: white;
     font-size: 1.2rem;
 }
 
-.resource-value button:hover {
-    background: #555;
+.resource-value .mais {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background-color: #2bd02b;
+    color: white;
 }
 
+.resource-value .menos:hover {
+    background: #ff0000dc;
+}
+
+.resource-value .mais:hover {
+    background-color: #2bd02bdc;
+}
 
 /* =========================
     PERÍCIAS
@@ -259,6 +270,40 @@ button {
     font-size: 0.9rem;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    z-index: 1000;
+}
+
+.modal-content {
+    width: min(90%, 400px);
+
+    padding: 1.5rem;
+
+    border: 1px solid #444;
+    border-radius: 12px;
+
+    background: #222;
+
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-bottom: 0.75rem;
+}
+
+.modal-content p {
+    margin-bottom: 1.25rem;
+    color: #bbb;
+}
 
 /* =========================
     BOTÕES
@@ -275,6 +320,10 @@ button {
 
 .button-primary {
     background: #666;
+}
+
+.button-menos {
+    background-color: red;
 }
 
 

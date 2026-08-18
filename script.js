@@ -402,8 +402,6 @@ function adicionarHabilidade() {
     habilidade.classList.add("ability");
 
     habilidade.innerHTML = `
-        <h3>Nova habilidade</h3>
-
         <div class="field">
             <label>Nome</label>
             <input
@@ -482,11 +480,27 @@ function usarHabilidade(habilidade) {
     const atual = Number(pe.value);
 
     if (atual < custo) {
-        alert("PE insuficiente!");
+        mostrarAlerta("Você não possui PE suficiente para usar esta habilidade.");
         return;
     }
 
     alterarRecurso("pe-atual", -custo);
+}
+
+function mostrarAlerta(mensagem) {
+
+    const modal = document.getElementById("modal-alerta");
+
+    modal.querySelector("p").textContent = mensagem;
+
+    modal.style.display = "flex";
+}
+
+function fecharAlerta() {
+
+    const modal = document.getElementById("modal-alerta");
+
+    modal.style.display = "none";
 }
 
 const classes = {
