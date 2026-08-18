@@ -487,10 +487,10 @@ function usarHabilidade(habilidade) {
     alterarRecurso("pe-atual", -custo);
 }
 
-function mostrarAlerta(mensagem) {
+function mostrarAlerta(titulo, mensagem) {
 
     const modal = document.getElementById("modal-alerta");
-
+    modal.querySelector("h3").textContent = titulo;
     modal.querySelector("p").textContent = mensagem;
 
     modal.style.display = "flex";
@@ -501,6 +501,202 @@ function fecharAlerta() {
     const modal = document.getElementById("modal-alerta");
 
     modal.style.display = "none";
+}
+
+function coletarPericias() {
+
+    const periciasIniciais = [];
+
+    document
+        .querySelectorAll("#pericias-iniciais .skill")
+        .forEach(skill => {
+
+            const campo = skill.querySelector("input, select");
+            const valor = skill.querySelector("select:last-child").value;
+
+            periciasIniciais.push({
+                nome: campo.value,
+                valor: valor
+            });
+        });
+
+
+    const periciasAdicionais = [];
+
+    document
+        .querySelectorAll("#lista-pericias .skill")
+        .forEach(skill => {
+
+            const nome = skill.querySelector("input").value;
+            const valor = skill.querySelector("select").value;
+
+            periciasAdicionais.push({
+                nome: nome,
+                valor: valor
+            });
+        });
+
+
+    return {
+        iniciais: periciasIniciais,
+        adicionais: periciasAdicionais
+    };
+}
+
+function carregarPericias(pericias) {
+
+    if (!pericias) {
+        return;
+    }
+
+    // =========================
+    // PERÍCIAS INICIAIS
+    // =========================
+
+    const iniciais =
+        document.querySelectorAll("#pericias-iniciais .skill");
+
+    pericias.iniciais.forEach((pericia, index) => {
+
+        const skill = iniciais[index];
+
+        if (!skill) {
+            return;
+        }
+
+        const campoNome =
+            skill.querySelector("input, select");
+
+        const camposValor =
+            skill.querySelectorAll("select");
+
+        campoNome.value = pericia.nome;
+
+        camposValor[camposValor.length - 1].value =
+            pericia.valor;
+    });
+
+
+    // =========================
+    // PERÍCIAS ADICIONAIS
+    // =========================
+
+    const adicionais =
+        document.querySelectorAll("#lista-pericias .skill");
+
+    pericias.adicionais.forEach((pericia, index) => {
+
+        const skill = adicionais[index];
+
+        if (!skill) {
+            return;
+        }
+
+        const campoNome =
+            skill.querySelector("input");
+
+        const campoValor =
+            skill.querySelector("select");
+
+        campoNome.value = pericia.nome;
+        campoValor.value = pericia.valor;
+    });
+}
+
+function coletarFicha() {
+
+    return {
+        nome: document.getElementById("nome").value,
+        origem: document.getElementById("origem").value,
+        classe: document.getElementById("classe").value,
+        trilha: document.getElementById("trilha").value,
+        epeem: document.getElementById("epeem").value,
+
+        atributos: {
+            forca: document.getElementById("forca").value,
+            agilidade: document.getElementById("agilidade").value,
+            resistencia: document.getElementById("resistencia").value,
+            conhecimento: document.getElementById("conhecimento").value,
+            influencia: document.getElementById("influencia").value
+        },
+
+        recursos: {
+            vida: document.getElementById("vida-atual").value,
+            pe: document.getElementById("pe-atual").value,
+            sanidade: document.getElementById("sanidade-atual").value
+        },
+
+        anotacoes: document.querySelector("textarea").value,
+
+        pericias: coletarPericias()
+    };
+}
+
+function salvarFicha() {
+
+    const ficha = coletarFicha();
+
+    localStorage.setItem(
+        "ficha-personagem",
+        JSON.stringify(ficha)
+    );
+    console.log("Ficha salva:", ficha);
+    mostrarAlerta("Salvar", "Ficha salva com sucesso!");
+}
+
+function carregarFicha() {
+
+    const dados = localStorage.getItem("ficha-personagem");
+
+    if (!dados) {
+        mostrarAlerta("Carregar", "Nenhuma ficha salva encontrada.");
+        return;
+    }
+
+    const ficha = JSON.parse(dados);
+
+    document.getElementById("nome").value = ficha.nome;
+    document.getElementById("origem").value = ficha.origem;
+    document.getElementById("classe").value = ficha.classe;
+    document.getElementById("trilha").value = ficha.trilha;
+    document.getElementById("epeem").value = ficha.epeem;
+
+    campoClasse.dispatchEvent(new Event("change"));
+
+    document.getElementById("forca").value =
+        ficha.atributos.forca;
+
+    document.getElementById("agilidade").value =
+        ficha.atributos.agilidade;
+
+    document.getElementById("resistencia").value =
+        ficha.atributos.resistencia;
+
+    document.getElementById("conhecimento").value =
+        ficha.atributos.conhecimento;
+
+    document.getElementById("influencia").value =
+        ficha.atributos.influencia;
+
+    document.getElementById("vida-atual").value =
+        ficha.recursos.vida;
+
+    document.getElementById("pe-atual").value =
+        ficha.recursos.pe;
+
+    document.getElementById("sanidade-atual").value =
+        ficha.recursos.sanidade;
+
+    document.querySelector("textarea").value =
+        ficha.anotacoes;
+
+
+    calcularStatus();
+    criarSlotsPericias();
+    atualizarInventario();
+    mostrarAlerta("Carregar", "Ficha carregada com sucesso!");
+
+    carregarPericias(ficha.pericias);
 }
 
 const classes = {
