@@ -393,7 +393,7 @@ function adicionarItem(){
     atualizarInventario();
 }
 
-function adicionarHabilidade() {
+function adicionarHabilidade(dados = null) {
 
     const lista = document.getElementById("lista-habilidades");
 
@@ -405,6 +405,7 @@ function adicionarHabilidade() {
         <div class="field">
             <label>Nome</label>
             <input
+                class="nome-habilidade"
                 type="text"
                 placeholder="Nome da habilidade"
             >
@@ -425,6 +426,7 @@ function adicionarHabilidade() {
             <div class="field">
                 <label>Dano/Efeito</label>
                 <input
+                    class="efeito-habilidade"
                     type="text"
                     placeholder="Ex: 2d8"
                 >
@@ -435,6 +437,7 @@ function adicionarHabilidade() {
         <div class="field">
             <label>Descrição</label>
             <textarea
+                class="descricao-habilidade"
                 placeholder="Descreva o efeito da habilidade..."
             ></textarea>
         </div>
@@ -456,6 +459,20 @@ function adicionarHabilidade() {
     `;
 
     lista.appendChild(habilidade);
+
+    if (dados) {
+        habilidade.querySelector(".nome-habilidade").value =
+            dados.nome;
+
+        habilidade.querySelector(".custo-habilidade").value =
+            dados.custo;
+
+        habilidade.querySelector(".efeito-habilidade").value =
+            dados.efeito;
+
+        habilidade.querySelector(".descricao-habilidade").value =
+            dados.descricao;
+    }
 
     const botaoUsar = habilidade.querySelector(".usar-habilidade");
     const botaoRemover = habilidade.querySelector(".button-remover");
@@ -543,6 +560,22 @@ function coletarPericias() {
     };
 }
 
+function coletarHabilidades() {
+    const habilidades = [];
+
+    document
+    .querySelectorAll("#lista-habilidades .ability")
+    .forEach(habilidade => {
+        habilidades.push({
+            nome: habilidade.querySelector(".nome-habilidade").value,
+            custo: habilidade.querySelector(".custo-habilidade").value,
+            efeito: habilidade.querySelector(".efeito-habilidade").value,
+            descricao: habilidade.querySelector(".descricao-habilidade").value
+        });
+    });
+    return habilidades;
+}
+
 function carregarPericias(pericias) {
 
     if (!pericias) {
@@ -603,6 +636,16 @@ function carregarPericias(pericias) {
     });
 }
 
+function carregarHabilidades(habilidades) {
+    const lista = document.getElementById("lista-habilidades");
+
+    lista.innerHTML = "";
+
+    habilidades.forEach(habilidade => {
+        adicionarHabilidade(habilidade);
+    });
+}
+
 function coletarFicha() {
 
     return {
@@ -626,9 +669,11 @@ function coletarFicha() {
             sanidade: document.getElementById("sanidade-atual").value
         },
 
-        anotacoes: document.querySelector("textarea").value,
+        anotacoes: document.querySelector(".anotacoes").value,
 
-        pericias: coletarPericias()
+        pericias: coletarPericias(),
+
+        habilidades: coletarHabilidades()
     };
 }
 
@@ -697,6 +742,7 @@ function carregarFicha() {
     mostrarAlerta("Carregar", "Ficha carregada com sucesso!");
 
     carregarPericias(ficha.pericias);
+    carregarHabilidades(ficha.habilidades);
 }
 
 const classes = {
