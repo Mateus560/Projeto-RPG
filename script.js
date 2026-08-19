@@ -1303,6 +1303,7 @@ const origens = {
         pericias: [
             "Diplomacia",
             "Investigação"
+        ]
     },
 
     "Prometido": {
