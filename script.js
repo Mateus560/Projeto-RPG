@@ -239,6 +239,51 @@ function carregarPericiasIniciais() {
     });
 }
 
+function carregarPericiasOrigem(periciasSalvas = null) {
+
+    const lista = document.getElementById("pericias-origem");
+
+    lista.innerHTML = "";
+
+    const origem = campoOrigem.value;
+
+    if (!origens[origem]) {
+        return;
+    }
+
+    const pericias = periciasSalvas || origens[origem].pericias;
+
+    pericias.forEach(pericia => {
+
+        const campo = document.createElement("div");
+
+        campo.classList.add("skill");
+
+        campo.innerHTML = `
+            <input
+                type="text"
+                list="lista-pericias-disponiveis"
+                value="${pericia.nome || pericia}"
+                placeholder="Escolha uma perícia"
+            >
+
+            <select>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        `;
+
+        lista.appendChild(campo);
+
+        // Se estiver carregando uma perícia salva,
+        // restaura também o valor dela.
+        if (typeof pericia === "object") {
+            campo.querySelector("select").value = pericia.valor;
+        }
+    });
+}
+
 function calcularEspacoInventario() {
     const forca = Number(
         document.getElementById("forca").value
@@ -253,7 +298,7 @@ function calcularEspacoUsado() {
 
     let espacoUsado = 0;
 
-    const espacos = document.querySelectorAll(".espaco-arma");
+    const espacos = document.querySelectorAll(".espaco-inventario");
 
     espacos.forEach(campo => {
         espacoUsado += Number(campo.value) || 0;
@@ -271,7 +316,7 @@ function atualizarInventario() {
         `Espaço: ${usado}/${maximo}`;
 }
 
-function adicionarArma() {
+function adicionarArma(dados = null) {
 
     const lista = document.getElementById("lista-armas");
 
@@ -285,6 +330,7 @@ function adicionarArma() {
             <label>Nome da arma</label>
 
             <input
+                class="nome-arma"
                 type="text"
                 placeholder="Ex: Espada longa"
             >
@@ -298,6 +344,7 @@ function adicionarArma() {
                 <label>Dano</label>
 
                 <input
+                    class="dano-arma"
                     type="text"
                     placeholder="Ex: 1d8"
                 >
@@ -309,6 +356,7 @@ function adicionarArma() {
                 <label>Crítico</label>
 
                 <input
+                    class="critico-arma"
                     type="text"
                     placeholder="Ex: 19/x2"
                 >
@@ -323,29 +371,52 @@ function adicionarArma() {
                     type="number"
                     min="0"
                     value="1"
-                    class="espaco-arma"
+                    class="espaco-inventario"
                 >
 
             </div>
 
         </div>
 
+        <div class="field">
+
+            <label>Descrição</label>
+
+            <textarea
+                class="descricao-arma"
+                placeholder="Descreva aparência da arma, ou algum efeito que ela possa ter."
+            ></textarea>
+        </div>
+
         <button
             type="button"
             class="button-remover"
-            onclick="this.parentElement.remove(); atualizarInventario();"
         >
             Remover
         </button>
     `;
 
     lista.appendChild(arma);
-    const campoEspaco = arma.querySelector(".espaco-arma");
+
+    if (dados) {
+        arma.querySelector(".nome-arma").value = dados.nome;
+        arma.querySelector(".dano-arma").value = dados.dano;
+        arma.querySelector(".critico-arma").value = dados.critico;
+        arma.querySelector(".espaco-inventario").value = dados.espaco;
+        arma.querySelector(".descricao-arma").value = dados.descricao || "";
+    }
+    const campoEspaco = arma.querySelector(".espaco-inventario");
+
+    arma.querySelector(".button-remover").addEventListener("click", () => {
+        arma.remove();
+        atualizarInventario();
+    });
+
     campoEspaco.addEventListener("input", atualizarInventario);
     atualizarInventario();
 }
 
-function adicionarItem(){
+function adicionarItem(dados = null){
     const lista = document.getElementById("lista-itens");
     const item = document.createElement("div");
 
@@ -356,6 +427,7 @@ function adicionarItem(){
             <label>Nome do item</label>
 
             <input
+                class="nome-item"
                 type="text"
                 placeholder="Ex: Corda"
             >
@@ -368,13 +440,14 @@ function adicionarItem(){
                     type="number"
                     min="0"
                     value="1"
-                    class="espaco-arma"
+                    class="espaco-inventario"
                 >
             </div>
             <div class="field">
-                <label>Descrição<label>
-                <textarea>
-                </textarea>
+                <label>Descrição</label>
+                <textarea
+                    class="descricao-item"
+                ></textarea>
             </div>
         </div>
 
@@ -388,7 +461,12 @@ function adicionarItem(){
     `;
 
     lista.appendChild(item);
-    const campoEspaco = item.querySelector(".espaco-arma");
+    if (dados) {
+        item.querySelector(".nome-item").value = dados.nome;
+        item.querySelector(".espaco-inventario").value = dados.espaco;
+        item.querySelector(".descricao-item").value = dados.descricao;
+    }
+    const campoEspaco = item.querySelector(".espaco-inventario");
     campoEspaco.addEventListener("input", atualizarInventario);
     atualizarInventario();
 }
@@ -497,7 +575,7 @@ function usarHabilidade(habilidade) {
     const atual = Number(pe.value);
 
     if (atual < custo) {
-        mostrarAlerta("Você não possui PE suficiente para usar esta habilidade.");
+        mostrarAlerta("PE Insuficiente!", "Você não possui PE suficiente para usar esta habilidade.");
         return;
     }
 
@@ -537,6 +615,23 @@ function coletarPericias() {
             });
         });
 
+    const periciasOrigem = [];
+
+    document
+        .querySelectorAll("#pericias-origem .skill")
+        .forEach(skill => {
+
+            const nome =
+                skill.querySelector("input").value;
+
+            const valor =
+                skill.querySelector("select").value;
+
+            periciasOrigem.push({
+                nome: nome,
+                valor: valor
+            });
+        });    
 
     const periciasAdicionais = [];
 
@@ -556,6 +651,7 @@ function coletarPericias() {
 
     return {
         iniciais: periciasIniciais,
+        origem: periciasOrigem,
         adicionais: periciasAdicionais
     };
 }
@@ -576,6 +672,41 @@ function coletarHabilidades() {
     return habilidades;
 }
 
+function coletarArmas(){
+    const armas = [];
+
+    document
+    .querySelectorAll("#lista-armas .inventory-item")
+    .forEach(arma => {
+        armas.push({
+            nome: arma.querySelector(".nome-arma").value,
+            dano: arma.querySelector(".dano-arma").value,
+            critico: arma.querySelector(".critico-arma").value,
+            espaco: arma.querySelector(".espaco-inventario").value,
+            descricao: arma.querySelector(".descricao-arma").value
+        });
+    });
+    return armas;
+}
+
+function coletarItens() {
+
+    const itens = [];
+
+    document
+        .querySelectorAll("#lista-itens .inventory-items")
+        .forEach(item => {
+
+            itens.push({
+                nome: item.querySelector(".nome-item").value,
+                espaco: item.querySelector(".espaco-inventario").value,
+                descricao: item.querySelector(".descricao-item").value
+            });
+        });
+
+    return itens;
+}
+
 function carregarPericias(pericias) {
 
     if (!pericias) {
@@ -589,7 +720,7 @@ function carregarPericias(pericias) {
     const iniciais =
         document.querySelectorAll("#pericias-iniciais .skill");
 
-    pericias.iniciais.forEach((pericia, index) => {
+    pericias.iniciais?.forEach((pericia, index) => {
 
         const skill = iniciais[index];
 
@@ -617,7 +748,7 @@ function carregarPericias(pericias) {
     const adicionais =
         document.querySelectorAll("#lista-pericias .skill");
 
-    pericias.adicionais.forEach((pericia, index) => {
+    pericias.adicionais?.forEach((pericia, index) => {
 
         const skill = adicionais[index];
 
@@ -637,6 +768,9 @@ function carregarPericias(pericias) {
 }
 
 function carregarHabilidades(habilidades) {
+    if (!habilidades){
+        return;
+    }
     const lista = document.getElementById("lista-habilidades");
 
     lista.innerHTML = "";
@@ -644,6 +778,39 @@ function carregarHabilidades(habilidades) {
     habilidades.forEach(habilidade => {
         adicionarHabilidade(habilidade);
     });
+}
+
+function carregarArmas(armas) {
+
+    if (!armas) {
+        return;
+    }
+
+    const lista = document.getElementById("lista-armas");
+
+    lista.innerHTML = "";
+
+    armas.forEach(arma => {
+        adicionarArma(arma);
+    });
+
+    atualizarInventario();
+}
+
+function carregarItens(itens) {
+
+    if (!itens) {
+        return;
+    }
+
+    const lista = document.getElementById("lista-itens");
+
+    lista.innerHTML = "";
+
+    itens.forEach(item => {
+        adicionarItem(item);
+    });
+
 }
 
 function coletarFicha() {
@@ -673,7 +840,10 @@ function coletarFicha() {
 
         pericias: coletarPericias(),
 
-        habilidades: coletarHabilidades()
+        habilidades: coletarHabilidades(),
+
+        armas: coletarArmas(),
+        itens: coletarItens()
     };
 }
 
@@ -702,6 +872,7 @@ function carregarFicha() {
 
     document.getElementById("nome").value = ficha.nome;
     document.getElementById("origem").value = ficha.origem;
+    campoOrigem.dispatchEvent(new Event("change"));
     document.getElementById("classe").value = ficha.classe;
     document.getElementById("trilha").value = ficha.trilha;
     document.getElementById("epeem").value = ficha.epeem;
@@ -742,7 +913,10 @@ function carregarFicha() {
     mostrarAlerta("Carregar", "Ficha carregada com sucesso!");
 
     carregarPericias(ficha.pericias);
+    carregarPericiasOrigem(ficha.pericias.origem)
     carregarHabilidades(ficha.habilidades);
+    carregarArmas(ficha.armas);
+    carregarItens(ficha.itens);
 }
 
 const classes = {
@@ -875,7 +1049,11 @@ const periciasDisponiveis = [
     "Medicina",
     "Intuição",
     "Crime",
-    "Domar"
+    "Domar",
+    "Ciências",
+    "Pilotagem",
+    "Ritualismo",
+    "Religião"
 ];
 
 const armas = [
@@ -885,8 +1063,6 @@ const armas = [
 const itens = [
     
 ];
-
-const inventario = [];
 
 const listaPericiasDisponiveis =
     document.getElementById("lista-pericias-disponiveis");
@@ -913,6 +1089,10 @@ Object.keys(classes).forEach(classe => {
 
 const campoClasse = document.getElementById("classe");
 const campoTrilha = document.getElementById("trilha");
+const campoOrigem = document.getElementById("origem");
+campoOrigem.addEventListener("change", () => {
+    carregarPericiasOrigem();
+});
 const listaTrilhas = document.getElementById("lista-trilhas");
 
 campoClasse.addEventListener("change", () => {
@@ -963,39 +1143,214 @@ document
     .getElementById("conhecimento")
     .addEventListener("input", criarSlotsPericias);
 
-const origens = [
-    "Acadêmico estudioso",
-    "Amaldiçoado fortalecido",
-    "Amigo dos animais",
-    "Amnésico",
-    "Artista de rua",
-    "Atleta",
-    "Ator/Atriz",
-    "Criminoso",
-    "Enfermeiro",
-    "Engenheiro",
-    "Escritor",
-    "Espadachim",
-    "Estilista",
-    "Inventor",
-    "Investigador Paranormal",
-    "Jornalista",
-    "Lutador",
-    "Mecânico de armas",
-    "Médico",
-    "Ocultista arrependido",
-    "Policial/Segurança",
-    "Prodígio",
-    "Prometido",
-    "Rato de laboratório",
-    "Religioso",
-    "Selado marcado",
-    "Sobrevivente anormal",
-    "Soldado militar",
-    "T.I"
-];
+const origens = {
 
-preencherLista("lista-origens", origens)
+    "Acadêmico estudioso": {
+        pericias: [
+            "Documentos",
+            "Investigação"
+        ]
+    },
+
+    "Amaldiçoado fortalecido": {
+        pericias: [
+            "Resistir",
+            "Sobrevivência"
+        ]
+    },
+
+    "Amigo dos animais": {
+        pericias: [
+            "Domar",
+            "Percepção"
+        ]
+    },
+
+    "Amnésico": {
+        pericias: [
+            "",
+            ""
+        ]
+    },
+
+    "Artista de rua": {
+        pericias: [
+            "Enganação",
+            "Intuição"
+        ]
+    },
+
+    "Atleta": {
+        pericias: [
+            "Atletismo",
+            "Reflexos"
+        ]
+    },
+
+    "Ator/Atriz": {
+        pericias: [
+            "Enganação",
+            "Sedução"
+        ]
+    },
+
+    "Criminoso": {
+        pericias: [
+            "Crime",
+            "Furtividade"
+        ]
+    },
+
+    "Enfermeiro": {
+        pericias: [
+            "Medicina",
+            "Sobrevivência"
+        ]
+    },
+
+    "Engenheiro": {
+        pericias: [
+            "Ciências",
+            "Ofício"
+        ]
+    },
+
+    "Escritor": {
+        pericias: [
+            "Documentos",
+            "Ofício"
+        ]
+    },
+
+    "Espadachim": {
+        pericias: [
+            "Combate",
+            "Iniciativa"
+        ]
+    },
+
+    "Estilista": {
+        pericias: [
+            "Enganação",
+            "Sedução"
+        ]
+    },
+
+    "Inventor": {
+        pericias: [
+            "Ofício",
+            "Tecnologia"
+        ]
+    },
+
+    "Investigador Paranormal": {
+        pericias: [
+            "Investigação",
+            "Percepção"
+        ]
+    },
+
+    "Jornalista": {
+        pericias: [
+            "Diplomacia",
+            "Investigação"
+        ]
+    },
+
+    "Lutador": {
+        pericias: [
+            "Combate",
+            "Reflexos"
+        ]
+    },
+
+    "Mecânico de armas": {
+        pericias: [
+            "Ofício",
+            "Pilotagem"
+        ]
+    },
+
+    "Médico": {
+        pericias: [
+            "Medicina",
+            "Ciências"
+        ]
+    },
+
+    "Ocultista arrependido": {
+        pericias: [
+            "Ritualismo",
+            "Intuição"
+        ]
+    },
+
+    "Policial/Segurança": {
+        pericias: [
+            "Intimidação",
+            "Pontaria"
+        ]
+    },
+
+    "Prodígio": {
+        pericias: [
+            "Ritualismo",
+            "Ofício"
+        ]
+    },
+
+    "Prometido": {
+        pericias: [
+            "Ritualismo",
+            "Religião"
+        ]
+    },
+
+    "Rato de laboratório": {
+        pericias: [
+            "Atletismo",
+            "Combate"
+        ]
+    },
+
+    "Religioso": {
+        pericias: [
+            "Religião",
+            "Diplomacia"
+        ]
+    },
+
+    "Selado marcado": {
+        pericias: [
+            "Fortificação",
+            ""
+        ]
+    },
+
+    "Sobrevivente anormal": {
+        pericias: [
+            "Ofício",
+            "Sobrevivência"
+        ]
+    },
+
+    "Soldado militar": {
+        pericias: [
+            "Iniciativa",
+            "Pontaria"
+        ]
+    },
+
+    "T.I": {
+        pericias: [
+            "Tecnologia",
+            "Intuição"
+        ]
+    }
+
+};
+
+preencherLista("lista-origens", Object.keys(origens))
 
 limitarRecursoAtual("vida-atual");
 limitarRecursoAtual("pe-atual");
