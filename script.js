@@ -143,22 +143,24 @@ function criarSlotsPericias() {
 
     const lista = document.getElementById("lista-pericias");
 
-    lista.innerHTML = "";
-
     const classe = campoClasse.value;
+
+    if (!classes[classe]) {
+        lista.innerHTML = "";
+        return;
+    }
 
     const conhecimento = Number(
         document.getElementById("conhecimento").value
     );
 
-    if (!classes[classe]) {
-        return;
-    }
-
     const limite =
         classes[classe].limitePericias + conhecimento;
 
-    for (let i = 0; i < limite; i++) {
+    const slotsAtuais = lista.querySelectorAll(".skill").length;
+
+    // Adiciona slots apenas se necessário
+    for (let i = slotsAtuais; i < limite; i++) {
 
         const campo = document.createElement("div");
 
@@ -179,6 +181,16 @@ function criarSlotsPericias() {
         `;
 
         lista.appendChild(campo);
+    }
+
+    // Remove slots excedentes
+    if (slotsAtuais > limite) {
+
+        const slots = lista.querySelectorAll(".skill");
+
+        for (let i = slots.length - 1; i >= limite; i--) {
+            slots[i].remove();
+        }
     }
 }
 
