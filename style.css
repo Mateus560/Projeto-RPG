@@ -266,6 +266,23 @@ background-color: #1c1c1c;
 }
 
 /* =========================
+    SELECT
+========================= */
+
+select {
+    background-color: #222222;
+    gap: 1rem;
+    padding: 0.65rem;
+    border: 1px solid #555;
+    border-radius: 6px;
+    color: white;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+}
+
+/* =========================
     HABILIDADES
 ========================= */
 

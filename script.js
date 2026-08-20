@@ -37,6 +37,25 @@ function preencherLista(idLista, opcoes) {
     });
 }
 
+function preencherAtributo(id) {
+
+    const campo = document.getElementById(id);
+
+    for (let i = 0; i <= 5; i++) {
+
+        const option = document.createElement("option");
+
+        option.value = i;
+        option.textContent = i;
+
+        if (i === 1) {
+            option.selected = true;
+        }
+
+        campo.appendChild(option);
+    }
+}
+
 function calcularStatus() {
 
     const classe = campoClasse.value;
@@ -1477,11 +1496,11 @@ preencherLista("lista-origens", Object.keys(origens))
 limitarRecursoAtual("vida-atual");
 limitarRecursoAtual("pe-atual");
 limitarRecursoAtual("sanidade-atual");
-limitarValor("forca", 0, 5)
-limitarValor("resistencia", 0, 5)
-limitarValor("agilidade", 0, 5)
-limitarValor("influencia", 0, 5)
-limitarValor("conhecimento", 0, 5)
+preencherAtributo("forca");
+preencherAtributo("agilidade");
+preencherAtributo("resistencia");
+preencherAtributo("conhecimento");
+preencherAtributo("influencia");
 
 document
     .getElementById("forca")
