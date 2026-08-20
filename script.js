@@ -1402,6 +1402,13 @@ const origens = {
         ]
     },
 
+    "Professor": {
+        pericias: [
+            "Diplomacia",
+            "Investigação"
+        ]
+    },
+
     "Prometido": {
         pericias: [
             "Ritualismo",
