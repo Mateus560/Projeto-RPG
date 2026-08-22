@@ -23,6 +23,17 @@ function alterarRecurso(id, valor) {
     input.value = atual;
 }
 
+function receberDano() {
+    const danoPv = Number(document.getElementById("dano-pv").value);
+    const danoSanidade = Number(document.getElementById("dano-sanidade").value);
+
+    alterarRecurso("vida-atual", -danoPv);
+    alterarRecurso("sanidade-atual", -danoSanidade);
+
+    document.getElementById("dano-pv").value = "";
+    document.getElementById("dano-sanidade").value = "";
+}
+
 function preencherLista(idLista, opcoes) {
 
     const lista = document.getElementById(idLista);
