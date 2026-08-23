@@ -25,6 +25,7 @@ import {
 } from "./modules/habilidades.js";
 
 import {
+    alterarRecurso,
     limitarRecursoAtual,
     receberDano
 } from "./modules/recursos.js"
@@ -331,6 +332,44 @@ document.addEventListener("DOMContentLoaded", () => {
             const dano = document.getElementById("dano-sanidade").value;
 
             receberDano(dano)
+        });
+    // botões de diminuir e aumentar PV
+    document
+        .getElementById("aumentar-pv")
+        .addEventListener("click", () => {
+            alterarRecurso("vida-atual", +1)
+        });
+    
+    document
+        .getElementById("diminuir-pv")
+        .addEventListener("click", () => {
+            alterarRecurso("vida-atual", -1)
+        });
+
+    // botões de diminuir e aumentar PE
+    document
+        .getElementById("aumentar-pe")
+        .addEventListener("click", () => {
+            alterarRecurso("pe-atual", +1)
+        });   
+    
+    document
+        .getElementById("diminuir-pe")
+        .addEventListener("click", () => {
+            alterarRecurso("pe-atual", -1)
+        });
+    
+    // botões de diminuir e aumentar Sanidade
+    document
+        .getElementById("aumentar-sanidade")
+        .addEventListener("click", () => {
+            alterarRecurso("sanidade-atual", +1)
+        });
+    
+    document
+        .getElementById("diminuir-sanidade")
+        .addEventListener("click", () => {
+            alterarRecurso("sanidade-atual", -1)
         });
 
     document

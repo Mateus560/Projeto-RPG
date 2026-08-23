@@ -141,7 +141,7 @@
 
                     <div class="resource-value">
 
-                        <button class="menos" onclick="alterarRecurso('vida-atual', -1)">
+                        <button class="menos" id="diminuir-pv">
                             −
                         </button>
 
@@ -151,7 +151,7 @@
                             value="0"
                         >
 
-                        <button class="mais" onclick="alterarRecurso('vida-atual', 1)">
+                        <button class="mais" id="aumentar-pv">
                             +
                         </button>
                     </div>
@@ -171,7 +171,7 @@
 
                     <div class="resource-value">
 
-                        <button class="menos" onclick="alterarRecurso('pe-atual', -1)">
+                        <button class="menos" id="diminuir-pe">
                             −
                         </button>
 
@@ -181,7 +181,7 @@
                             value="0"
                         >
 
-                        <button class="mais" onclick="alterarRecurso('pe-atual', 1)">
+                        <button class="mais" id="aumentar-pe">
                             +
                         </button>
 
@@ -200,7 +200,7 @@
 
                     <div class="resource-value">
 
-                        <button class="menos" onclick="alterarRecurso('sanidade-atual', -1)">
+                        <button class="menos" id="diminuir-sanidade">
                             −
                         </button>
 
@@ -210,7 +210,7 @@
                             value="0"
                         >
 
-                        <button class="mais" onclick="alterarRecurso('sanidade-atual', 1)">
+                        <button class="mais" id="aumentar-sanidade">
                             +
                         </button>
 
@@ -403,11 +403,6 @@
                 >
                     📂 Carregar
                 </button>
-
-                <button class="button">
-                    ⬇ Exportar
-                </button>
-
             </div>
 
         </section>
