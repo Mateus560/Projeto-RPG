@@ -1,0 +1,31 @@
+const periciasDisponiveis = [
+    "Atletismo",
+    "Furtividade",
+    "Investigação",
+    "Acrobacia",
+    "Enganação",
+    "Intimidação",
+    "Percepção",
+    "Diplomacia",
+    "Sobrevivência",
+    "Sedução",
+    "Documentos",
+    "Combate",
+    "Pontaria",
+    "Fortificação",
+    "Iniciativa",
+    "Ofício",
+    "Reflexos",
+    "Resistir",
+    "Tecnologia",
+    "Medicina",
+    "Intuição",
+    "Crime",
+    "Domar",
+    "Ciências",
+    "Pilotagem",
+    "Ritualismo",
+    "Religião"
+];
+
+export default periciasDisponiveis;

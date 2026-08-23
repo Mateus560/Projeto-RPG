@@ -1,59 +1,97 @@
-function alterarRecurso(id, valor) {
+// ============================================================
+// DADOS
+// ============================================================
 
-    const input = document.getElementById(id);
+import origens from "./data/origens.js";
+import classes from "./data/classes.js";
+import almas from "./data/almas.js";
+import periciasDisponiveis from "./data/pericias.js";
 
-    let atual = Number(input.value);
+import {
+    duracoes,
+    execucoes,
+    alvos,
+    alcances
+} from "./data/rituais.js";
 
-    const tipo = id.replace("-atual", "");
+import {
+    carregarPericiasIniciais,
+    carregarPericiasOrigem,
+    criarSlotsPericias,
+} from "./modules/pericias.js";
 
-    const maximo = Number(
-        document.getElementById(`${tipo}-max`).textContent
-    );
+import {
+    adicionarHabilidade,
+} from "./modules/habilidades.js";
 
-    atual += valor;
+import {
+    limitarRecursoAtual,
+    receberDano
+} from "./modules/recursos.js"
 
-    if (atual < 0) {
-        atual = 0;
-    }
+import {
+    fecharAlerta
+} from "./modules/ui.js";
 
-    if (atual > maximo) {
-        atual = maximo;
-    }
+import {
+    adicionarArma,
+    adicionarItem,
+    atualizarInventario
+} from "./modules/inventario.js";
 
-    input.value = atual;
-}
+import {atualizarAlma} from "./modules/alma.js";
 
-function receberDano() {
-    const danoPv = Number(document.getElementById("dano-pv").value);
-    const danoSanidade = Number(document.getElementById("dano-sanidade").value);
+import { calcularStatus } from "./modules/status.js";
 
-    alterarRecurso("vida-atual", -danoPv);
-    alterarRecurso("sanidade-atual", -danoSanidade);
+import {
+    salvarFicha,
+    carregarFicha
+} from "./modules/ficha.js";
 
-    document.getElementById("dano-pv").value = "";
-    document.getElementById("dano-sanidade").value = "";
-}
+// ============================================================
+// REFERÊNCIAS DO HTML
+// ============================================================
+
+const campoNome = document.getElementById("nome");
+const campoOrigem = document.getElementById("origem");
+const campoClasse = document.getElementById("classe");
+const campoTrilha = document.getElementById("trilha");
+const campoEpeem = document.getElementById("epeem");
+const campoAlma = document.getElementById("alma");
+
+// ============================================================
+// FUNÇÕES UTILITÁRIAS
+// ============================================================
 
 function preencherLista(idLista, opcoes) {
-
     const lista = document.getElementById(idLista);
 
+    if (!lista) {
+        console.warn(`Elemento #${idLista} não encontrado.`);
+        return;
+    }
+
+    lista.innerHTML = "";
+
     opcoes.forEach(opcao => {
-
         const option = document.createElement("option");
-
         option.value = opcao;
-
         lista.appendChild(option);
     });
 }
 
-function preencherAtributo(id) {
 
+function preencherAtributo(id) {
     const campo = document.getElementById(id);
 
-    for (let i = 0; i <= 5; i++) {
+    if (!campo) {
+        console.warn(`Elemento #${id} não encontrado.`);
+        return;
+    }
 
+    campo.innerHTML = "";
+
+    for (let i = 0; i <= 5; i++) {
         const option = document.createElement("option");
 
         option.value = i;
@@ -67,1454 +105,251 @@ function preencherAtributo(id) {
     }
 }
 
-function calcularStatus() {
 
-    const classe = campoClasse.value;
+// ============================================================
+// RECURSOS
+// ============================================================
 
-    if (!classes[classe]) {
-        return;
-    }
 
-    const epeem = Number(
-        document.getElementById("epeem").value
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Listas
+
+    preencherLista(
+        "lista-pericias-disponiveis",
+        periciasDisponiveis
     );
 
-    const resistencia = Number(
-        document.getElementById("resistencia").value
+    preencherLista(
+        "lista-classes",
+        Object.keys(classes)
     );
 
-    const influencia = Number(
-        document.getElementById("influencia").value
+    preencherLista(
+        "lista-origens",
+        Object.keys(origens)
     );
 
-    const dadosClasse = classes[classe];
+    preencherLista(
+        "lista-almas",
+        Object.keys(almas)
+    );
 
-    const progresso = Math.max(0, Math.floor(epeem / 5) - 1);
-    const vidaMaxima =
-        dadosClasse.vidaBase +
-        resistencia +
-        (progresso * (dadosClasse.progressao.vida + resistencia));
+    preencherLista(
+        "duracoes-rituais",
+        duracoes
+    );
 
-    const peMaximo =
-        dadosClasse.peBase +
-        influencia +
-        (progresso * (dadosClasse.progressao.pe + influencia));
+    preencherLista(
+        "execucoes-rituais",
+        execucoes
+    );
 
-    const sanidadeMaxima =
-        dadosClasse.sanidadeBase +
-        (progresso * dadosClasse.progressao.sanidade);
+    preencherLista(
+        "alvos-rituais",
+        alvos
+    );
 
-    document.getElementById("vida-max").textContent = vidaMaxima;
+    preencherLista(
+        "alcances-rituais",
+        alcances
+    );
 
-    document.getElementById("pe-max").textContent = peMaximo;
+    // Atributos
 
-    document.getElementById("sanidade-max").textContent = sanidadeMaxima;
+    preencherAtributo("forca");
+    preencherAtributo("agilidade");
+    preencherAtributo("resistencia");
+    preencherAtributo("conhecimento");
+    preencherAtributo("influencia");
 
-    const vidaAtual = document.getElementById("vida-atual");
-    const peAtual = document.getElementById("pe-atual");
-    const sanidadeAtual = document.getElementById("sanidade-atual");
 
-    if (Number(vidaAtual.value) > vidaMaxima) {
-        vidaAtual.value = vidaMaxima;
-    }
+    // Recursos
 
-    if (Number(peAtual.value) > peMaximo) {
-        peAtual.value = peMaximo;
-    }
+    limitarRecursoAtual("vida-atual");
+    limitarRecursoAtual("pe-atual");
+    limitarRecursoAtual("sanidade-atual");
 
-    if (Number(sanidadeAtual.value) > sanidadeMaxima) {
-        sanidadeAtual.value = sanidadeMaxima;
-    }
 
-}
+    // Alma
 
-function limitarValor(id, minimo, maximo) {
-    const campo = document.getElementById(id)
-    campo.addEventListener("input", () => {
-        let valor = Number(campo.value);
+    campoAlma.addEventListener(
+        "change",
+        atualizarAlma
+    );
 
-        if (valor > maximo){
-            campo.value = maximo
+
+    // Origem
+
+    campoOrigem.addEventListener(
+        "change",
+        () => {
+            carregarPericiasOrigem();
         }
+    );
 
-        if (valor < minimo) {
-            campo.value = minimo
+
+    // Classe
+
+    campoClasse.addEventListener(
+        "change",
+        () => {
+            const classe =
+                campoClasse.value;
+
+            const listaTrilhas =
+                document.getElementById(
+                    "lista-trilhas"
+                );
+
+            listaTrilhas.innerHTML = "";
+
+            campoTrilha.value = "";
+
+
+            if (!classes[classe]) {
+                campoTrilha.disabled = true;
+
+                document.getElementById(
+                    "lista-pericias"
+                ).innerHTML = "";
+
+                document.getElementById(
+                    "pericias-iniciais"
+                ).innerHTML = "";
+
+                return;
+            }
+
+
+            classes[classe].trilhas.forEach(
+                trilha => {
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value = trilha;
+
+                    listaTrilhas.appendChild(
+                        option
+                    );
+                }
+            );
+
+
+            campoTrilha.disabled = false;
+
+            calcularStatus();
+
+            carregarPericiasIniciais();
+
+            criarSlotsPericias();
         }
-    });
-}
+    );
 
-function limitarRecursoAtual(id) {
 
-    const campo = document.getElementById(id);
+    // Eventos de status
 
-    campo.addEventListener("input", () => {
+    campoEpeem.addEventListener(
+        "input",
+        calcularStatus
+    );
 
-        const tipo = id.replace("-atual", "");
-
-        const maximo = Number(
-            document.getElementById(`${tipo}-max`).textContent
+    document
+        .getElementById("resistencia")
+        .addEventListener(
+            "input",
+            calcularStatus
         );
 
-        let valor = Number(campo.value);
+    document
+        .getElementById("influencia")
+        .addEventListener(
+            "input",
+            calcularStatus
+        );
 
-        if (valor < 0) {
-            valor = 0;
-        }
 
-        if (valor > maximo) {
-            valor = maximo;
-        }
+    document
+        .getElementById("conhecimento")
+        .addEventListener(
+            "input",
+            criarSlotsPericias
+        );
 
-        campo.value = valor;
-    });
-}
 
-function criarSlotsPericias() {
+    document
+        .getElementById("forca")
+        .addEventListener(
+            "input",
+            atualizarInventario
+        );
 
-    const lista = document.getElementById("lista-pericias");
+        
+    document
+        .getElementById("adicionar-habilidade")
+        .addEventListener("click", () => {
+            adicionarHabilidade();
+        });
 
-    const classe = campoClasse.value;
+    document
+        .getElementById("adicionar-arma")
+        .addEventListener(
+            "click",
+            adicionarArma
+        );
+    
+    document
+        .getElementById("adicionar-item")
+        .addEventListener(
+            "click",
+            adicionarItem
+        );
+        
+    document
+        .getElementById("entendi")
+        .addEventListener(
+            "click",
+            fecharAlerta
+        );
+    document
+        .getElementById("pv-dano")
+        .addEventListener("click", () => {
+            const dano = document.getElementById("dano-pv").value;
 
-    if (!classes[classe]) {
-        lista.innerHTML = "";
-        return;
-    }
+            receberDano(dano);
+        });
+    
+    document
+        .getElementById("sanidade-dano")
+        .addEventListener("click", () => {
+            const dano = document.getElementById("dano-sanidade").value;
 
-    const conhecimento = Number(
-        document.getElementById("conhecimento").value
+            receberDano(dano)
+        });
+
+    document
+    .getElementById("salvar-ficha")
+    .addEventListener(
+        "click",
+        salvarFicha
     );
 
-    const limite =
-        classes[classe].limitePericias + conhecimento;
-
-    const slotsAtuais = lista.querySelectorAll(".skill").length;
-
-    // Adiciona slots apenas se necessário
-    for (let i = slotsAtuais; i < limite; i++) {
-
-        const campo = document.createElement("div");
-
-        campo.classList.add("skill");
-
-        campo.innerHTML = `
-            <input
-                type="text"
-                list="lista-pericias-disponiveis"
-                placeholder="Escolha uma perícia"
-            >
-
-            <select>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-            </select>
-        `;
-
-        lista.appendChild(campo);
-    }
-
-    // Remove slots excedentes
-    if (slotsAtuais > limite) {
-
-        const slots = lista.querySelectorAll(".skill");
-
-        for (let i = slots.length - 1; i >= limite; i--) {
-            slots[i].remove();
-        }
-    }
-}
-
-function carregarPericiasIniciais() {
-
-    const classe = campoClasse.value;
-
-    if (!classes[classe]) {
-        return;
-    }
-
-    const lista = document.getElementById("pericias-iniciais");
-
-    lista.innerHTML = "";
-
-    classes[classe].periciasIniciais?.forEach(pericia => {
-
-        const campo = document.createElement("div");
-
-        campo.classList.add("skill");
-
-        if (Array.isArray(pericia)) {
-
-            campo.innerHTML = `
-                <select>
-                    ${pericia.map(opcao => `
-                        <option value="${opcao}">
-                            ${opcao}
-                        </option>
-                    `).join("")}
-                </select>
-
-                <select>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                </select>
-            `;
-
-        } else {
-
-            campo.innerHTML = `
-                <input
-                    type="text"
-                    value="${pericia}"
-                    readonly
-                >
-
-                <select>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                </select>
-            `;
-        }
-
-        lista.appendChild(campo);
-    });
-}
-
-function carregarPericiasOrigem(periciasSalvas = null) {
-
-    const lista = document.getElementById("pericias-origem");
-
-    lista.innerHTML = "";
-
-    const origem = campoOrigem.value;
-
-    if (!origens[origem]) {
-        return;
-    }
-
-    const pericias = periciasSalvas || origens[origem].pericias;
-
-    pericias.forEach(pericia => {
-
-        const campo = document.createElement("div");
-
-        campo.classList.add("skill");
-
-        campo.innerHTML = `
-            <input
-                type="text"
-                list="lista-pericias-disponiveis"
-                value="${pericia.nome || pericia}"
-                placeholder="Escolha uma perícia"
-            >
-
-            <select>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-            </select>
-        `;
-
-        lista.appendChild(campo);
-
-        // Se estiver carregando uma perícia salva,
-        // restaura também o valor dela.
-        if (typeof pericia === "object") {
-            campo.querySelector("select").value = pericia.valor;
-        }
-    });
-}
-
-function calcularEspacoInventario() {
-    const forca = Number(
-        document.getElementById("forca").value
-    );
-    if (forca === 0){
-        return 2
-    };
-    return forca * 5
-}
-
-function calcularEspacoUsado() {
-
-    let espacoUsado = 0;
-
-    const espacos = document.querySelectorAll(".espaco-inventario");
-
-    espacos.forEach(campo => {
-        espacoUsado += Number(campo.value) || 0;
-    });
-
-    return espacoUsado;
-}
-
-function atualizarInventario() {
-
-    const usado = calcularEspacoUsado();
-    const maximo = calcularEspacoInventario();
-
-    document.getElementById("espaco").textContent =
-        `Espaço: ${usado}/${maximo}`;
-}
-
-function adicionarArma(dados = null) {
-
-    const lista = document.getElementById("lista-armas");
-
-    const arma = document.createElement("div");
-
-    arma.classList.add("inventory-item");
-
-    arma.innerHTML = `
-        <div class="field">
-
-            <label>Nome da arma</label>
-
-            <input
-                class="nome-arma"
-                type="text"
-                placeholder="Ex: Espada longa"
-            >
-
-        </div>
-
-        <div class="grid grid-3">
-
-            <div class="field">
-
-                <label>Dano</label>
-
-                <input
-                    class="dano-arma"
-                    type="text"
-                    placeholder="Ex: 1d8"
-                >
-
-            </div>
-
-            <div class="field">
-
-                <label>Crítico</label>
-
-                <input
-                    class="critico-arma"
-                    type="text"
-                    placeholder="Ex: 19/x2"
-                >
-
-            </div>
-
-            <div class="field">
-
-                <label>Espaço</label>
-
-                <input
-                    type="number"
-                    min="0"
-                    value="1"
-                    class="espaco-inventario"
-                >
-
-            </div>
-
-        </div>
-
-        <div class="field">
-
-            <label>Descrição</label>
-
-            <textarea
-                class="descricao-arma"
-                placeholder="Descreva aparência da arma, ou algum efeito que ela possa ter."
-            ></textarea>
-        </div>
-
-        <button
-            type="button"
-            class="button-remover"
-        >
-            Remover
-        </button>
-    `;
-
-    lista.appendChild(arma);
-
-    if (dados) {
-        arma.querySelector(".nome-arma").value = dados.nome;
-        arma.querySelector(".dano-arma").value = dados.dano;
-        arma.querySelector(".critico-arma").value = dados.critico;
-        arma.querySelector(".espaco-inventario").value = dados.espaco;
-        arma.querySelector(".descricao-arma").value = dados.descricao || "";
-    }
-    const campoEspaco = arma.querySelector(".espaco-inventario");
-
-    arma.querySelector(".button-remover").addEventListener("click", () => {
-        arma.remove();
-        atualizarInventario();
-    });
-
-    campoEspaco.addEventListener("input", atualizarInventario);
-    atualizarInventario();
-}
-
-function adicionarItem(dados = null){
-    const lista = document.getElementById("lista-itens");
-    const item = document.createElement("div");
-
-    item.classList.add("inventory-items");
-    item.innerHTML = `
-        <div class="field">
-
-            <label>Nome do item</label>
-
-            <input
-                class="nome-item"
-                type="text"
-                placeholder="Ex: Corda"
-            >
-
-            <div class="field">
-
-                <label>Espaço</label>
-
-                <input
-                    type="number"
-                    min="0"
-                    value="1"
-                    class="espaco-inventario"
-                >
-            </div>
-            <div class="field">
-                <label>Descrição</label>
-                <textarea
-                    class="descricao-item"
-                ></textarea>
-            </div>
-        </div>
-
-        <button
-            type="button"
-            class="button-remover"
-            onclick="this.parentElement.remove(); atualizarInventario();"
-        >
-            Remover
-        </button>
-    `;
-
-    lista.appendChild(item);
-    if (dados) {
-        item.querySelector(".nome-item").value = dados.nome;
-        item.querySelector(".espaco-inventario").value = dados.espaco;
-        item.querySelector(".descricao-item").value = dados.descricao;
-    }
-    const campoEspaco = item.querySelector(".espaco-inventario");
-    campoEspaco.addEventListener("input", atualizarInventario);
-    atualizarInventario();
-}
-
-function adicionarHabilidade(dados = null) {
-
-    const lista = document.getElementById("lista-habilidades");
-
-    const habilidade = document.createElement("div");
-
-    habilidade.classList.add("ability");
-
-    habilidade.innerHTML = `
-        <div class="field">
-            <label>Nome</label>
-            <input
-                class="nome-habilidade"
-                type="text"
-                placeholder="Nome da habilidade"
-            >
-        </div>
-
-        <div class="grid grid-2">
-
-            <div class="field">
-                <label>Custo em PE</label>
-                <input
-                    type="number"
-                    class="custo-habilidade"
-                    min="1"
-                    value="1"
-                >
-            </div>
-
-            <div class="field">
-                <label>Dano/Efeito</label>
-                <input
-                    class="efeito-habilidade"
-                    type="text"
-                    placeholder="Ex: 2d8"
-                >
-            </div>
-
-        </div>
-
-        <div class="field">
-            <label>Descrição</label>
-            <textarea
-                class="descricao-habilidade"
-                placeholder="Descreva o efeito da habilidade..."
-            ></textarea>
-        </div>
-            <div class="ability-actions">
-                <button
-                    type="button"
-                    class="usar-habilidade"
-                    >
-                    Usar
-                </button>
-
-                <button
-                    type="button"
-                    class="button-remover"
-                    >
-                    Remover
-                </button>
-            </div>
-    `;
-
-    lista.appendChild(habilidade);
-
-    if (dados) {
-        habilidade.querySelector(".nome-habilidade").value =
-            dados.nome;
-
-        habilidade.querySelector(".custo-habilidade").value =
-            dados.custo;
-
-        habilidade.querySelector(".efeito-habilidade").value =
-            dados.efeito;
-
-        habilidade.querySelector(".descricao-habilidade").value =
-            dados.descricao;
-    }
-
-    const botaoUsar = habilidade.querySelector(".usar-habilidade");
-    const botaoRemover = habilidade.querySelector(".button-remover");
-
-    botaoUsar.addEventListener("click", () => {
-        usarHabilidade(habilidade);
-    });
-
-    botaoRemover.addEventListener("click", () => {
-        habilidade.remove();
-    });
-}
-
-function usarHabilidade(habilidade) {
-
-    const custo = Number(
-        habilidade.querySelector(".custo-habilidade").value
-    );
-
-    const pe = document.getElementById("pe-atual");
-
-    const atual = Number(pe.value);
-
-    if (atual < custo) {
-        mostrarAlerta("PE Insuficiente!", "Você não possui PE suficiente para usar esta habilidade.");
-        return;
-    }
-
-    alterarRecurso("pe-atual", -custo);
-}
-
-function mostrarAlerta(titulo, mensagem) {
-
-    const modal = document.getElementById("modal-alerta");
-    modal.querySelector("h3").textContent = titulo;
-    modal.querySelector("p").textContent = mensagem;
-
-    modal.style.display = "flex";
-}
-
-function fecharAlerta() {
-
-    const modal = document.getElementById("modal-alerta");
-
-    modal.style.display = "none";
-}
-
-function coletarPericias() {
-
-    const periciasIniciais = [];
-
     document
-        .querySelectorAll("#pericias-iniciais .skill")
-        .forEach(skill => {
+        .getElementById("carregar-ficha")
+        .addEventListener(
+            "click",
+            carregarFicha
+        );
 
-            const campo = skill.querySelector("input, select");
-            const valor = skill.querySelector("select:last-child").value;
-
-            periciasIniciais.push({
-                nome: campo.value,
-                valor: valor
-            });
-        });
-
-    const periciasOrigem = [];
-
-    document
-        .querySelectorAll("#pericias-origem .skill")
-        .forEach(skill => {
-
-            const nome =
-                skill.querySelector("input").value;
-
-            const valor =
-                skill.querySelector("select").value;
-
-            periciasOrigem.push({
-                nome: nome,
-                valor: valor
-            });
-        });    
-
-    const periciasAdicionais = [];
-
-    document
-        .querySelectorAll("#lista-pericias .skill")
-        .forEach(skill => {
-
-            const nome = skill.querySelector("input").value;
-            const valor = skill.querySelector("select").value;
-
-            periciasAdicionais.push({
-                nome: nome,
-                valor: valor
-            });
-        });
-
-
-    return {
-        iniciais: periciasIniciais,
-        origem: periciasOrigem,
-        adicionais: periciasAdicionais
-    };
-}
-
-function coletarHabilidades() {
-    const habilidades = [];
-
-    document
-    .querySelectorAll("#lista-habilidades .ability")
-    .forEach(habilidade => {
-        habilidades.push({
-            nome: habilidade.querySelector(".nome-habilidade").value,
-            custo: habilidade.querySelector(".custo-habilidade").value,
-            efeito: habilidade.querySelector(".efeito-habilidade").value,
-            descricao: habilidade.querySelector(".descricao-habilidade").value
-        });
-    });
-    return habilidades;
-}
-
-function coletarArmas(){
-    const armas = [];
-
-    document
-    .querySelectorAll("#lista-armas .inventory-item")
-    .forEach(arma => {
-        armas.push({
-            nome: arma.querySelector(".nome-arma").value,
-            dano: arma.querySelector(".dano-arma").value,
-            critico: arma.querySelector(".critico-arma").value,
-            espaco: arma.querySelector(".espaco-inventario").value,
-            descricao: arma.querySelector(".descricao-arma").value
-        });
-    });
-    return armas;
-}
-
-function coletarItens() {
-
-    const itens = [];
-
-    document
-        .querySelectorAll("#lista-itens .inventory-items")
-        .forEach(item => {
-
-            itens.push({
-                nome: item.querySelector(".nome-item").value,
-                espaco: item.querySelector(".espaco-inventario").value,
-                descricao: item.querySelector(".descricao-item").value
-            });
-        });
-
-    return itens;
-}
-
-function carregarPericias(pericias) {
-
-    if (!pericias) {
-        return;
-    }
-
-    // =========================
-    // PERÍCIAS INICIAIS
-    // =========================
-
-    const iniciais =
-        document.querySelectorAll("#pericias-iniciais .skill");
-
-    pericias.iniciais?.forEach((pericia, index) => {
-
-        const skill = iniciais[index];
-
-        if (!skill) {
-            return;
-        }
-
-        const campoNome =
-            skill.querySelector("input, select");
-
-        const camposValor =
-            skill.querySelectorAll("select");
-
-        campoNome.value = pericia.nome;
-
-        camposValor[camposValor.length - 1].value =
-            pericia.valor;
-    });
-
-
-    // =========================
-    // PERÍCIAS ADICIONAIS
-    // =========================
-
-    const adicionais =
-        document.querySelectorAll("#lista-pericias .skill");
-
-    pericias.adicionais?.forEach((pericia, index) => {
-
-        const skill = adicionais[index];
-
-        if (!skill) {
-            return;
-        }
-
-        const campoNome =
-            skill.querySelector("input");
-
-        const campoValor =
-            skill.querySelector("select");
-
-        campoNome.value = pericia.nome;
-        campoValor.value = pericia.valor;
-    });
-}
-
-function carregarHabilidades(habilidades) {
-    if (!habilidades){
-        return;
-    }
-    const lista = document.getElementById("lista-habilidades");
-
-    lista.innerHTML = "";
-
-    habilidades.forEach(habilidade => {
-        adicionarHabilidade(habilidade);
-    });
-}
-
-function carregarArmas(armas) {
-
-    if (!armas) {
-        return;
-    }
-
-    const lista = document.getElementById("lista-armas");
-
-    lista.innerHTML = "";
-
-    armas.forEach(arma => {
-        adicionarArma(arma);
-    });
+    // Estado inicial
 
     atualizarInventario();
-}
-
-function carregarItens(itens) {
-
-    if (!itens) {
-        return;
-    }
-
-    const lista = document.getElementById("lista-itens");
-
-    lista.innerHTML = "";
-
-    itens.forEach(item => {
-        adicionarItem(item);
-    });
-
-}
-
-function coletarFicha() {
-
-    return {
-        nome: document.getElementById("nome").value,
-        origem: document.getElementById("origem").value,
-        classe: document.getElementById("classe").value,
-        trilha: document.getElementById("trilha").value,
-        epeem: document.getElementById("epeem").value,
-
-        atributos: {
-            forca: document.getElementById("forca").value,
-            agilidade: document.getElementById("agilidade").value,
-            resistencia: document.getElementById("resistencia").value,
-            conhecimento: document.getElementById("conhecimento").value,
-            influencia: document.getElementById("influencia").value
-        },
-
-        recursos: {
-            vida: document.getElementById("vida-atual").value,
-            pe: document.getElementById("pe-atual").value,
-            sanidade: document.getElementById("sanidade-atual").value
-        },
-
-        anotacoes: document.querySelector(".anotacoes").value,
-
-        pericias: coletarPericias(),
-
-        habilidades: coletarHabilidades(),
-
-        armas: coletarArmas(),
-        itens: coletarItens(),
-        alma: document.getElementById("alma").value,
-    };
-}
-
-function salvarFicha() {
-
-    const ficha = coletarFicha();
-
-    localStorage.setItem(
-        "ficha-personagem",
-        JSON.stringify(ficha)
-    );
-    console.log("Ficha salva:", ficha);
-    mostrarAlerta("Salvar", "Ficha salva com sucesso!");
-}
-
-function carregarFicha() {
-
-    const dados = localStorage.getItem("ficha-personagem");
-
-    if (!dados) {
-        mostrarAlerta("Carregar", "Nenhuma ficha salva encontrada.");
-        return;
-    }
-
-    const ficha = JSON.parse(dados);
-
-    document.getElementById("nome").value = ficha.nome;
-    document.getElementById("origem").value = ficha.origem;
-    campoOrigem.dispatchEvent(new Event("change"));
-    document.getElementById("classe").value = ficha.classe;
-    document.getElementById("trilha").value = ficha.trilha;
-    document.getElementById("epeem").value = ficha.epeem;
-    document.getElementById("alma").value = ficha.alma;
-    campoAlma.dispatchEvent(new Event("change"));
-
-    campoClasse.dispatchEvent(new Event("change"));
-
-    document.getElementById("forca").value =
-        ficha.atributos.forca;
-
-    document.getElementById("agilidade").value =
-        ficha.atributos.agilidade;
-
-    document.getElementById("resistencia").value =
-        ficha.atributos.resistencia;
-
-    document.getElementById("conhecimento").value =
-        ficha.atributos.conhecimento;
-
-    document.getElementById("influencia").value =
-        ficha.atributos.influencia;
-
-    document.getElementById("vida-atual").value =
-        ficha.recursos.vida;
-
-    document.getElementById("pe-atual").value =
-        ficha.recursos.pe;
-
-    document.getElementById("sanidade-atual").value =
-        ficha.recursos.sanidade;
-
-    document.querySelector("textarea").value =
-        ficha.anotacoes;
-
 
     calcularStatus();
-    criarSlotsPericias();
-    atualizarInventario();
-    mostrarAlerta("Carregar", "Ficha carregada com sucesso!");
-
-    carregarPericias(ficha.pericias);
-    carregarPericiasOrigem(ficha.pericias.origem)
-    carregarHabilidades(ficha.habilidades);
-    carregarArmas(ficha.armas);
-    carregarItens(ficha.itens);
-}
-
-const classes = {
-    Combatente: {
-        trilhas: [
-            "Berserker",
-            "Vigia",
-            "Fortificado",
-            "Solo",
-            "Aberrante",
-            "Samurai Urbano",
-            "Feiticeiro",
-            "Punho Divergente",
-            "Caçador Desamparado"
-        ],
-
-        vidaBase: 20,
-        peBase: 2,
-        sanidadeBase: 12,
-
-        progressao: {
-            vida: 5,
-            pe: 2,
-            sanidade: 3
-        },
-
-        periciasIniciais: [
-            ["Combate", "Pontaria"],
-            ["Reflexos", "Fortificação"]
-        ],
-
-        limitePericias: 2
-    },
-
-    Especialista: {
-        trilhas: [
-            "Técnico de Combate",
-            "Artífice Prodígio",
-            "Socorrista de Campo",
-            "Camper de Elite",
-            "Fantasma",
-            "Negociante Experiente",
-            "Arqueiro"
-        ],
-
-        vidaBase: 16,
-        peBase: 3,
-        sanidadeBase: 16,
-
-        progressao: {
-            vida: 4,
-            pe: 3,
-            sanidade: 4
-        },
-
-        limitePericias: 7
-    },
-
-    Profeta: {
-        trilhas: [
-            "Destemido",
-            "Receptáculo",
-            "Alma Iluminada",
-            "Olho Paranormal",
-            "Invasor de Rede",
-            "Replicante"
-        ],
-
-        vidaBase: 13,
-        peBase: 4,
-        sanidadeBase: 20,
-
-        progressao: {
-            vida: 3,
-            pe: 4,
-            sanidade: 5
-        },
-
-        periciasIniciais: [
-            "Ritualismo", "Resistir"
-        ],
-
-        limitePericias: 3
-    },
-
-    Ascetico: {
-        trilhas: [
-            "Atormentado",
-            "Devorador"
-        ],
-
-        vidaBase: 15,
-        peBase: 3,
-        sanidadeBase: 15,
-
-        progressao: {
-            vida: 3,
-            pe: 3,
-            sanidade: 4
-        },
-
-        periciasIniciais: [
-            "Ritualismo", "Religião"
-        ],
-
-        limitePericias: 3
-    }
-};
-
-const periciasDisponiveis = [
-    "Atletismo",
-    "Furtividade",
-    "Investigação",
-    "Acrobacia",
-    "Enganação",
-    "Intimidação",
-    "Percepção",
-    "Diplomacia",
-    "Sobrevivência",
-    "Sedução",
-    "Documentos",
-    "Combate",
-    "Pontaria",
-    "Fortificação",
-    "Iniciativa",
-    "Ofício",
-    "Reflexos",
-    "Resistir",
-    "Tecnologia",
-    "Medicina",
-    "Intuição",
-    "Crime",
-    "Domar",
-    "Ciências",
-    "Pilotagem",
-    "Ritualismo",
-    "Religião"
-];
-
-almas = {
-  "Alma Necrótica - Aceitação": {
-    descricao: "Aqueles que carregam esta alma compreendem que todas as coisas possuem um fim. Não significa desejar a morte, mas aceitar perdas, mudanças e encerramentos sem permitir que eles destruam aquilo que ainda pode ser construído.",
-    
-    afinidade_elemental: "Morte",
-
-    antonimo: "Apego. A incapacidade de aceitar o fim, agarrando-se ao que já morreu, ao que já acabou ou àquilo que nunca poderá voltar.",
-
-    poder: "Eco do Fim: Ao receber dano fatal pela primeira vez em um combate ou cena, você sobrevive com 1 PV. (Uma vez por missão.)"
-  },
-  "Alma Pestilência Resiliência": {
-    descricao: "Aqueles que carregam esta alma sabem sobreviver à deterioração. Mesmo quando tudo ao seu redor apodrece, encontram uma maneira de continuar existindo. São capazes de transformar dificuldades em experiência e crescer através das próprias adversidades.",
-    
-    afinidade_elemental: "Pestilência", 
-
-    antonimo: "Estagnação. A incapacidade de mudar ou se adaptar, permitindo que a deterioração consuma lentamente tudo aquilo que existe.",
-
-    poder: "Sobrevivência Degenerativa: Toda vez que você ficar Machucado, recupera 1 PE no início do seu turno. Ao atingir 50% ou menos dos PV, recupera 1d3 PE em vez disso."
-  },
-  "Alma Áurica - Ambição": {
-    descricao: "Aqueles que carregam esta alma nunca aceitam que seus limites atuais sejam definitivos. Buscam conhecimento, poder e aperfeiçoamento constantemente, acreditando que sempre existe algo além daquilo que já alcançaram.",
-    
-    afinidade_elemental: "Áurico",
-
-    antonimo: "Complacência. A satisfação absoluta com aquilo que já possui, recusando-se a evoluir porque acredita que não há mais nada a conquistar.",
-
-    poder: "Ganância Mecânica: Toda vez que você matar ou executar um inimigo, recupera 1d12 PV e recebe +2 em todos os testes por uma quantidade de turnos igual ao seu maior atributo."
-  },
-  "Alma Desesperada - Coragem": {
-    descricao: "Aqueles que carregam esta alma conhecem o medo, mas não permitem que ele determine suas escolhas. A verdadeira coragem não é ignorar o perigo, mas continuar avançando mesmo quando se compreende exatamente o que pode acontecer.",
-
-    afinidade_elemental: "Desespero",
-
-    antonimo: "Covardia. Permitir que o medo controle completamente suas decisões, fazendo com que a própria possibilidade de fracasso seja suficiente para impedir qualquer ação.",
-
-    poder: "Última Chance: Caso consiga uma falha crítica em um teste que não seja de combate e que levaria à sua morte, você sobrevive com PV igual ao seu maior atributo. Caso não seja dano fatal, reduz o dano sofrido em valor igual ao seu maior atributo."
-  },
-  "Alma Aflita - Autenticidade": {
-    descricao: "Aqueles que carregam esta alma não escondem aquilo que sentem. Sua paixão, raiva, amor e sofrimento são intensos, mas genuínos. Eles não têm medo de se entregar completamente àquilo que consideram importante.",
-    
-    afinidade_elemental: "Agonia",
-
-    antonimo: "Apatia. A perda da capacidade de sentir intensamente, tornando-se indiferente diante da dor, da alegria, das pessoas e até mesmo da própria existência.",
-
-    poder: "Fagulha da Tormenta: Ao receber dano crítico, você causa metade do dano sofrido para quem realizou o ataque. (Uma vez por alvo.)"
-  },
-  "Alma Culpada - Responsabilidade": {
-    descricao: "Aqueles que carregam esta alma reconhecem seus próprios erros. Em vez de fugir das consequências de suas escolhas, aceitam o peso delas e procuram reparar aquilo que causaram.",
-
-    afinidade_elemental: "Culpa",
-
-    antonimo: "Negação. Recusar-se a reconhecer os próprios erros, transferindo a culpa para outras pessoas ou fingindo que suas ações nunca aconteceram.",
-
-    poder: "Peso Compartilhado: Efeitos negativos não paranormais ou mentais duram 1 turno a menos em você, enquanto os seus duram 1 turno a mais. Você não pode cair ou morrer exclusivamente devido a efeitos de Status negativos, independente de sua origem."
-  },
-  "Alma Ensanguentada - Justiça": {
-    descricao: "Aqueles que carregam esta alma acreditam que toda ação possui uma consequência. Sua força não existe simplesmente para destruir, mas para impedir que aqueles que causam sofrimento permaneçam impunes.",
-    
-    afinidade_elemental: "Punição",
-
-    antonimo: "Vingança. Aqueles que abandonam a justiça não buscam equilíbrio ou reparação, mas retribuição pessoal. A vingança não se importa com o que é justo, apenas com fazer o outro sofrer pelo sofrimento que causou. Onde a Justiça pergunta “qual consequência é merecida?”, a Vingança pergunta apenas “quanto você deve sofrer?”. ",
-      
-    poder: "Cura Acelerada: Regenera 1d4 PV no início de cada um de seus turnos."
-  }
-}
-
-const campoAlma = document.getElementById("alma");
-
-preencherLista(
-    "lista-almas",
-    Object.keys(almas)
-);
-
-campoAlma.addEventListener("change", () => {
-
-    const almaEscolhida = campoAlma.value;
-    const dadosAlma = almas[almaEscolhida];
-
-    const descricao = document.getElementById("descricao-alma");
-
-    if (!dadosAlma) {
-        descricao.hidden = true;
-        return;
-    }
-
-    document.getElementById("afinidade-alma").textContent =
-        dadosAlma.afinidade_elemental;
-
-    document.getElementById("texto-alma").textContent =
-        dadosAlma.descricao;
-
-    document.getElementById("poder-alma").textContent =
-        dadosAlma.poder;
-    
-    document.getElementById("antonimo-alma").textContent = 
-        dadosAlma.antonimo;
-
-    descricao.hidden = false;
 });
-
-const armas = [
-
-];
-
-const itens = [
-    
-];
-
-const listaPericiasDisponiveis =
-    document.getElementById("lista-pericias-disponiveis");
-
-periciasDisponiveis.forEach(pericia => {
-
-    const option = document.createElement("option");
-
-    option.value = pericia;
-
-    listaPericiasDisponiveis.appendChild(option);
-});
-
-const listaClasses = document.getElementById("lista-classes");
-
-Object.keys(classes).forEach(classe => {
-
-    const option = document.createElement("option");
-
-    option.value = classe;
-
-    listaClasses.appendChild(option);
-});
-
-const campoClasse = document.getElementById("classe");
-const campoTrilha = document.getElementById("trilha");
-const campoOrigem = document.getElementById("origem");
-campoOrigem.addEventListener("change", () => {
-    carregarPericiasOrigem();
-});
-const listaTrilhas = document.getElementById("lista-trilhas");
-
-campoClasse.addEventListener("change", () => {
-
-    const classeEscolhida = campoClasse.value;
-
-    listaTrilhas.innerHTML = "";
-    campoTrilha.value = "";
-
-    if (!classes[classeEscolhida]) {
-        campoTrilha.disabled = true;
-
-        document.getElementById("lista-pericias").innerHTML = "";
-        document.getElementById("pericias-iniciais").innerHTML = "";
-
-        return;
-    }
-
-    classes[classeEscolhida].trilhas.forEach(trilha => {
-
-        const option = document.createElement("option");
-
-        option.value = trilha;
-
-        listaTrilhas.appendChild(option);
-    });
-
-    campoTrilha.disabled = false;
-
-    calcularStatus();
-    carregarPericiasIniciais();
-    criarSlotsPericias();
-});
-
-document
-    .getElementById("epeem")
-    .addEventListener("input", calcularStatus);
-
-document
-    .getElementById("resistencia")
-    .addEventListener("input", calcularStatus);
-
-document
-    .getElementById("influencia")
-    .addEventListener("input", calcularStatus);
-
-document
-    .getElementById("conhecimento")
-    .addEventListener("input", criarSlotsPericias);
-
-const origens = {
-
-    "Acadêmico estudioso": {
-        pericias: [
-            "Documentos",
-            "Investigação"
-        ]
-    },
-
-    "Amaldiçoado fortalecido": {
-        pericias: [
-            "Resistir",
-            "Sobrevivência"
-        ]
-    },
-
-    "Amigo dos animais": {
-        pericias: [
-            "Domar",
-            "Percepção"
-        ]
-    },
-
-    "Amnésico": {
-        pericias: [
-            "",
-            ""
-        ]
-    },
-
-    "Artista de rua": {
-        pericias: [
-            "Enganação",
-            "Intuição"
-        ]
-    },
-
-    "Atleta": {
-        pericias: [
-            "Atletismo",
-            "Reflexos"
-        ]
-    },
-
-    "Ator/Atriz": {
-        pericias: [
-            "Enganação",
-            "Sedução"
-        ]
-    },
-
-    "Criminoso": {
-        pericias: [
-            "Crime",
-            "Furtividade"
-        ]
-    },
-
-    "Enfermeiro": {
-        pericias: [
-            "Medicina",
-            "Sobrevivência"
-        ]
-    },
-
-    "Engenheiro": {
-        pericias: [
-            "Ciências",
-            "Ofício"
-        ]
-    },
-
-    "Escritor": {
-        pericias: [
-            "Documentos",
-            "Ofício"
-        ]
-    },
-
-    "Espadachim": {
-        pericias: [
-            "Combate",
-            "Iniciativa"
-        ]
-    },
-
-    "Estilista": {
-        pericias: [
-            "Enganação",
-            "Sedução"
-        ]
-    },
-
-    "Inventor": {
-        pericias: [
-            "Ofício",
-            "Tecnologia"
-        ]
-    },
-
-    "Investigador Paranormal": {
-        pericias: [
-            "Investigação",
-            "Percepção"
-        ]
-    },
-
-    "Jornalista": {
-        pericias: [
-            "Diplomacia",
-            "Investigação"
-        ]
-    },
-
-    "Lutador": {
-        pericias: [
-            "Combate",
-            "Reflexos"
-        ]
-    },
-
-    "Mecânico de armas": {
-        pericias: [
-            "Ofício",
-            "Pilotagem"
-        ]
-    },
-
-    "Médico": {
-        pericias: [
-            "Medicina",
-            "Ciências"
-        ]
-    },
-
-    "Ocultista arrependido": {
-        pericias: [
-            "Ritualismo",
-            "Intuição"
-        ]
-    },
-
-    "Policial/Segurança": {
-        pericias: [
-            "Intimidação",
-            "Pontaria"
-        ]
-    },
-
-    "Prodígio": {
-        pericias: [
-            "Ritualismo",
-            "Ofício"
-        ]
-    },
-
-    "Professor": {
-        pericias: [
-            "Diplomacia",
-            "Investigação"
-        ]
-    },
-
-    "Prometido": {
-        pericias: [
-            "Ritualismo",
-            "Religião"
-        ]
-    },
-
-    "Rato de laboratório": {
-        pericias: [
-            "Atletismo",
-            "Combate"
-        ]
-    },
-
-    "Religioso": {
-        pericias: [
-            "Religião",
-            "Diplomacia"
-        ]
-    },
-
-    "Selado marcado": {
-        pericias: [
-            "Fortificação",
-            ""
-        ]
-    },
-
-    "Sobrevivente anormal": {
-        pericias: [
-            "Ofício",
-            "Sobrevivência"
-        ]
-    },
-
-    "Soldado militar": {
-        pericias: [
-            "Iniciativa",
-            "Pontaria"
-        ]
-    },
-
-    "T.I": {
-        pericias: [
-            "Tecnologia",
-            "Intuição"
-        ]
-    }
-
-};
-
-preencherLista("lista-origens", Object.keys(origens))
-
-limitarRecursoAtual("vida-atual");
-limitarRecursoAtual("pe-atual");
-limitarRecursoAtual("sanidade-atual");
-preencherAtributo("forca");
-preencherAtributo("agilidade");
-preencherAtributo("resistencia");
-preencherAtributo("conhecimento");
-preencherAtributo("influencia");
-
-document
-    .getElementById("forca")
-    .addEventListener("input", atualizarInventario);
-
-atualizarInventario();

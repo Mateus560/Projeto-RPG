@@ -26,8 +26,8 @@
 
                 <button
                     type="button"
+                    id="entendi"
                     class="button"
-                    onclick="fecharAlerta()"
                 >
                     Entendi
                 </button>
@@ -157,7 +157,7 @@
                     </div>
                     <span>Dano</span>
                     <input type="number" id="dano-pv" placeholder="Insira o valor do dano" min="0">
-                    <button class="button-remover" onclick="receberDano()">Aplicar</button>
+                    <button class="button-remover" id="pv-dano">Aplicar</button>
                 </div>
 
 
@@ -217,7 +217,7 @@
                     </div>
                     <span>Dano</span>
                     <input type="number" id="dano-sanidade" placeholder="Insira o valor do dano" min="0">
-                    <button class="button-remover" onclick="receberDano()">Aplicar</button>
+                    <button class="button-remover" id="sanidade-dano">Aplicar</button>
                 </div>
 
             </div>
@@ -315,10 +315,9 @@
 
             <div id="lista-habilidades"></div>
 
-            <button type="button" class="adicionar" onclick="adicionarHabilidade()">
+            <button type="button" id="adicionar-habilidade" class="adicionar">
                 + Adicionar habilidade
             </button>
-
         </section>
 
         <!-- =========================
@@ -340,7 +339,7 @@
                 <button
                     type="button"
                     class="adicionar"
-                    onclick="adicionarArma()"
+                    id="adicionar-arma"
                 >
                     + Adicionar arma
                 </button>
@@ -353,7 +352,11 @@
                 <div id="lista-itens">
 
                 </div>
-                <button class="adicionar" onclick="adicionarItem()">
+                <button 
+                    type="button"
+                    class="adicionar"
+                    id="adicionar-item"
+                >
                     + Adicionar item
                 </button>
             </div>
@@ -385,11 +388,19 @@
 
             <div class="actions">
 
-                <button type="button" class="button button-primary" onclick="salvarFicha()">
+                <button 
+                    type="button" 
+                    class="button button-primary"
+                    id="salvar-ficha"
+                >
                     💾 Salvar
                 </button>
 
-                <button type="button" class="button" onclick="carregarFicha()">
+                <button
+                    type="button" 
+                    class="button"
+                    id="carregar-ficha"
+                >
                     📂 Carregar
                 </button>
 
@@ -400,7 +411,21 @@
             </div>
 
         </section>
+
+        <section class="section">
+
+            <h2 class="section-title">Outras páginas</h2>
+
+            <div class="actions">
+
+                <a href="rituais.html">
+                    Rituais
+                </a>
+
+            </div>
+
+        </section>
     </main>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
