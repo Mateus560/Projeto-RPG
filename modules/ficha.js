@@ -12,17 +12,16 @@ import {
 } from "./habilidades.js";
 
 import {
-    coletarRituais,
-    carregarRituais
-} from "./rituais.js";
-
-import {
     coletarArmas,
     coletarItens,
     carregarArmas,
     carregarItens,
     atualizarInventario
 } from "./inventario.js";
+
+import {
+    coletarRituais
+} from "./rituais.js";
 
 import {
     calcularStatus
@@ -117,9 +116,6 @@ export function coletarFicha() {
         habilidades:
             coletarHabilidades(),
 
-        rituais:
-            coletarRituais(),
-
         armas:
             coletarArmas(),
 
@@ -143,17 +139,23 @@ export function coletarFicha() {
 
 export function salvarFicha() {
 
-    const ficha =
+    const fichaAtual =
+        JSON.parse(
+            localStorage.getItem("ficha-personagem")
+        ) || {};
+
+    const novaFicha =
         coletarFicha();
+
+    const ficha =
+        {
+            ...fichaAtual,
+            ...novaFicha
+        };
 
     localStorage.setItem(
         "ficha-personagem",
         JSON.stringify(ficha)
-    );
-
-    console.log(
-        "Ficha salva:",
-        ficha
     );
 
     mostrarAlerta(
@@ -338,9 +340,4 @@ export function carregarFicha() {
     // ========================================================
     // FINAL
     // ========================================================
-
-    mostrarAlerta(
-        "Carregar",
-        "Ficha carregada com sucesso!"
-    );
 }

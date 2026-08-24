@@ -1,4 +1,7 @@
-export function adicionarRitual(dados = null) {
+import rituais from "../data/rituais.js";
+
+export function adicionarRitual() {
+
     const lista =
         document.getElementById("lista-ritual");
 
@@ -7,178 +10,256 @@ export function adicionarRitual(dados = null) {
     const ritual =
         document.createElement("div");
 
-    ritual.classList.add("rituais");
+    ritual.classList.add("ritual");
 
     ritual.innerHTML = `
+    <section class="section">
         <div class="field">
-            <label>Nome do Ritual</label>
 
-            <input
-                class="nome-ritual"
-                type="text"
-                placeholder="Nome do Ritual"
-            >
-        </div>
+            <label>Ritual</label>
 
-        <div class="field">
-            <label>Custo em PE</label>
+            <select class="selecionar-ritual">
 
-            <select class="custo-ritual">
-                <option value="1">1</option>
-                <option value="3">3</option>
-                <option value="6">6</option>
-                <option value="10">10</option>
+                <option value="">
+                    Selecione um ritual
+                </option>
+
             </select>
+
         </div>
 
-        <div class="field">
-            <label>Duração</label>
+        <div class="dados-ritual" hidden>
 
-            <input
-                class="duracao-ritual"
-                type="text"
-                list="duracoes-rituais"
-                placeholder="Ex: Cena"
-            >
+            <h3 class="nome-ritual"></h3>
+
+            <p>
+                <strong>Elemento:</strong>
+                <span class="elemento-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Círculo:</strong>
+                <span class="circulo-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Patrono:</strong>
+                <span class="patrono-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Execução:</strong>
+                <span class="execucao-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Alcance:</strong>
+                <span class="alcance-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Alvo:</strong>
+                <span class="alvo-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Duração:</strong>
+                <span class="duracao-ritual"></span>
+            </p>
+
+            <p>
+                <strong>Resistência:</strong>
+                <span class="resistencia-ritual"></span>
+            </p>
+
+            <div class="field">
+
+                <strong>Descrição</strong>
+
+                <p class="descricao-ritual"></p>
+
+            </div>
+
+            <div class="field">
+
+                <strong>Discente</strong>
+
+                <p class="discente-ritual"></p>
+
+            </div>
+
+            <div class="field">
+
+                <strong>Verdadeiro</strong>
+
+                <p class="verdadeiro-ritual"></p>
+
+            </div>
+
         </div>
+    </section>
 
-        <div class="field">
-            <label>Execução</label>
-
-            <input
-                class="execucao-ritual"
-                type="text"
-                list="execucoes-rituais"
-                placeholder="Ex: Padrão"
-            >
-        </div>
-
-        <div class="field">
-            <label>Alcance</label>
-
-            <input
-                class="alcance-ritual"
-                type="text"
-                list="alcances-rituais"
-                placeholder="Ex: Curto"
-            >
-        </div>
-
-        <div class="field">
-            <label>Alvo</label>
-
-            <input
-                class="alvo-ritual"
-                type="text"
-                list="alvos-rituais"
-                placeholder="Ex: 1 ser"
-            >
-        </div>
-
-        <div class="field">
-            <label>Descrição</label>
-
-            <textarea
-                class="descricao-ritual"
-                placeholder="Descreva o efeito..."
-            ></textarea>
-        </div>
-
-        <div class="ability-actions">
-            <button
-                type="button"
-                class="usar-habilidade"
-            >
-                Usar
-            </button>
-
-            <button
-                type="button"
-                class="button-remover"
-            >
-                Remover
-            </button>
-        </div>
+        <button
+            type="button"
+            class="button-remover"
+        >
+            Remover
+        </button>
     `;
 
     lista.appendChild(ritual);
 
-    if (dados) {
-        ritual.querySelector(".nome-ritual").value =
-            dados.nome || "";
+    const select = ritual.querySelector(".selecionar-ritual");
 
-        ritual.querySelector(".custo-ritual").value =
-            dados.custo || 1;
+    Object.keys(rituais).forEach(nome => {
+        const option = document.createElement("option");
 
-        ritual.querySelector(".duracao-ritual").value =
-            dados.duracao || "";
+        option.value = nome;
+        option.textContent = nome;
 
-        ritual.querySelector(".execucao-ritual").value =
-            dados.execucao || "";
+        select.appendChild(option);
+    });
 
-        ritual.querySelector(".alcance-ritual").value =
-            dados.alcance || "";
+    select.addEventListener("change", () => {
 
-        ritual.querySelector(".alvo-ritual").value =
-            dados.alvo || "";
+        const nome = select.value;
+        const dados = rituais[nome];
 
-        ritual.querySelector(".descricao-ritual").value =
-            dados.descricao || "";
-    }
+        const dadosRitual =
+            ritual.querySelector(".dados-ritual");
 
-    ritual.querySelector(".usar-habilidade")
-        .addEventListener("click", () => {
-            usarHabilidade(ritual);
-        });
+        if (!dados) {
+            dadosRitual.hidden = true;
+            return;
+        }
 
-    ritual.querySelector(".button-remover")
-        .addEventListener("click", () => {
-            ritual.remove();
-        });
+        ritual.querySelector(".nome-ritual").textContent =
+            nome;
+
+        ritual.querySelector(".elemento-ritual").textContent =
+            dados.elemento;
+
+        ritual.querySelector(".circulo-ritual").textContent =
+            dados.circulo;
+
+        ritual.querySelector(".patrono-ritual").textContent =
+            dados.patrono || "—";
+
+        ritual.querySelector(".execucao-ritual").textContent =
+            dados.execucao;
+
+        ritual.querySelector(".alcance-ritual").textContent =
+            dados.alcance;
+
+        ritual.querySelector(".alvo-ritual").textContent =
+            dados.alvo;
+
+        ritual.querySelector(".duracao-ritual").textContent =
+            dados.duracao;
+
+        ritual.querySelector(".resistencia-ritual").textContent =
+            dados.resistencia || "Nenhuma";
+
+        ritual.querySelector(".descricao-ritual").textContent =
+            dados.descricao;
+
+        ritual.querySelector(".discente-ritual").textContent =
+            dados.discente?.efeito || "—";
+
+        ritual.querySelector(".verdadeiro-ritual").textContent =
+            dados.verdadeiro?.efeito || "—";
+
+        dadosRitual.hidden = false;
+
+        salvarRituais();
+    });
+
+    ritual
+    .querySelector(".button-remover")
+    .addEventListener("click", () => {
+        ritual.remove();
+        salvarRituais();
+    });
 }
-
 
 export function coletarRituais() {
-    const rituais = [];
-
-    document
-        .querySelectorAll("#lista-ritual .rituais")
-        .forEach(ritual => {
-            rituais.push({
-                nome:
-                    ritual.querySelector(".nome-ritual").value,
-
-                custo:
-                    ritual.querySelector(".custo-ritual").value,
-
-                duracao:
-                    ritual.querySelector(".duracao-ritual").value,
-
-                execucao:
-                    ritual.querySelector(".execucao-ritual").value,
-
-                alcance:
-                    ritual.querySelector(".alcance-ritual").value,
-
-                alvo:
-                    ritual.querySelector(".alvo-ritual").value,
-
-                descricao:
-                    ritual.querySelector(".descricao-ritual").value
-            });
-        });
-
-    return rituais;
-}
-
-
-export function carregarRituais(rituais) {
-    if (!rituais) return;
 
     const lista =
         document.getElementById("lista-ritual");
 
-    lista.innerHTML = "";
+    if (!lista) return [];
 
-    rituais.forEach(adicionarRitual);
+    const rituaisSelecionados = [];
+
+    lista
+        .querySelectorAll(".ritual")
+        .forEach(ritual => {
+
+            const select =
+                ritual.querySelector(
+                    ".selecionar-ritual"
+                );
+
+            if (!select?.value) return;
+
+            rituaisSelecionados.push({
+                nome: select.value
+            });
+        });
+
+    return rituaisSelecionados;
+}
+
+export function carregarRituais() {
+
+    const dados =
+        localStorage.getItem("ficha-personagem");
+
+    if (!dados) return;
+
+    const ficha = JSON.parse(dados);
+
+    if (!ficha.rituais) return;
+
+    ficha.rituais.forEach(dadosRitual => {
+
+        adicionarRitual();
+
+        const lista =
+            document.getElementById("lista-ritual");
+
+        const rituais =
+            lista.querySelectorAll(".ritual");
+
+        const ritual =
+            rituais[rituais.length - 1];
+
+        const select =
+            ritual.querySelector(
+                ".selecionar-ritual"
+            );
+
+        select.value = dadosRitual.nome;
+
+        select.dispatchEvent(
+            new Event("change")
+        );
+    });
+}
+
+export function salvarRituais() {
+
+    const dados =
+        localStorage.getItem("ficha-personagem");
+
+    if (!dados) return;
+
+    const ficha = JSON.parse(dados);
+
+    ficha.rituais = coletarRituais();
+
+    localStorage.setItem(
+        "ficha-personagem",
+        JSON.stringify(ficha)
+    );
 }

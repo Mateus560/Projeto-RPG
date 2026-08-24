@@ -8,13 +8,6 @@ import almas from "./data/almas.js";
 import periciasDisponiveis from "./data/pericias.js";
 
 import {
-    duracoes,
-    execucoes,
-    alvos,
-    alcances
-} from "./data/rituais.js";
-
-import {
     carregarPericiasIniciais,
     carregarPericiasOrigem,
     criarSlotsPericias,
@@ -138,26 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     preencherLista(
         "lista-almas",
         Object.keys(almas)
-    );
-
-    preencherLista(
-        "duracoes-rituais",
-        duracoes
-    );
-
-    preencherLista(
-        "execucoes-rituais",
-        execucoes
-    );
-
-    preencherLista(
-        "alvos-rituais",
-        alvos
-    );
-
-    preencherLista(
-        "alcances-rituais",
-        alcances
     );
 
     // Atributos
@@ -391,4 +364,11 @@ document.addEventListener("DOMContentLoaded", () => {
     atualizarInventario();
 
     calcularStatus();
+
+    const fichaSalva =
+    localStorage.getItem("ficha-personagem");
+
+    if (fichaSalva) {
+        carregarFicha();
+    }
 });
