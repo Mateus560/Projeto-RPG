@@ -434,6 +434,12 @@ a {
     border-radius: 10px;
 }
 
+.requisito-verdadeiro, .requisito-discente {
+    font-style: italic;
+    font-weight: bold;
+    color: red;
+}
+
 /* =========================
     TABLET / DESKTOP
 ========================= */

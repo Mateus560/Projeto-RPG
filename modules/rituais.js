@@ -85,6 +85,8 @@ export function adicionarRitual() {
                 <strong>Discente</strong>
 
                 <p class="discente-ritual"></p>
+                <p class="requisito-discente"></p>
+
 
             </div>
 
@@ -93,6 +95,7 @@ export function adicionarRitual() {
                 <strong>Verdadeiro</strong>
 
                 <p class="verdadeiro-ritual"></p>
+                <p class="requisito-verdadeiro"></p>
 
             </div>
 
@@ -166,8 +169,12 @@ export function adicionarRitual() {
         ritual.querySelector(".discente-ritual").textContent =
             dados.discente?.efeito || "—";
 
-        ritual.querySelector(".verdadeiro-ritual").textContent =
+        ritual.querySelector(".requisito-discente").textContent = dados.discente?.requisito || "Sem requisito";
+
+        ritual.querySelector(".verdadeiro-ritual").textContent = 
             dados.verdadeiro?.efeito || "—";
+        
+        ritual.querySelector(".requisito-verdadeiro").textContent = dados.verdadeiro?.requisito || "—";
 
         dadosRitual.hidden = false;
 
