@@ -1,7 +1,3 @@
-// ============================================================
-// DADOS
-// ============================================================
-
 import origens from "./data/origens.js";
 import classes from "./data/classes.js";
 import almas from "./data/almas.js";
