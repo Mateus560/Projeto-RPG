@@ -515,6 +515,7 @@ const rituais = {
 
     "Fumaça Espessa": {
         elemento: "Medo",
+        circulo: 1,
         alcance: "Cone em 3 metros na frente do usuário",
         alvo: "Todos que estiverem dentro do Cone",
         descricao: "Uma fumaça espessa sai de seus pulmões e causa 2d6+2 de dano de Medo e empurra todos dentro da área cônica em Metros equivalente ao seu maior atributo. Em alvos humanos isso causa Penumbra I por 2 turnos."
@@ -522,6 +523,7 @@ const rituais = {
 
     "Vel Enevoado": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Ophthalmon, o Vigilante Eterno",
         execucao: "Padrão",
         alcance: "Curto, circular 3m",
@@ -544,6 +546,7 @@ const rituais = {
 
     "Venda Oculta": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Ophthalmon, o Vigilante Etern",
         execucao: "Padrão",
         alcance: "Pessoal",
@@ -566,6 +569,7 @@ const rituais = {
 
     "Marca de Visão": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Ophthalmon, o Vigilante Eterno",
         execucao: "Padrão",
         alcance: "Toque",
@@ -589,6 +593,7 @@ const rituais = {
 
     "Distorção Visual": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Ophthalmon, o Vigilante Eterno",
         execucao: "Padrão",
         alcance: "Curto",
@@ -612,6 +617,7 @@ const rituais = {
 
     "Compreensão Assombrosa": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Rundarr O Decaído",
         execucao: "Padrão",
         alcance: "Pessoal",
@@ -634,6 +640,7 @@ const rituais = {
 
     "Banimento Espiritual": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Kami, A Profana Controladora",
         execucao: "Padrão",
         alcance: "Curto", 
@@ -655,6 +662,7 @@ const rituais = {
 
     "Corpo Intangível": {
         elemento: "Medo",
+        circulo: 1,
         patrono: "Nihil, o Homem Entre as Paredes",
         execucao: "Padrão",
         alcance: "Pessoal",
@@ -677,6 +685,7 @@ const rituais = {
 
     "Explosão de Insetos": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Entomonimus, Os Profanos Insetos",
         execucao: "Padrão",
         alcance: "Curto",
@@ -700,6 +709,7 @@ const rituais = {
 
     "Revitalização Penosa": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Lain, A Decrépita",
         execucao: "Padrão",
         alcance: "Curto",
@@ -723,6 +733,7 @@ const rituais = {
 
     "Monstruosidade Incompleta": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Agares, o Deformante",
         execucao: "Movimento",
         alcance: "Pessoal",
@@ -745,6 +756,7 @@ const rituais = {
 
     "Reestruturação Corpórea": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Nutto Fungi, a Aberração dos Fungos",
         execucao: "Padrão",
         alcance: "Toque",
@@ -767,6 +779,7 @@ const rituais = {
 
     "Decadência Corpórea": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Tengan, o Oportunista",
         execucao: "Padrão",
         alcance: "Toque",
@@ -789,6 +802,7 @@ const rituais = {
 
     "Pragas Quartenárias": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Entomonimus, Os Profanos Insetóides",
         execucao: "Padrão",
         alcance: "Muito Curto",
@@ -812,6 +826,7 @@ const rituais = {
 
     "O Melhor Tempero": {
         elemento: "Pestilência",
+        circulo: 1,
         patrono: "Hungrig, o Cozinheiro Perverso",
         execucao: "Padrão",
         alcance: "Pessoal",
