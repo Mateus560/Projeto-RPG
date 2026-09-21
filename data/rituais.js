@@ -511,6 +511,168 @@ const rituais = {
             efeito: "O alvo recebe Infecção Astral III imediatamente. Enquanto estiver nesse estágio, sempre que sofrer dano recebe +1d6 de dano de Iluminação uma vez por turno.",
             requisito: "3º círculo"
         }
+    },
+
+    "Fumaça Espessa": {
+        elemento: "Medo",
+        alcance: "Cone em 3 metros na frente do usuário",
+        alvo: "Todos que estiverem dentro do Cone",
+        descricao: "Uma fumaça espessa sai de seus pulmões e causa 2d6+2 de dano de Medo e empurra todos dentro da área cônica em Metros equivalente ao seu maior atributo. Em alvos humanos isso causa Penumbra I por 2 turnos."
+    },
+
+    "Vel Enevoado": {
+        elemento: "Medo",
+        patrono: "Ophthalmon, o Vigilante Eterno",
+        execucao: "Padrão",
+        alcance: "Curto, circular 3m",
+        alvo: "Aliados em alcance curto",
+        duracao: "2 turnos fora do círculo",
+        descricao: "O ritual cria uma névoa sutil que 'fecha' parcialmente a visão espiritual dos aliados, protegendo-os do terror direto.Enquanto estiverem dentro da área do efeito, os alvos tornam-se imunes a quaisquer ônus ou penalidades causados por fobias. Além disso, recebem +5 em testes de Presença do Medo e +5 em testes de Resistência contra rituais que não causam dano direto aos Pontos de Vida (como controle mental, paralisia ou medo). Se um aliado sair da área do efeito, a proteção persiste por apenas 2 turnos antes de se dissipar completamente para aquele indivíduo.",
+
+        discente: {
+            custo: 2,
+            efeito: "Muda o alcance para “Médio” e a área para “raio de 6m”. A duração do efeito residual ao sair do círculo aumenta para 1 cena inteira, independentemente da distância percorrida.",
+            requisito: "2º círculo."
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Muda o alcance para “Pessoal” e o alvo para “você e todos os aliados em alcance Longo”. Em vez do normal, a névoa torna-se densa e visível apenas para os afetados. Além dos benefícios originais, os aliados afetados podem, uma vez por turno, ignorar completamente o resultado de um teste de resistência falho contra um ritual de Medo, tratando-o como um sucesso automático. A duração fora da área torna-se indefinida até o fim da cena, mesmo que se movam para longe do conjurador.",
+            requisito: "3º círculo e afinidade com o elemento Medo"            
+        }
+    },
+
+    "Venda Oculta": {
+        elemento: "Medo",
+        patrono: "Ophthalmon, o Vigilante Etern",
+        execucao: "Padrão",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Cena",
+        descricao: "O ritual confere a você percepção sobrenatural ao renunciar à visão física. Ao cobrir seus olhos (com uma venda real ou gesto simbólico), você se torna imune a qualquer efeito de cegueira física ou mental e ilusões visuais. Em troca, você enxerga o mundo como fluxos de energia espiritual, sendo capaz de identificar rastros espirituais e entidades invisíveis como se fossem objetos físicos brilhantes.",
+
+        discente: {
+            custo: 2,
+            efeito: "Muda o alcance para “toque” e o alvo para “1 ser”. Você pode aplicar a venda em outra pessoa, concedendo a ela a visão espiritual e a imunidade à cegueira.",
+            requisito: "2º círculo"
+        },
+
+        verdadeiro: {
+            custo: 4,
+            efeito: "Muda o alcance para “pessoal” e o alvo para “você”. Em vez do normal, você não precisa cobrir os olhos fisicamente. Você vê simultaneamente o plano físico e o espiritual, podendo enxergar através de obstáculos sólidos (paredes, portas) e detectar automaticamente qualquer ser não-físico ou ritual ativo em um raio de 30m, sem sofrer penalidades de distinção de detalhes.",
+            requisito: "3º círculo"
+        }
+    },
+
+    "Marca de Visão": {
+        elemento: "Medo",
+        patrono: "Ophthalmon, o Vigilante Eterno",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 objeto ou ser",
+        duracao: "Cena",
+        resistencia: "Teste de Resistir DT 15+CON do usuário",
+        descricao: "Teste de Resistir DT 15+CON do usuário. Se tocar um objeto inanimado, você o marca com o símbolo invisível de Ophthalmon. Enquanto o ritual durar, você (ou outro ser que você tocar) pode fechar os olhos e ver o ambiente exatamente da perspectiva do objeto marcado, como se tivesse olhos na superfície dele. O objeto não precisa ter olhos; a visão é mágica e abrange 360 graus se o objeto não tiver obstruções físicas. Se tocar um ser inteligente, você marca sua visão. Pelo resto da cena, você (ou outro ser que você tocar) pode ver através dos olhos do alvo marcado. O alvo percebe a invasão visual como um leve arrepio ou sombra no canto do olho. Se o alvo fechar os olhos, a visão compartilhada torna-se escura. Um alvo involuntário tem direito a um teste de Vontade para anular a marca.",
+
+        discente: {
+            custo: 2,
+            efeito: "Muda o alcance para “curto” e o alvo para “alvos escolhidos”. Você pode marcar múltiplos objetos ou seres. Quem você tocar pode alternar a visão entre qualquer um dos alvos marcados à vontade.",
+            requisito: "2º círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Muda o alcance para “pessoal” e o alvo para “você”. Em vez do normal, você não precisa tocar em ninguém para marcar. Você pode marcar qualquer objeto ou ser que possa ver dentro do seu alcance de visão. Além disso, você pode ver através de todas as marcas simultaneamente, dividindo sua atenção como se tivesse múltiplos olhos onipresentes.",
+            requisito: "3º círculo"
+        }
+    },
+
+    "Distorção Visual": {
+        elemento: "Medo",
+        patrono: "Ophthalmon, o Vigilante Eterno",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "1 ser",
+        duracao: "Cena ou até receber dano",
+        resistencia: "Teste de Resistir DT 15+CON do usuário",
+        descricao: "O ritual altera a percepção visual que os outros têm do alvo. Você pode modificar características físicas (rosto, corpo, roupas) ou fazê-lo parecer um objeto inanimado. A ilusão é apenas visual; sons e cheiros permanecem reais. Se o alvo agir de forma hostil, o efeito se desfaz para quem testemunhar. Alvos involuntários podem anular com um teste de Vontade.",
+
+        discente: {
+            custo: 2,
+            efeito: "Muda o alvo para “alvos escolhidos”. Altera a aparência de múltiplos seres simultaneamente com uma ilusão coordenada. Altera o cheiro e o som que o alvo produz.",
+            requisito: "2º círculo."
+        },
+
+        verdadeiro: {
+            custo: 3, 
+            efeito: "Muda o alcance para “Longo” e a Duração para “1 hora”. A ilusão inclui distorções superficiais de som e movimento. Só se desfaz se o alvo for tocado ou sofrer dano.",
+            requisito: "3º círculo"
+        }
+    },
+
+    "Compreensão Assombrosa": {
+        elemento: "Medo",
+        patrono: "Rundarr O Decaído",
+        execucao: "Padrão",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Cena",
+        descricao: "Se tocar um objeto impregnado de terror (uma arma de crime, um local de assassinato, um amuleto de maldição), você entende a 'história' do medo ligado a ele, percebendo como o pavor foi infligido e qual a natureza do trauma, mesmo sem ter testemunhado o evento. Se tocar uma pessoa (ou ser inteligente), você compreende profundamente o que mais a aterroriza no momento, permitindo que você se comunique com ela através da linguagem do medo (acalmando-a ou aterrorizando-a com precisão cirúrgica) como se compartilhassem esse sentimento. Se tocar um ser não inteligente (como um animal), você percebe seus instintos de preservação e pavor imediato, sabendo exatamente o que está causando medo a ele no ambiente. Um alvo involuntário tem direito a um teste de Resistência contra o seu Ritualismo para anular o efeito.",
+
+        discente: {
+            custo: 2,
+            efeito: "Muda o alcance para “curto” e o alvo para “alvos escolhidos”. Você pode entender os medos de todos os alvos afetados simultaneamente.",
+            requisito: "2º círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Muda o alcance para “pessoal” e o alvo para “você”. Em vez do normal, você pode sentir, interpretar e projetar qualquer tipo de medo humano (ou da sua campanha) à vontade. Você se torna um mestre em identificar fobias ocultas e pode induzir o medo que escolher em quem tocar, sem necessidade de teste de resistência inicial.",
+            requisito: "3º círculo"
+        }
+    },
+
+    "Banimento Espiritual": {
+        elemento: "Medo",
+        patrono: "Kami, A Profana Controladora",
+        execucao: "Padrão",
+        alcance: "Curto", 
+        alvo: "Área (raio de 3m)",
+        duracao: "Cena",
+        descricao: "Cria uma barreira invisível que bloqueia a passagem de seres não-físicos e anula qualquer ritual que tente cruzá-la. Os seres físicos atravessam livremente enquanto profanos e híbridos são incapazes de atravessar.",
+
+        discente: {
+            custo: 2,
+            efeito: "Muda o alcance para 'Médio' e a área para 'raio de 6m'. A barreira torna-se visível e causa 3d4+4 de dano de medo a qualquer não-físico que tente tocá-la, empurrando-o para trás.",
+            requisito: "2º círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Área muda para 'raio de 15m'. A barreira torna-se absoluta."
+        }
+    },
+
+    "Corpo Intangível": {
+        elemento: "Medo",
+        patrono: "Nihil, o Homem Entre as Paredes",
+        execucao: "Padrão",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Até 4 minutos",
+        descricao: "Seu corpo perde parcialmente sua existência física, tornando-se translúcido e semelhante a uma sombra distorcida. Enquanto estiver sob o efeito, você pode atravessar até dois objetos ou estruturas sólidas, como paredes, portas ou pisos, desde que consiga alcançar o outro lado dentro da duração do ritual. Enquanto estiver atravessando uma estrutura, você não pode realizar ataques ou utilizar rituais que tenham como alvo seres fora dela. Se permanecer dentro de uma estrutura quando a duração terminar, seu corpo é violentamente expulso para o espaço desocupado mais próximo e você sofre 2d6 de dano de Sanidade.",
+
+        discente: {
+            custo: 2,
+            efeito: "Você pode atravessar até quatro estruturas sólidas durante a duração e recebe +5 em testes de Furtividade enquanto estiver intangível.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Você pode permanecer intangível por até 10 minutos e atravessar qualquer quantidade de estruturas, desde que elas estejam fisicamente conectadas. Além disso, enquanto estiver completamente dentro de uma estrutura, você não pode ser percebido por meios físicos comuns. Se a duração terminar enquanto você estiver dentro de uma estrutura, o dano de Sanidade aumenta para 4d6.",
+            requisito: "3º Círculo"
+        }
     }
 };
 
