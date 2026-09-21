@@ -9,7 +9,7 @@ const almas = {
             "Eco do Fim: Ao receber dano fatal pela primeira vez em um combate ou cena, você sobrevive com 1 PV. (Uma vez por missão.)"
     },
 
-    "Alma Pestilência Resiliência": {
+    "Alma Pestilência - Resiliência": {
         descricao:
             "Aqueles que carregam esta alma sabem sobreviver à deterioração. Mesmo quando tudo ao seu redor apodrece, encontram uma maneira de continuar existindo. São capazes de transformar dificuldades em experiência e crescer através das próprias adversidades.",
         afinidade_elemental: "Pestilência",
