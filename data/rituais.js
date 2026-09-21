@@ -202,7 +202,7 @@ const rituais = {
         discente: {
             custo: 2,
             efeito: "Cause 5d4+5 de dano de Punição, acerte até 2 seres adjacentes e torna-se capaz de acertar alvos sem sangue.",
-            requisito: "2º círculo e 25 de EPEEM"
+            requisito: "2º círculo e 25% de EPEEM"
         },
         verdadeiro: {
             custo: 6,
@@ -672,6 +672,163 @@ const rituais = {
             custo: 5,
             efeito: "Você pode permanecer intangível por até 10 minutos e atravessar qualquer quantidade de estruturas, desde que elas estejam fisicamente conectadas. Além disso, enquanto estiver completamente dentro de uma estrutura, você não pode ser percebido por meios físicos comuns. Se a duração terminar enquanto você estiver dentro de uma estrutura, o dano de Sanidade aumenta para 4d6.",
             requisito: "3º Círculo"
+        }
+    },
+
+    "Explosão de Insetos": {
+        elemento: "Pestilência",
+        patrono: "Entomonimus, Os Profanos Insetos",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "Um ser ou objeto",
+        duracao: "Instantâneo",
+        resistencia: "Fortificação Reduz à metade.",
+        descricao: "Você é capaz de conjurar insetos explosivos com a ajuda de Entomonimus que possuem capacidades destrutivas ácidas. Você causa 2d6+2 de Dano Pestilento. Caso acerte um objeto tecnológico, ele parará de funcionar por 2 turnos.",
+
+        discente: {
+            custo: 2,
+            efeito: "Seu dano aumenta para 4d6+4, o alcance torna-se médio e você causa Faminto I por 2 turnos no alvo.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Muda “Alvo” para Até 3 Seres ou Objetos. Muda o dano para 6d6+6.",
+            requisito: "Afinidade de Pestilência"
+        }
+    },
+
+    "Revitalização Penosa": {
+        elemento: "Pestilência",
+        patrono: "Lain, A Decrépita",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "Até 3 metros",
+        duracao: "Instantâneo",
+        resistencia: "Fortificação Reduz a metade do Dano, caso um alvo resista o dado de cura se torna apenas 1d4, 3d4 (Discente) e 5d4 (Verdadeiro).",
+        descricao: "A Miséria é insaciável. Através do desejo de consumir, o usuário convoca as entidades da Miséria para devorar a vitalidade de seres próximos. Este ritual causa 1D6+1 de dano de Pestilência para até 3 alvos em alcance muito curto, concedendo 1d8 PV Temporários por alvo com o custo de 1 PE para cada alvo consumido. Você recebe a Condição de Status Positiva, Saciado, que concede +3 em todos os seus testes por 3 turnos e você não pode utilizar este ritual até perder todo o PV temporário ou não estar mais saciado. O PV Temporário some depois da cena ou por ser zerado.",
+
+        discente: {
+            custo: 3,
+            efeito: "O seu dano aumenta para 3d6+3 e todo o PV temporário se torna 2d8",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 6,
+            efeito: "O seu dano aumenta para 5d6+5 e toda a cura realizada é igual ao dano. O Efeito da área se torna uma esfera de 6 Metros ou um Triângulo.",
+            requisito: "Afinidade de Pestilência e Terceiro Círculo"
+        }
+    },
+
+    "Monstruosidade Incompleta": {
+        elemento: "Pestilência",
+        patrono: "Agares, o Deformante",
+        execucao: "Movimento",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Cena",
+        descricao: "O Usuário desenvolve garras e/ou presas e força uma readaptação do corpo para o desenvolvimento das presas ou garras. As garras causam 2d4 de dano de Pestilência e duram uma cena.",
+
+        discente: {
+            custo: 4,
+            efeito: "Aumenta o dano para 3d4+2 de Pestilência e consiga +1 dado nos testes de ataque com esta arma.",
+            requisito: "25% de EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 6,
+            efeito: "Ao possuir a Arma de Ferrugem, e conjurar este Ritual, você recebe +4d4+3 de dano de Pestilência e caso acerte um dano crítico em um ser, conceda a ele a Condição de Status Faminto II por 2 turnos e consiga a Condição de Status Saciado por 2 turnos.",
+            requisito: "Arma de Ferrugem"
+        }
+    },
+
+    "Reestruturação Corpórea": {
+        elemento: "Pestilência",
+        patrono: "Nutto Fungi, a Aberração dos Fungos",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 ser",
+        duracao: "Instantâneo",
+        descricao: "Cura um ser ao tocar sob sua ferida. Recebe a Condição de Status negativa, Faminto I por 3 turnos. Recupere 3d8+3. Cada uso deixa a pessoa bastante magra e com uma aparência mais cansada, cuidado com os diversos usos deste ritual.",
+
+        discente: {
+            custo: 3,
+            efeito: "Cura 5d8+5 de PV e não concede mais a Condição de Status Faminto I",
+            requisito: "2º Círculo e/ou 25% de EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 9,
+            efeito: "Cura 7d8+7 de PV e concede a Condição de Status Saciado por 5 turnos. Muda o alcance para Curto, e alvo para Seres Escolhidos.",
+            requisito: "Quarto Círculo e Afinidade com Pestilência"
+        }
+    },
+
+    "Decadência Corpórea": {
+        elemento: "Pestilência",
+        patrono: "Tengan, o Oportunista",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 ser",
+        duracao: "Instantâneo",
+        resistencia: "Fortificação reduz à metade o dano e ignora a Condição de Status.",
+        descricao: "Causa uma doença em algum alvo e acelera para estágios dolorosos para causar Dano Paranormal de Pestilência/Fome. 2d8+2, é necessário tocar no alvo.",
+
+        discente: {
+            custo: 3,
+            efeito: "Você transfere a Doença e contamina sua arma, causando assim o dano da sua arma junto com o dano do Ritual que se torna 3d8+3. Concede a Condição de Status Faminto I por 3 turnos. Remove a Resistência do Ritual."
+        },
+
+        verdadeiro: {
+            custo: 6,
+            efeito: "Você pode causar uma Explosão Esférica de 6 metros em Alcance Curto que causa 8d8+8 de dano e que concede a Condição de Status Faminto II por 6 turnos para todos aqueles que foram acertados.",
+            requisito: "Afinidade de Pestilência e Terceiro Círculo"
+        }
+    },
+
+    "Pragas Quartenárias": {
+        elemento: "Pestilência",
+        patrono: "Entomonimus, Os Profanos Insetóides",
+        execucao: "Padrão",
+        alcance: "Muito Curto",
+        alvo: "1 ser",
+        duracao: "3 Turnos",
+        resistencia: "Fortificação cancela o efeito do Parasita.",
+        descricao: "Convoque um enxame de insetos que sairá de alguma parte do seu corpo ou da sua boca para envolver uma criatura, causando 2d4+1 de dano extra de Pestilência. Ao falhar no teste de Fortificação, ela ficará afetada por este parasita paranormal que causará 1d4 de dano, Caso a criatura sofra da condição de Status negativa, o dano é somado a +2 e adicione 1d4.",
+
+        discente: {
+            custo: 4,
+            efeito: "O dano se torna 4d4+3 de Pestilência, e tendo uma condição de status negativa, o dano é somado em +5. Aumenta a duração em 1 turno",
+            requisito: "Pestilência I e 30% de EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 7,
+            efeito: "O dano se torna 6d4+5 e se possuir uma condição de status negativa o dano fixo se torna +4 e adiciona 2d4. Aumenta a duração em +2 turnos.",
+            requisito: "Afinidade de Pestilência e Acesso ao Terceiro Círculo"
+        }
+    },
+
+    "O Melhor Tempero": {
+        elemento: "Pestilência",
+        patrono: "Hungrig, o Cozinheiro Perverso",
+        execucao: "Padrão",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Cena",
+        descricao: "Comidas e bebidas apodrecidas, estragadas ou contaminadas atuam como refeição completa e não causam nenhum efeito negativo ao consumo. E ao comer alguma comida ou bebida apodrecida recupere 1d4+CON de PV.",
+
+        discente: {
+            custo: 2,
+            efeito: "Você recupera 2d6+CON de PV. Ao se alimentar de algo podre, você consegue a condição de Status Saciado por 2 turnos.",
+            requisito: "10% de EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 4,
+            efeito: "Você recupera 2d8+CON, conjurar este Ritual durante uma Cena de Interlúdio permite você usar a ação de se Alimentar Gratuitamente, escolha um aliado para poder Alimentar-se gratuitamente.",
+            requisito: "Segundo Círculo e/ou 25% de EPEEM"
         }
     }
 };
