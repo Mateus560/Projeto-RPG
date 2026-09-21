@@ -1,13 +1,13 @@
 const origens = {
-    "Acadêmico estudioso": {
+    "Acadêmico Estudioso": {
         pericias: ["Documentos", "Investigação"]
     },
 
-    "Amaldiçoado fortalecido": {
+    "Amaldiçoado Fortalecido": {
         pericias: ["Resistir", "Sobrevivência"]
     },
 
-    "Amigo dos animais": {
+    "Amigo dos Animais": {
         pericias: ["Domar", "Percepção"]
     },
 
@@ -15,7 +15,7 @@ const origens = {
         pericias: ["", ""]
     },
 
-    "Artista de rua": {
+    "Artista de Rua": {
         pericias: ["Enganação", "Intuição"]
     },
 
@@ -67,7 +67,7 @@ const origens = {
         pericias: ["Combate", "Reflexos"]
     },
 
-    "Mecânico de armas": {
+    "Mecânico de Armas": {
         pericias: ["Ofício", "Pilotagem"]
     },
 
@@ -75,7 +75,7 @@ const origens = {
         pericias: ["Medicina", "Ciências"]
     },
 
-    "Ocultista arrependido": {
+    "Ocultista Arrependido": {
         pericias: ["Ritualismo", "Intuição"]
     },
 
@@ -95,7 +95,7 @@ const origens = {
         pericias: ["Ritualismo", "Religião"]
     },
 
-    "Rato de laboratório": {
+    "Rato de Laboratório": {
         pericias: ["Atletismo", "Combate"]
     },
 
@@ -103,15 +103,15 @@ const origens = {
         pericias: ["Religião", "Diplomacia"]
     },
 
-    "Selado marcado": {
+    "Selado Marcado": {
         pericias: ["Fortificação", ""]
     },
 
-    "Sobrevivente anormal": {
+    "Sobrevivente Anormal": {
         pericias: ["Ofício", "Sobrevivência"]
     },
 
-    "Soldado militar": {
+    "Soldado Militar": {
         pericias: ["Iniciativa", "Pontaria"]
     },
 
