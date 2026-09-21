@@ -259,7 +259,7 @@ const rituais = {
         alcance: "Toque",
         alvo: "1 Ser",
         duracao: "Cena",
-        descricao: "Você ferve o sangue do alvo, aprimorando suas capacidades físicas e transformando-o numa besta violenta. Concede +3 em rolagens de dano e testes de ataque, impede lesões e cura 2 PV por turno. Ao acabar, recebe Exaustão II por 12 horas.",
+        descricao: "Ao tocar em 1 ser, você ferve o sangue dele, aprimorando as suas capacidades físicas, e o mais importante, você o transforma numa besta violenta com sede de sangue que atacará todos os inimigos, mas cuidado, ele pode se virar contra você, ele sempre deverá atacar um alvo mesmo que seja você ou um aliado de vocês e se torna incapaz de raciocinar, mirar com armas de fogo, usar Rituais, Técnicas Espirituais, Furtividade e etc. Concede +3 em rolagens de dano e testes de ataque e se torna incapaz de receber lesões e cura 2 de vida a cada turno dele. Ao acabar o Ritual, recebe Exaustão II por 12 horas.",
         discente: {
             custo: 2,
             efeito: "O alvo recebe 5 de RD contra dano Perfurante, Impacto, Cortante e Tecnológico, pode utilizar 1 Ritual Ofensivo e fazer um ataque adicional.",
