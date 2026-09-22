@@ -1050,6 +1050,180 @@ const rituais = {
             efeito: "Aumenta a duração em +3 turnos e o dano em +1. Ao ter Afinidade de Morte, você é curado ao invés de perder PV.",
             requisito: "Afinidade de Morte"
         }
+    },
+
+    "Condutor Dourado": {
+        elemento: "Áurico",
+        patrono: "Veyra, a Engrenagem Dourada",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "1 Criatura",
+        duracao: "1 rodada",
+        descricao: "Você cria um circuito dourado sobre seu braço e descarrega uma corrente elétrica contra o alvo. O alvo sofre 2d6+2 de dano Áurico. Se o alvo estiver utilizando uma arma, equipamento tecnológico ou possuir alguma prótese/aprimoramento artificial, sofre +1d6 de dano.",
+
+        discente: {
+            custo: 2,
+            efeito: "Dano passa para 4d6+4 e o alvo fica Atordoado por 1 turno caso falhe em Reflexos.",
+            requisito: "2° Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "dano passa para 6d6+6. Contra criaturas artificialmente aprimoradas, o dano passa para 8d8+8.",
+            requisito: "4° Círculo e Afinidade Áurica"
+        }
+    },
+
+    "Rejeição da Carne": {
+        elemento: "Áurico",
+        patrono: "Seraph-0, o Primeiro Aprimorado",
+        execucao: "Reação",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Instantânea",
+        descricao: "Ao sofrer dano físico, seu corpo cria uma camada metálica no ponto atingido. Reduza o dano sofrido em 2d6+2.",
+
+        discente: {
+            custo: 2,
+            efeito: "Reduza o dano em 3d6+3.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Reduza o dano em 4d6+4 e, se reduzir o dano a 0, o atacante sofre 2d6+2 de dano Áurico.",
+            requisito: "3º Círculo"
+        }
+    },
+
+    "Circuito Regenerativo": {
+        elemento: "Áurico",
+        patrono: "Seraph-0, o Primeiro Aprimorado",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 Criatura",
+        duracao: "3 Turnos",
+        descricao: "Você cria pequenos circuitos dourados sob a pele do alvo. No início de cada turno, recebe 2d4 de PV Temporário, se não for consumido, volta para 2d4 novamente.",
+
+        discente: {
+            custo: 2,
+            efeito: " A regeneração passa para 3d4 PV Temporário e o alvo recebe +5 em testes de Defesa.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "A regeneração passa para 4d4 PV e, uma vez durante a duração, quando o alvo seria reduzido a 0 PV, permanece com 1 PV (Apenas 1 vez por missão).",
+            requisito: "3º Círculo e afinidade Áurica"
+        }
+    },
+
+    "Aprimoramento Artificial": {
+        elemento: "Áurico",
+        patrono: "Aurum, o Rei Incompleto",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 Criatura",
+        duracao: "3 Turnos",
+        descricao: "Você aperfeiçoa temporariamente uma parte do corpo do alvo. Escolha Força, Agilidade, Conhecimento, Influência ou Resistência. O alvo recebe +1d6 no próximo teste que utilizar o atributo escolhido a cada turno. Você fica imune a falhas críticas durante a duração.",
+
+        discente: {
+            custo: 2,
+            efeito: "O bônus passa para +2d6 e dura 5 turnos, muda o alvo para Sua Escolha e alcance para Curto.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "O bônus passa para +3d6 e o alvo recebe +3 em Defesa durante a duração.",
+            requisito: "3º Círculo"
+        }
+    },
+
+    "Bateria Humana": {
+        elemento: "Áurico",
+        patrono: "Nexum, a Máquina que Sonha",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 criatura ou objeto",
+        duracao: "Cena",
+        descricao: "Você transforma seu alvo em uma pequena fonte de energia. Uma criatura afetada pode alimentar equipamentos eletrônicos apenas tocando neles, sem consumir PE ou qualquer outra fonte de energia. Além disso, recebe +5 em testes relacionados a tecnologia e eletrônica.",
+
+        discente: {
+            custo: 2,
+            efeito: "A criatura pode descarregar energia através do toque, causando +1d6 de dano Áurico.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "A descarga passa para +3d6 e pode atingir até 2 criaturas adjacentes ao alvo inicial.",
+            requisito: "3º Círculo"
+        }
+    },
+
+    "Olho Mecânico": {
+        elemento: "Áurico",
+        patrono: "Nexum, a Máquina que Sonha",
+        execucao: "Padrão",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Cena",
+        descricao: "Um olho artificial surge sobre seu corpo. Você recebe +1d6 em Percepção e Investigação e consegue enxergar através de escuridão comum. Além disso, consegue identificar aparelhos eletrônicos, mecanismos e fontes de energia próximas.",
+
+        discente: {
+            custo: 2,
+            efeito: "Você recebe Visão no Escuro e pode enxergar através de fumaça e névoa comuns.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Você também consegue perceber criaturas através de paredes finas e detectar fontes de energia Paranormal em alcance Curto.",
+            requisito: "3º Círculo"
+        }
+    },
+
+    "Douramento": {
+        elemento: "Áurico",
+        patrono: "Midas, o Eterno",
+        execucao: "Padrão",
+        alvo: "1 objeto",
+        duracao: "Cena",
+        descricao: "Você reveste um objeto com uma fina camada de ouro Paranormal, tornando-o mais resistente. O objeto recebe +5 de RD contra dano físico. Se for uma arma, recebe +2 de dano fixo. Objetos e Armas revestidas de Ouro Tecnológico podem ter a camada removida para serem utilizados como Componentes de Ritual.",
+
+        discente: {
+            custo: 2,
+            efeito: "O bônus passa para +10 RD ou +4 de dano.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "O objeto se torna temporariamente praticamente indestrutível, recebendo RD 15 e, se for uma arma, +1 dado de dano e +1 na margem de crítico.",
+            requisito: "3º Círculo"
+        }
+    },
+
+    "Distorção Dourada": {
+        elemento: "Áurico",
+        patrono: "Midas, o Eterno",
+        execucao: "Padrão",
+        alcance: "Toque",
+        alvo: "1 objeto",
+        duracao: "Você cobre a arma com ouro Paranormal, fazendo sua estrutura se deformar e se adaptar ao seu portador. A arma recebe uma Modificação de Arma: Distorção Dourada. Distorção Dourada: A arma recebe +2 em testes de ataque e pode alterar sua forma entre Cortante, Perfurante ou Contundente como ação livre. Além disso, uma vez por turno, quando acertar um ataque, você pode alterar o tipo de dano causado pela arma para um dos três tipos físicos.",
+
+        discente:{
+            custo: 2,
+            efeito: "A arma recebe +2 em testes de ataque e +2 de dano fixo. A alteração de forma passa a poder ser realizada uma vez por ataque, sem gastar ações.",
+            requisito: "2º Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: " A arma recebe +3 em testes de ataque, +4 de dano fixo e seus ataques ignoram 5 pontos de RD física. Além disso, sempre que alterar o tipo de dano da arma, o próximo ataque recebe +1 dado de dano Áurico.",
+            requisito: "3º Círculo e Afinidade Áurica"
+        }
     }
 };
 
