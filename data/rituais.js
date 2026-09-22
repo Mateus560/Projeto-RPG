@@ -1186,6 +1186,7 @@ const rituais = {
 
     "Douramento": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Midas, o Eterno",
         execucao: "Padrão",
         alvo: "1 objeto",
