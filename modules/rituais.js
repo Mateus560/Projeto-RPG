@@ -167,12 +167,12 @@ export function adicionarRitual() {
         ritual.querySelector(".discente-ritual").textContent = 
             dados.discente?.efeito || "—";
 
-        ritual.querySelector(".requisito-discente").textContent = dados.discente?.requisito || "Sem requisito";
+        ritual.querySelector(".requisito-discente").textContent = `Requisito: ${dados.discente?.requisito || "Sem requisito"}`;
 
         ritual.querySelector(".verdadeiro-ritual").textContent = 
             dados.verdadeiro?.efeito || "—";
         
-        ritual.querySelector(".requisito-verdadeiro").textContent = dados.verdadeiro?.requisito || "—";
+        ritual.querySelector(".requisito-verdadeiro").textContent = `Requisito: ${dados.verdadeiro?.requisito || "Sem requisito"}`;
 
         ritual.querySelector(".custo-discente").textContent = `Discente (+${dados.discente.custo} PE)`
 
