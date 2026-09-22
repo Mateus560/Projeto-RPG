@@ -845,6 +845,211 @@ const rituais = {
             efeito: "Você recupera 2d8+CON, conjurar este Ritual durante uma Cena de Interlúdio permite você usar a ação de se Alimentar Gratuitamente, escolha um aliado para poder Alimentar-se gratuitamente.",
             requisito: "Segundo Círculo e/ou 25% de EPEEM"
         }
+    },
+
+    "Flecha Sepulcral": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Morvath, o Arqueiro do Crepúsculo",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "1 Criatura",
+        duracao: "Instantânea",
+        descricao: "Você condensa energia da Morte em um projétil escuro e silencioso que atravessa o ar até atingir seu alvo. A essência do ritual permanece alojada na vítima, tornando sua alma momentaneamente instável. O alvo sofre 2d6+2 de dano de Morte. Se sofrer dano de qualquer fonte antes do início do seu próximo turno, recebe +1d4 de dano de Morte adicional, pois a energia do projétil reage ao novo ferimento.",
+
+        discente: {
+            custo: 2,
+            efeito: "O dano inicial aumenta para 4d6+4, e o dano adicional passa para 2d4 de dano de Morte.",
+            requisito: "2° Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: " O dano inicial aumenta para 6d6, o dano adicional passa para 2d6 de dano de Morte, e, se o efeito adicional for ativado, o alvo fica Debilitado até o fim do próximo turno.",
+            requisito: "3° Círculo"
+        }
+    },
+
+    "Olhar do Crepúsculo": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Morvath, o Arqueiro do Crepúsculo",
+        execucao: "Padrão",
+        alcance: "Médio",
+        alvo: "1 Criatura",
+        duracao: "3 Turnos",
+        descricao: "Você invoca o olhar de Morvath sobre uma criatura. Durante a duração do ritual, o alvo sente a constante presença do Arqueiro do Crepúsculo observando cada um de seus movimentos. Enquanto estiver sob efeito, a primeira vez que o alvo errar um teste de ataque ou perícia a cada turno, ele sofre 1d6+1 de dano de Morte.",
+
+        discente: {
+            custo: 2,
+            efeito: "O dano aumenta para 2d6+2, o alvo recebe um ônus de -5.",
+            requisito: "15% EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "O dano aumenta para 3d6+3. Sempre que o efeito for ativado, o alvo deve passar em um teste de Resistir ou fica Abalado até o fim do próximo turno.",
+            requisito: "2° Círculo" 
+        }
+    },
+
+    "Passo Derradeiro": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Patrono, Gravey o Esquecido",
+        execucao: "Reação",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Instantânea",
+        descricao: "Quando uma criatura termina um movimento dentro do alcance de uma de suas armas ou rituais, você desaparece em uma névoa escura e reaparece até 3 metros em um espaço desocupado que possa ver. Até o fim da reação, o próximo ataque ou ritual ofensivo que você realizar contra essa criatura causa +1d6 de dano de Morte.",
+
+        discente: {
+            custo: 2,
+            efeito: "Você pode se deslocar até 6 metros, e o dano adicional aumenta para 2d6+2.",
+            requisito: "2° Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Você pode se deslocar até 9 metros. Se o ataque atingir, a criatura fica com a velocidade reduzida à metade até o fim do próximo turno.",
+            requisito: "3° Círculo"
+        }
+    },
+
+    "Flores de Luto": {
+        elemento: "Morte",
+        circulo: 1,
+        execucao: "Padrão",
+        alcance: "Médio",
+        alvo: "Todos os Seres em 9 Metros (Inclusive o próprio Conjurador)",
+        duracao: "Instantâneo",
+        descricao: "O conjurador, com uma ação padrão e o consumo de cinzas mortas, materializa a presença da Morte a partir do cadáver para dissipá-lo em sua forma, gerando no processo uma implosão dentro de um raio de até 9 metros. Todos dentro deste raio no momento da implosão recebem 2D8+2 de dano de impacto e 1D8+2 de dano de Morte.",
+
+        discente: {
+            custo: 3,
+            efeito: "O dano de Morte torna-se 2d8+CON.",
+            requisito: "Morte I"
+        },
+
+        verdadeiro: {
+            custo: 6,
+            efeito: "O Dano de Morte aumenta para 4d8+CON e o Impacto torna-se 3d8+8.",
+            requisito: "Afinidade de Morte."
+        }
+    },
+
+    "Vislumbre da Morte": {
+        elemento: "Morte",
+        circulo: 1,
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "1 Ser no alcance do Ritual",
+        duracao: "1 Dia",
+        descricao: "Canalizando a Influência Trágica de Thanatos Mori’Yani sobre a mente de um alvo, você é capaz de colocar na mente deste alvo memórias de morte, trágicas ou extremamente dolorosas em um ser que ficará sendo revivido por 1 dia. Causa 1d6=8 de dano Mental e -5 em Testes de Conhecimento e Influência.",
+
+        discente: {
+            custo: 3,
+            efeito: "O dano Mental torna-se 2d6 e o ônus nos testes torna-se -10",
+            requisito: "20% de EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Você é capaz de utilizar isso em até 2 alvos, o dano mental torna-se 3d6 e a duração torna-se 2 dias.",
+            requisito: "Morte II"
+        }
+    },
+
+    "Armadura de Ossos": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Shard, a Despedaçada",
+        execucao: "Padrão",
+        alcance: "Pessoal",
+        alvo: "Você",
+        duracao: "Cena",
+        descricao: "Ao se cobrir com os Catalisadores de Morte sob seu corpo, uma armadura de Ossos e Memórias começa a cobrir o seu corpo, aumentando em +5 sua defesa. Causa 1d3 de dano em todos que atacam corpo a corpo.",
+
+        discente: {
+            custo: 5,
+            efeito: "O efeito da Defesa se torna +10, recebe RD6 de Cortante, Perfurante, Impacto e Tecnológico. O dano sobe pra 1d6+1 em ataques corpo a corpo e 1d4+1 para quem ataca a distância (Teste de Reflexos evita o dano a distância.)",
+            requisito: "3° Círculo"
+        },
+
+        verdadeiro: {
+            custo: 9,
+            efeito: "O efeito da Defesa se torna +15, recebe RD12 de Cortante, Perfurante, Impacto, Tecnológico e concede +3 em testes de reação. O dano sobe para 1d10+1 e 1d8+1 para quem ataca a distância (Teste de Reflexos evita o dano à distância.)",
+            requisito: "4° Círculo"
+        }
+    },
+
+    "Estilhaçar Existência": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Shard, a Despedaçada",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "1 ser de sua escolha",
+        duracao: "Dano, instantâneo, maldição, 1 dia",
+        descricao: "O usuário cria uma rachadura invisível na essência do alvo. Cada dano recebido faz a rachadura crescer, permitindo que o próximo golpe atravesse mais profundamente. Efeito: O alvo recebe 3d6 de dano de Morte. Até o final da cena, sempre que sofrer dano, recebe +2 de dano adicional.",
+
+        discente: {
+            custo: 2,
+            efeito: "O bônus aumenta para +4.",
+            requisito: "2° Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "Ao sofrer dano que reduza o alvo a metade dos PV, ele sofre 3d6 de dano de Morte adicional.",
+            requisito: "3° Círculo e Afinidade de Morte"
+        }
+    },
+
+    "Lamaçal": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Lungri, o Tenebroso",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "1 Criatura",
+        duracao: "2 Turnos",
+        descricao: "O lodo desperta a sensação inevitável do fim. Enquanto estiver sob efeito, sempre que o alvo sofrer dano, recebe +2 de dano de Morte fixo adicional. Quando o ritual termina, o alvo deve passar em um teste de Resistir. Em caso de falha, fica Vulnerável até o fim do próximo turno.",
+
+        discente: {
+            custo: 2,
+            efeito: "O dano adicional aumenta para +4 de dano de Morte.",
+            requisito: "2° Círculo"
+        },
+
+        verdadeiro: {
+            custo: 5,
+            efeito: "O dano adicional aumenta para +4 de dano de Morte e a primeira cura que o alvo recebe durante a duração do ritual é reduzida à metade.",
+            requisito: "3° Círculo"
+        }
+    },
+
+    "Relógio Macabro": {
+        elemento: "Morte",
+        circulo: 1,
+        patrono: "Lungri, o Tenebroso",
+        execucao: "Padrão",
+        alcance: "Curto",
+        alvo: "Todos os seres em alcance Curto (Incluindo o Conjurador)",
+        duracao: "3 Turnos",
+        descricao: "Ao utilizar o Relógio de Thanatos você é capaz de invocar ela em alcance curto, que começará a sugar a vida de todos os seres em alcance curto. Tira 3 de PV dos seres em alcance como Dano de Morte, após 3 turnos, Tira 6 de PV como Dano de Morte, após 5 turnos, Tira 9 de PV como Dano de Morte.",
+
+        discente: {
+            custo: 3,
+            efeito: "Pode conjurar isso em Alcance Médio. O Conjurador não recebe dano. Aumenta a duração em +2 turnos e o dano em +1.",
+            requisito: "30% de EPEEM"
+        },
+
+        verdadeiro: {
+            custo: 6,
+            efeito: "Aumenta a duração em +3 turnos e o dano em +1. Ao ter Afinidade de Morte, você é curado ao invés de perder PV.",
+            requisito: "Afinidade de Morte"
+        }
     }
 };
 
