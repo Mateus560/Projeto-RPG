@@ -82,7 +82,7 @@ export function adicionarRitual() {
 
             <div class="field">
 
-                <strong>Discente</strong>
+                <strong class='custo-discente'></strong>
 
                 <p class="discente-ritual"></p>
                 <p class="requisito-discente"></p>
@@ -92,7 +92,7 @@ export function adicionarRitual() {
 
             <div class="field">
 
-                <strong>Verdadeiro</strong>
+                <strong class='custo-verdadeiro'></strong>
 
                 <p class="verdadeiro-ritual"></p>
                 <p class="requisito-verdadeiro"></p>
@@ -173,6 +173,10 @@ export function adicionarRitual() {
             dados.verdadeiro?.efeito || "—";
         
         ritual.querySelector(".requisito-verdadeiro").textContent = dados.verdadeiro?.requisito || "—";
+
+        ritual.querySelector(".custo-discente").textContent = `Discente (+${dados.discente.custo} PE)`
+
+        ritual.querySelector(".custo-verdadeiro").textContent = `Verdadeiro (+${dados.verdadeiro.custo} PE)`
 
         dadosRitual.hidden = false;
 
