@@ -1212,7 +1212,8 @@ const rituais = {
         execucao: "Padrão",
         alcance: "Toque",
         alvo: "1 objeto",
-        duracao: "Você cobre a arma com ouro Paranormal, fazendo sua estrutura se deformar e se adaptar ao seu portador. A arma recebe uma Modificação de Arma: Distorção Dourada. Distorção Dourada: A arma recebe +2 em testes de ataque e pode alterar sua forma entre Cortante, Perfurante ou Contundente como ação livre. Além disso, uma vez por turno, quando acertar um ataque, você pode alterar o tipo de dano causado pela arma para um dos três tipos físicos.",
+        duracao: "Cena",
+        descricao: "Você cobre a arma com ouro Paranormal, fazendo sua estrutura se deformar e se adaptar ao seu portador. A arma recebe uma Modificação de Arma: Distorção Dourada. Distorção Dourada: A arma recebe +2 em testes de ataque e pode alterar sua forma entre Cortante, Perfurante ou Contundente como ação livre. Além disso, uma vez por turno, quando acertar um ataque, você pode alterar o tipo de dano causado pela arma para um dos três tipos físicos.",
 
         discente:{
             custo: 2,
