@@ -16,6 +16,7 @@ import {
 import {
     alterarRecurso,
     limitarRecursoAtual,
+    receberCura,
     receberDano
 } from "./modules/recursos.js"
 
@@ -296,12 +297,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     
     document
+        .getElementById("pv-cura")
+        .addEventListener("click", () => {
+            const cura = document.getElementById("pv-cura").value;
+
+            receberCura(cura)
+        })
+    
+    document
         .getElementById("sanidade-dano")
         .addEventListener("click", () => {
             const dano = document.getElementById("dano-sanidade").value;
 
             receberDano(dano)
         });
+
+    document
+        .getElementById("sanidade-cura")
+        .addEventListener("click", () => {
+            const cura = document.getElementById("sanidade-cura").value;
+
+            receberCura(cura)
+        })
     // botões de diminuir e aumentar PV
     document
         .getElementById("aumentar-pv")

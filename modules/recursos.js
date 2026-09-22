@@ -36,6 +36,19 @@ export function receberDano() {
     document.getElementById("dano-sanidade").value = "";
 }
 
+export function receberCura() {
+    const curaPv = 
+        Number(document.getElementById("cura-pv")?.value) || 0;
+    
+    const curaSanidade = 
+        Number(document.getElementById("cura-sanidade")?.value) || 0;
+
+    alterarRecurso("vida-atual", +curaPv);
+    alterarRecurso("sanidade-atual", +curaSanidade);
+
+    document.getElementById("cura-pv").value = "";
+    document.getElementById("cura-sanidade").value = ""
+}
 
 export function limitarRecursoAtual(id) {
     const campo = document.getElementById(id);
