@@ -25,10 +25,8 @@ body {
     line-height: 1.5;
 }
 
-button,
-input,
-textarea {
-    font: inarialerit;
+button, a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 input,
@@ -59,10 +57,10 @@ button:active {
     transform: scale(0.97);
 }
 
-.aplicar-dano, .aplicar-cura {
+ #aplicar {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 .button-aplicar-dano {
@@ -392,11 +390,17 @@ select {
     HABILIDADES
 ========================= */
 
+#habilidade {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .ability {
     margin-bottom: 1rem;
     padding: 1rem;
     border: 1px solid #444;
-    border-radius: 8px;
+    border-radius: 10px;
     background: #1c1c1c;
 }
 
@@ -525,7 +529,7 @@ textarea {
     border-radius: 6px;
     padding: 7px;
     cursor: pointer;
-    box-shadow: 0 4px 0 white;
+    box-shadow: 0px 4px 0px white;
     transition: all 0.05s ease;
 }
 
