@@ -57,7 +57,7 @@ button:active {
     transform: scale(0.97);
 }
 
- #aplicar {
+.aplicar {
     display: flex;
     flex-direction: column;
     gap: 10px;
