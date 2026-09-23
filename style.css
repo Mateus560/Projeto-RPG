@@ -64,21 +64,112 @@ button:active {
     transform: scale(0.97);
 }
 
-.adicionar{
-    background-color: white;
-    margin-top: 10px;
+.aplicar-dano, .aplicar-cura {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.button-aplicar-dano {
+    background-color: #1C1C1C;
+    border: 1px solid #444;
+    font-family: 'Algerian';
+    color: red;
+    text-shadow: 0 0 8px red;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.button-aplicar-cura {
+    background-color: #1C1C1C;
+    border: 1px solid #444;
+    font-family: 'Algerian';
+    color: limegreen;
+    text-shadow: 0 0 8px limegreen;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.button-aplicar-dano:active {
+    color: red;
+    text-shadow: 0 0 8px red;
+    font-weight: bold;
+}
+
+.button-aplicar-cura:active {
+    color: limegreen;
+    text-shadow: 0 0 8px limegreen;
+    font-weight: bold;
+
+}
+
+#adicionar-ritual {
+    background-color: #1C1C1C;
+    border: 1px solid #444;
+    font-family: 'Algerian';
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 white;
+    transition: all 0.05s ease;
+}
+
+#adicionar-ritual:active {
+    text-shadow: 0 0 8px gold;
+    color: gold;
+    transform: translateY(4px);
+    box-shadow: 0 0 0px white;
+
+}
+
+.adicionar {
+    font-family: 'Algerian';
+    background-color: #1C1C1C;
+    border: 1px solid #444;
+    color: white;
+    text-shadow: 0 0 8px white;
+}
+
+.adicionar:active{
+    font-weight: bold;
 }
 
 .usar-habilidade{
-    background-color: rgb(0, 132, 255);
-    color: white;
+    font-family: 'Algerian';
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    color: blue;
+    text-shadow: 0 0 8px blue;
+    border-radius: 6px;
+    padding: 7px;
+}
+
+.usar-habilidade:active {
+    font-weight: bold;
 }
 
 .button-remover{
-    background-color: red;
-    color: white;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    font-family: 'Argelian';
+    background-color: #1C1C1C;
+    border: 1px solid #444;
+    font-family: 'Algerian';
+    color: red;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 8px red;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.button-remover:active {
+    font-weight: bold;
 }
 
 .ability-actions {
@@ -428,14 +519,26 @@ textarea {
     gap: 0.75rem;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-    background-color: white;
-    padding: 0.65rem 1rem;
-    border-radius: 6px;
-    border: 1px solid;
+.btn-3d {
+    background-color: #1C1C1C;
+    border: 1px solid #444;
+    font-family: 'Algerian';
+    font-weight: bold;
+    color: white;
     text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 white;
+    transition: all 0.05s ease;
+}
+
+.btn-3d:active{
+    text-shadow: 0 0 8px rgba(255, 0, 0);
+    color: #ff0000;
+    transform: translateY(4px);
+    box-shadow: 0 0 0 white; 
 }
 
 /* =========================
@@ -453,6 +556,12 @@ a {
     font-style: italic;
     font-weight: bold;
     color: red;
+}
+
+#button-ritual-page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* =========================

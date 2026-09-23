@@ -143,7 +143,7 @@ export function adicionarItem(dados = null) {
     const item =
         document.createElement("div");
 
-    item.classList.add("inventory-items");
+    item.classList.add("inventory-item");
 
     item.innerHTML = `
         <div class="field">

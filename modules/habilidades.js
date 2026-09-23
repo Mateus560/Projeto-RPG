@@ -23,29 +23,25 @@ export function adicionarHabilidade(dados = null) {
             >
         </div>
 
-        <div class="grid grid-2">
+        <div class="field">
+            <label>Custo em PE</label>
 
-            <div class="field">
-                <label>Custo em PE</label>
+            <input
+                type="number"
+                class="custo-habilidade"
+                min="1"
+                value="1"
+            >
+        </div>
 
-                <input
-                    type="number"
-                    class="custo-habilidade"
-                    min="1"
-                    value="1"
-                >
-            </div>
+        <div class="field">
+            <label>Dano/Efeito</label>
 
-            <div class="field">
-                <label>Dano/Efeito</label>
-
-                <input
-                    class="efeito-habilidade"
-                    type="text"
-                    placeholder="Ex: 2d8"
-                >
-            </div>
-
+            <input
+                class="efeito-habilidade"
+                type="text"
+                placeholder="Ex: 2d8"
+            >
         </div>
 
         <div class="field">
@@ -65,7 +61,7 @@ export function adicionarHabilidade(dados = null) {
                 type="button"
                 class="usar-habilidade"
             >
-                Usar
+                Usar Habilidae
             </button>
 
             <button
