@@ -25,11 +25,6 @@ body {
     line-height: 1.5;
 }
 
-p, textarea {
-    text-align: justify;
-    font-family: 'Courier New', Courier, monospace;
-}
-
 button,
 input,
 textarea {
