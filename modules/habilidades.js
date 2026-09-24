@@ -61,7 +61,7 @@ export function adicionarHabilidade(dados = null) {
                 type="button"
                 class="usar-habilidade"
             >
-                Usar Habilidae
+                Usar Habilidade
             </button>
 
             <button

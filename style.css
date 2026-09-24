@@ -8,10 +8,6 @@
     font-style: normal;
 }
 
-#afinidade-alma {
-    font-family: 'Algerian';
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -57,112 +53,46 @@ button:active {
     transform: scale(0.97);
 }
 
- #aplicar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.button-aplicar-dano {
+.adicionar {
     background-color: #1C1C1C;
-    border: 1px solid #444;
+    border: 1px solid #777;
     font-family: 'Algerian';
-    color: red;
-    text-shadow: 0 0 8px red;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-}
-
-.button-aplicar-cura {
-    background-color: #1C1C1C;
-    border: 1px solid #444;
-    font-family: 'Algerian';
-    color: limegreen;
-    text-shadow: 0 0 8px limegreen;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-}
-
-.button-aplicar-dano:active {
-    color: red;
-    text-shadow: 0 0 8px red;
-    font-weight: bold;
-}
-
-.button-aplicar-cura:active {
-    color: limegreen;
-    text-shadow: 0 0 8px limegreen;
-    font-weight: bold;
-
-}
-
-#adicionar-ritual {
-    background-color: #1C1C1C;
-    border: 1px solid #444;
-    font-family: 'Algerian';
-    font-weight: bold;
     color: white;
     text-align: center;
     text-decoration: none;
     border-radius: 6px;
     padding: 7px;
     cursor: pointer;
-    box-shadow: 0 4px 0 white;
+    box-shadow: 0 1px 0 white;
+    transition: all 0.05s ease;
+}
+
+.adicionar:active{
+    font-weight: bold;
+    transform: translateY(4px);
+    box-shadow: 0 0 0 white;
+}
+
+#adicionar-ritual {
+    background-color: #1C1C1C;
+    border: 1px solid #777;
+    font-family: 'Algerian';
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 white;
     transition: all 0.05s ease;
 }
 
 #adicionar-ritual:active {
     text-shadow: 0 0 8px gold;
+    font-weight: bold;
     color: gold;
     transform: translateY(4px);
     box-shadow: 0 0 0px white;
-
-}
-
-.adicionar {
-    font-family: 'Algerian';
-    background-color: #1C1C1C;
-    border: 1px solid #444;
-    color: white;
-    text-shadow: 0 0 8px white;
-}
-
-.adicionar:active{
-    font-weight: bold;
-}
-
-.usar-habilidade{
-    font-family: 'Algerian';
-    background-color: #1a1a1a;
-    border: 1px solid #444;
-    color: blue;
-    text-shadow: 0 0 8px blue;
-    border-radius: 6px;
-    padding: 7px;
-}
-
-.usar-habilidade:active {
-    font-weight: bold;
-}
-
-.button-remover{
-    font-family: 'Argelian';
-    background-color: #1C1C1C;
-    border: 1px solid #444;
-    font-family: 'Algerian';
-    color: red;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 0 8px red;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-}
-
-.button-remover:active {
-    font-weight: bold;
 }
 
 .ability-actions {
@@ -327,17 +257,55 @@ button:active {
     background-color: #2bd02bdc;
 }
 
+#aplicar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.button-aplicar-dano, .button-aplicar-cura {
+    background-color: #1C1C1C;
+    border: 1px solid #777;
+    font-family: 'Algerian';
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 white;
+}
+
+.button-aplicar-dano {
+    color: red;
+    text-shadow: 0 0 8px red;
+}
+
+.button-aplicar-cura {
+    color: limegreen;
+    text-shadow: 0 0 8px limegreen;
+}
+
+.button-aplicar-dano:active {
+    color: red;
+    text-shadow: 0 0 8px red;
+    font-weight: bold;
+    transform: translateY(4px);
+    box-shadow: 0 0 0 white;
+}
+
+.button-aplicar-cura:active {
+    color: limegreen;
+    text-shadow: 0 0 8px limegreen;
+    font-weight: bold;
+    transform: translateY(4px);
+    box-shadow: 0 0 0 white;
+}
+
 /* =========================
     ALMAS
 ========================= */
 
-/*
-background-color: #1c1c1c;
-    gap: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-*/
+#afinidade-alma {
+    font-family: 'Algerian';
+}
 
 #descricao-alma p {
     background-color: #1c1c1c;
@@ -408,14 +376,35 @@ select {
     margin-bottom: 0;
 }
 
-.ability h3 {
-    margin-bottom: 0.5rem;
+.usar-habilidade, .button-remover {
+    font-family: 'Algerian';
+    background-color: #1a1a1a;
+    border: 1px solid #777;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 white;
 }
 
-.ability p {
-    color: #bbb;
-    font-size: 0.9rem;
+.usar-habilidade {
+    color: blue;
+    text-shadow: 0 0 8px blue;
 }
+
+.button-remover {
+    color: red;
+    text-shadow: 0 0 8px red;
+}
+
+.usar-habilidade:active, .button-remover:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 white;
+    font-weight: bold;
+}
+
+/* =========================
+    MODAL
+========================= */
 
 .modal {
     display: none;
@@ -450,6 +439,21 @@ select {
 .modal-content p {
     margin-bottom: 1.25rem;
     color: #bbb;
+}
+
+#entendi {
+    font-family: 'Algerian';
+    color: #2bd02b;
+    box-shadow: 0px 1px 0px white;
+    transition: all 0.5s ease;
+    background-color: #1a1a1a;
+    border: solid 1px #777;
+}
+
+#entendi:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 white;
+    font-weight: bold;
 }
 
 /* =========================
