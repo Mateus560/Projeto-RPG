@@ -39,7 +39,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-    border-color: #aaa;
+    border-color: white;
 }
 
 button {
@@ -75,6 +75,7 @@ button:active {
     color: white;
     text-align: center;
     text-decoration: none;
+    text-shadow: 0 0 4px white;
     border-radius: 6px;
     padding: 7px;
     cursor: pointer;
@@ -125,7 +126,6 @@ button:active {
     margin: 1rem auto 3rem;
 }
 
-
 /* =========================
     HEADER
 ========================= */
@@ -143,7 +143,6 @@ button:active {
     text-align: center;
     font-size: 1.5rem;
 }
-
 
 /* =========================
     SECTIONS
@@ -163,7 +162,6 @@ button:active {
     border-bottom: 1px solid #444;
     font-size: 1.1rem;
 }
-
 
 /* =========================
     CAMPOS
@@ -211,12 +209,6 @@ button:active {
     background: #1c1c1c;
 }
 
-.attribute input {
-    width: 70px;
-    text-align: center;
-}
-
-
 /* =========================
     RECURSOS
 ========================= */
@@ -224,7 +216,7 @@ button:active {
 .resource {
     padding: 1rem;
     border: 1px solid #444;
-    border-radius: 8px;
+    border-radius: 10px;
     background: #1c1c1c;
 }
 
@@ -246,35 +238,28 @@ button:active {
     text-align: center;
 }
 
-.resource-value .menos {
+.resource-value .menos, .mais {
     width: 40px;
     height: 40px;
     padding: 0;
-    background: #ff0000;
     color: white;
     font-size: 1.2rem;
 }
 
+.resource-value .menos {
+    background-color: #ff0000;
+}
+
 .resource-value .mais {
-    width: 40px;
-    height: 40px;
-    padding: 0;
     background-color: #2bd02b;
-    color: white;
 }
 
 .resource-value .menos:hover {
-    background: #ff0000dc;
+    background-color: #ff0000dc;
 }
 
 .resource-value .mais:hover {
     background-color: #2bd02bdc;
-}
-
-#aplicar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .aplicar {
@@ -303,17 +288,7 @@ button:active {
     text-shadow: 0 0 8px limegreen;
 }
 
-.button-aplicar-dano:active {
-    color: red;
-    text-shadow: 0 0 8px red;
-    font-weight: bold;
-    transform: translateY(4px);
-    box-shadow: 0 0 0 white;
-}
-
-.button-aplicar-cura:active {
-    color: limegreen;
-    text-shadow: 0 0 8px limegreen;
+.button-aplicar-dano:active, .button-aplicar-cura:active {
     font-weight: bold;
     transform: translateY(4px);
     box-shadow: 0 0 0 white;
@@ -352,11 +327,6 @@ button:active {
     border-bottom: none;
 }
 
-.skill input[type="number"] {
-    width: 60px;
-    text-align: center;
-}
-
 /* =========================
     SELECT
 ========================= */
@@ -368,9 +338,7 @@ select {
     border: 1px solid #555;
     border-radius: 6px;
     color: white;
-
     font-size: 1rem;
-
     cursor: pointer;
 }
 
@@ -430,25 +398,18 @@ select {
     display: none;
     position: fixed;
     inset: 0;
-
     align-items: center;
     justify-content: center;
-
     background: rgba(0, 0, 0, 0.7);
-
     z-index: 1000;
 }
 
 .modal-content {
     width: min(90%, 400px);
-
     padding: 1.5rem;
-
     border: 1px solid #444;
     border-radius: 12px;
-
     background: #222;
-
     text-align: center;
 }
 
@@ -465,7 +426,6 @@ select {
     font-family: 'Algerian';
     color: #2bd02b;
     box-shadow: 0px 1px 0px white;
-    transition: all 0.5s ease;
     background-color: #1a1a1a;
     border: solid 1px #777;
 }
