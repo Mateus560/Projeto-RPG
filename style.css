@@ -54,12 +54,6 @@ button:active {
     transform: scale(0.97);
 }
 
-.aplicar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .button-aplicar-dano {
     background-color: #1C1C1C;
     border: 1px solid #777;
@@ -72,6 +66,19 @@ button:active {
     cursor: pointer;
     box-shadow: 0 1px 0 white;
     transition: all 0.05s ease;
+}
+
+.adicionar {
+    background-color: #1C1C1C;
+    border: 1px solid #777;
+    font-family: 'Algerian';
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 white;
 }
 
 .adicionar:active{
@@ -265,6 +272,12 @@ button:active {
 }
 
 #aplicar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.aplicar {
     display: flex;
     flex-direction: column;
     gap: 10px;
