@@ -3,6 +3,10 @@ import classes from "./data/classes.js";
 import almas from "./data/almas.js";
 import periciasDisponiveis from "./data/pericias.js";
 
+import {
+    exportarFicha,
+    importarFicha
+} from "./modules/backup.js";
 
 import {
     carregarPericiasIniciais,
@@ -40,10 +44,6 @@ import {
     carregarFicha
 } from "./modules/ficha.js";
 
-import {
-    exportarFicha,
-    importarFicha
-} from "../modules/backup.js";
 // ============================================================
 // REFERÊNCIAS DO HTML
 // ============================================================
