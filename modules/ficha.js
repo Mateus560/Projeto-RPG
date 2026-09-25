@@ -20,10 +20,6 @@ import {
 } from "./inventario.js";
 
 import {
-    coletarRituais
-} from "./rituais.js";
-
-import {
     calcularStatus
 } from "./status.js";
 

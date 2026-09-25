@@ -244,7 +244,7 @@ export function coletarItens() {
     const itens = [];
 
     document
-        .querySelectorAll("#lista-itens .inventory-items")
+        .querySelectorAll("#lista-itens .inventory-item")
         .forEach(item => {
             itens.push({
                 nome:
