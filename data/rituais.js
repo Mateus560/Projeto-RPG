@@ -1054,6 +1054,7 @@ const rituais = {
 
     "Condutor Dourado": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Veyra, a Engrenagem Dourada",
         execucao: "Padrão",
         alcance: "Curto",
@@ -1076,6 +1077,7 @@ const rituais = {
 
     "Rejeição da Carne": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Seraph-0, o Primeiro Aprimorado",
         execucao: "Reação",
         alcance: "Pessoal",
@@ -1098,6 +1100,7 @@ const rituais = {
 
     "Circuito Regenerativo": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Seraph-0, o Primeiro Aprimorado",
         execucao: "Padrão",
         alcance: "Toque",
@@ -1120,6 +1123,7 @@ const rituais = {
 
     "Aprimoramento Artificial": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Aurum, o Rei Incompleto",
         execucao: "Padrão",
         alcance: "Toque",
@@ -1142,6 +1146,7 @@ const rituais = {
 
     "Bateria Humana": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Nexum, a Máquina que Sonha",
         execucao: "Padrão",
         alcance: "Toque",
@@ -1164,6 +1169,7 @@ const rituais = {
 
     "Olho Mecânico": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Nexum, a Máquina que Sonha",
         execucao: "Padrão",
         alcance: "Pessoal",
@@ -1208,6 +1214,7 @@ const rituais = {
 
     "Distorção Dourada": {
         elemento: "Áurico",
+        circulo: 1,
         patrono: "Midas, o Eterno",
         execucao: "Padrão",
         alcance: "Toque",
