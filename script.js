@@ -4,6 +4,11 @@ import almas from "./data/almas.js";
 import periciasDisponiveis from "./data/pericias.js";
 
 import {
+    exportarFicha,
+    importarFicha
+} from "../modules/backup.js";
+
+import {
     carregarPericiasIniciais,
     carregarPericiasOrigem,
     criarSlotsPericias,
@@ -371,6 +376,28 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             carregarFicha
         );
+    
+    document
+        .getElementById("exportar-ficha")
+        .addEventListener(
+            "click",
+            exportarFicha
+        );
+    
+    const botaoImportar =
+    document.getElementById("importar-ficha");
+
+    const arquivoFicha =
+        document.getElementById("arquivo-ficha");
+
+    botaoImportar.addEventListener("click", () => {
+        arquivoFicha.click();
+    });
+
+    arquivoFicha.addEventListener("change", async () => {
+        await importarFicha(arquivoFicha.files[0]);
+        arquivoFicha.value = "";
+    });
 
     // Estado inicial
 
