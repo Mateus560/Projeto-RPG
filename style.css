@@ -92,7 +92,8 @@ button:active {
     background-color: #1C1C1C;
     border: 1px solid #777;
     font-family: 'Algerian';
-    color: white;
+    color: gold;
+    text-shadow: 0 0 8px gold;
     text-align: center;
     text-decoration: none;
     border-radius: 6px;
@@ -247,11 +248,11 @@ button:active {
 }
 
 .resource-value .menos {
-    background-color: #ff0000;
+    background-color: red;
 }
 
 .resource-value .mais {
-    background-color: #2bd02b;
+    background-color: limegreen;
 }
 
 .resource-value .menos:hover {
@@ -500,6 +501,11 @@ textarea {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.75rem;
+}
+
+#salvar-ficha:active {
+    text-shadow: 0 0 8px white;
+    color: white;
 }
 
 .btn-3d {
