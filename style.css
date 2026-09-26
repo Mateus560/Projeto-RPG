@@ -315,7 +315,7 @@ button:active {
     PERÍCIAS
 ========================= */
 
-.skill {
+.skill, .proficiencia {
     display: grid;
     grid-template-columns: 1fr auto auto;
     gap: 0.75rem;
@@ -324,7 +324,7 @@ button:active {
     border-bottom: 1px solid #333;
 }
 
-.skill:last-child {
+.skill:last-child, .proficiencia:last-child {
     border-bottom: none;
 }
 

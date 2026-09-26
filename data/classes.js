@@ -23,7 +23,10 @@ const classes = {
             ["Combate", "Pontaria"],
             ["Reflexos", "Fortificação"]
         ],
-        limitePericias: 2
+        limitePericias: 2,
+        proficiencias: [
+            "Armas Simples", "Armas Pesadas", "Proteções Leves", "Proteções Pesadas"
+        ]
     },
 
     Especialista: {
@@ -45,7 +48,10 @@ const classes = {
             sanidade: 4
         },
         periciasIniciais: [],
-        limitePericias: 7
+        limitePericias: 7,
+        proficiencias: [
+            "Armas Simples", "Armas Marciais", "Proteções Leves"
+        ]
     },
 
     Profeta: {
@@ -69,7 +75,10 @@ const classes = {
             "Ritualismo",
             "Resistir"
         ],
-        limitePericias: 3
+        limitePericias: 3,
+        proficiencias: [
+            "Armas Simples", "Armas Exóticas"
+        ]
     },
 
     Ascetico: {
@@ -89,7 +98,10 @@ const classes = {
             "Ritualismo",
             "Religião"
         ],
-        limitePericias: 3
+        limitePericias: 3,
+        proficiencias: [
+            "Armas Simples", "Combate Desarmado"
+        ]
     }
 };
 

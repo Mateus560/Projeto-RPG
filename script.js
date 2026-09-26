@@ -25,6 +25,10 @@ import {
     receberDano
 } from "./modules/recursos.js"
 
+import {atualizarAlma} from "./modules/alma.js";
+
+import { carregarProficienciasClasse } from "./modules/proficiencias.js";
+
 import {
     fecharAlerta
 } from "./modules/ui.js";
@@ -35,7 +39,6 @@ import {
     atualizarInventario
 } from "./modules/inventario.js";
 
-import {atualizarAlma} from "./modules/alma.js";
 
 import { calcularStatus } from "./modules/status.js";
 
@@ -48,7 +51,6 @@ import {
 // REFERÊNCIAS DO HTML
 // ============================================================
 
-const campoNome = document.getElementById("nome");
 const campoOrigem = document.getElementById("origem");
 const campoClasse = document.getElementById("classe");
 const campoTrilha = document.getElementById("trilha");
@@ -158,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
         atualizarAlma
     );
 
-
     // Origem
 
     campoOrigem.addEventListener(
@@ -182,7 +183,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     "lista-trilhas"
                 );
 
+            const listaProficiencias = 
+                document.getElementById("lista-proficiencias");
+
             listaTrilhas.innerHTML = "";
+
+            listaProficiencias.innerHTML = "";
 
             campoTrilha.value = "";
 
@@ -196,6 +202,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 document.getElementById(
                     "pericias-iniciais"
+                ).innerHTML = "";
+
+                document.getElementById(
+                    "lista-proficiencias"
                 ).innerHTML = "";
 
                 return;
@@ -225,6 +235,8 @@ document.addEventListener("DOMContentLoaded", () => {
             carregarPericiasIniciais();
 
             criarSlotsPericias();
+
+            carregarProficienciasClasse();
         }
     );
 

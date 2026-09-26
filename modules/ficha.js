@@ -27,6 +27,11 @@ import {
     mostrarAlerta
 } from "./ui.js";
 
+import {
+    coletarProficiencias,
+    carregarProficienciasClasse 
+} from "../modules/proficiencias.js";
+
 
 // ============================================================
 // COLETAR FICHA
@@ -118,13 +123,15 @@ export function coletarFicha() {
         itens:
             coletarItens(),
 
+        proficiencias:
+            coletarProficiencias(),
 
         // ====================================================
         // ALMA
         // ====================================================
 
         alma:
-            document.getElementById("alma").value
+            document.getElementById("alma").value,
     };
 }
 
@@ -256,13 +263,17 @@ export function carregarFicha() {
             new Event("change")
         );
 
+    // ========================================================
+    // PROFICIÊNCIAS
+    // ========================================================
+
+    carregarProficienciasClasse();
 
     // ========================================================
     // STATUS
     // ========================================================
 
     calcularStatus();
-
 
     // ========================================================
     // RECURSOS
@@ -309,14 +320,6 @@ export function carregarFicha() {
     carregarHabilidades(
         ficha.habilidades
     );
-
-
-    // ========================================================
-    // RITUAIS
-    // ========================================================
-
-    
-
 
     // ========================================================
     // INVENTÁRIO
