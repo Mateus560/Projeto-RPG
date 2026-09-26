@@ -26,7 +26,7 @@ const almas = {
         antonimo:
             "Complacência. A satisfação absoluta com aquilo que já possui, recusando-se a evoluir porque acredita que não há mais nada a conquistar.",
         poder:
-            "Ganância Mecânica: Toda vez que você matar ou executar um inimigo, recupera 1d12 PV e recebe +2 em todos os testes por uma quantidade de turnos igual ao seu maior atributo."
+            "Ganância Mecânica: Uma vez por cena você pode transformar o resultado do dado ao seu favor. Falha crítica se torna uma falha comum, Falha comum se torna sucesso."
     },
 
     "Alma Desesperada - Coragem": {
@@ -36,7 +36,7 @@ const almas = {
         antonimo:
             "Covardia. Permitir que o medo controle completamente suas decisões, fazendo com que a própria possibilidade de fracasso seja suficiente para impedir qualquer ação.",
         poder:
-            "Última Chance: Caso consiga uma falha crítica em um teste que não seja de combate e que levaria à sua morte, você sobrevive com PV igual ao seu maior atributo. Caso não seja dano fatal, reduz o dano sofrido em valor igual ao seu maior atributo."
+            "Sem Recuar: Quando realizar um teste (que não seja de combate e ofensivo) cuja DT seja maior que seu valor de teste, recebe +5 nesse teste. Ao usar isso perca 2 de PE e 1 de sanidade."
     },
 
     "Alma Aflita - Autenticidade": {
@@ -66,7 +66,7 @@ const almas = {
         antonimo:
             "Vingança. Aqueles que abandonam a justiça não buscam equilíbrio ou reparação, mas retribuição pessoal. A vingança não se importa com o que é justo, apenas com fazer o outro sofrer pelo sofrimento que causou. Onde a Justiça pergunta “qual consequência é merecida?”, a Vingança pergunta apenas “quanto você deve sofrer?”. ",
         poder:
-            "Cura Acelerada: Regenera 1d4 PV no início de cada um de seus turnos."
+            "Balança Imparcial: Quando você ataca um ser, ignora bônus defensivos adicionais dele, como aumentos de Defesa e bônus em testes de Defesa. Quando um ser ataca você, ignora os bônus ofensivos adicionais que ele possui contra você."
     }
 };
 

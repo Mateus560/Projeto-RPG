@@ -26,6 +26,10 @@ button, a {
   user-select: none;
 }
 
+textarea, p {
+    text-align: justify;
+}
+
 input,
 textarea {
     width: 100%;
@@ -448,10 +452,6 @@ select {
 
 .button:hover {
     background: #555;
-}
-
-.button-primary {
-    background: #666;
 }
 
 .button-menos {

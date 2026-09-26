@@ -57,7 +57,6 @@ export function adicionarArma(dados = null) {
             >
         </div>
 
-        <div class="grid grid-3">
             <div class="field">
                 <label>Dano</label>
                 <input
@@ -85,22 +84,21 @@ export function adicionarArma(dados = null) {
                     class="espaco-inventario"
                 >
             </div>
-        </div>
 
-        <div class="field">
-            <label>Descrição</label>
-            <textarea
-                class="descricao-arma"
-                placeholder="Descrição da arma"
-            ></textarea>
-        </div>
+            <div class="field">
+                <label>Descrição</label>
+                <textarea
+                    class="descricao-arma"
+                    placeholder="Descrição da arma"
+                ></textarea>
+            </div>
 
-        <button
-            type="button"
-            class="button-remover"
-        >
-            Remover
-        </button>
+            <button
+                type="button"
+                class="button-remover"
+            >
+                Remover
+            </button>
     `;
 
     lista.appendChild(arma);
