@@ -1,593 +1,517 @@
-/* =========================
-    RESET
-========================= */
-@font-face {
-    font-family: 'Algerian';
-    src: url('fonts/algerian.ttf');
-    font-size: normal;
-    font-style: normal;
+/* ==========================================================================
+   1. VARIÁVEIS DO SISTEMA (Design Tokens)
+   ========================================================================== */
+:root {
+  /* CORES PRINCIPAIS */
+  --bg-body: #1a1a1a;
+  --bg-card: #222222;
+  --bg-input: #252525;
+  --bg-inner: #1c1c1c;
+
+  /* BORDAS & LINHAS */
+  --border-color: #444444;
+  --border-light: #555555;
+  --border-dark: #333333;
+
+  /* TEXTO */
+  --text-main: #f2f2f2;
+  --text-muted: #bbbbbb;
+
+  /* CORES DE DESTAQUE / ESTADOS */
+  --color-accent: #0000ff; /* Azul */
+  --color-danger: #ff0000; /* Vermelho */
+  --color-success: #2bd02b; /* Verde */
+  --color-warning: #ffd700; /* Ouro */
+
+  /* TIPOGRAFIA & ESPAÇAMENTO */
+  --font-heading: 'Algerian', 'Cinzel Decorative', serif;
+  --font-sans: Arial, Helvetica, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ==========================================================================
+   2. RESET & ESTILOS BASE
+   ========================================================================== */
+@font-face {
+  font-family: 'Algerian';
+  src: url('fonts/algerian.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #1a1a1a;
-    color: #f2f2f2;
-    line-height: 1.5;
+  font-family: var(--font-sans);
+  background: var(--bg-body);
+  color: var(--text-main);
+  line-height: 1.5;
 }
 
-button, a {
+/* Acessibilidade & Mobile */
+button,
+a,
+input,
+select,
+textarea {
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
+  font-family: inherit;
 }
 
-textarea, p {
-    text-align: justify;
+button,
+a {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ==========================================================================
+   3. ELEMENTOS DE FORMULÁRIO (Inputs, Selects, Textarea)
+   ========================================================================== */
+input,
+textarea,
+select {
+  padding: 0.65rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input,
 textarea {
     width: 100%;
-    padding: 0.65rem;
-    border: 1px solid #555;
-    border-radius: 6px;
-    background: #252525;
-    color: #fff;
-    outline: none;
 }
 
 input:focus,
-textarea:focus {
-    border-color: white;
+textarea:focus,
+select:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
+select {
+  cursor: pointer;
+  background-color: var(--bg-card);
+}
+
+textarea {
+  min-height: 180px;
+  resize: vertical;
+  text-align: justify;
+}
+
+p {
+  text-align: justify;
+}
+
+/* ==========================================================================
+   4. BOTÕES & AÇÕES (Agrupados pelas suas classes originais)
+   ========================================================================== */
+/* Botão Padrão do Sistema */
 button {
-    border: none;
-    border-radius: 6px;
-    padding: 0.65rem 1rem;
-    cursor: pointer;
-    transition: transform 0.1s ease;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform 0.05s ease, background-color 0.2s ease;
 }
 
 button:active {
-    transform: scale(0.97);
+  transform: scale(0.97);
 }
-
-.button-aplicar-dano {
-    background-color: #1C1C1C;
-    border: 1px solid #777;
-    font-family: 'Algerian';
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-    box-shadow: 0 1px 0 white;
-    transition: all 0.05s ease;
-}
-
-.adicionar {
-    background-color: #1C1C1C;
-    border: 1px solid #777;
-    font-family: 'Algerian';
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 0 4px white;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-    box-shadow: 0 1px 0 white;
-}
-
-.adicionar:active{
-    font-weight: bold;
-    transform: translateY(4px);
-    box-shadow: 0 0 0 white;
-}
-
-#adicionar-ritual {
-    background-color: #1C1C1C;
-    border: 1px solid #777;
-    font-family: 'Algerian';
-    color: gold;
-    text-shadow: 0 0 8px gold;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-    box-shadow: 0 1px 0 white;
-    transition: all 0.05s ease;
-}
-
-#adicionar-ritual:active {
-    text-shadow: 0 0 8px gold;
-    font-weight: bold;
-    color: gold;
-    transform: translateY(4px);
-    box-shadow: 0 0 0px white;
-}
-
-.ability-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-}
-
-/* =========================
-    CONTAINER
-========================= */
-
-.container {
-    width: min(100% - 2rem, 1000px);
-    margin: 1rem auto 3rem;
-}
-
-/* =========================
-    HEADER
-========================= */
-
-.header {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-    background: #222;
-}
-
-.header h1 {
-    margin-bottom: 1rem;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-/* =========================
-    SECTIONS
-========================= */
-
-.section {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-    background: #222;
-}
-
-.section-title {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #444;
-    font-size: 1.1rem;
-}
-
-/* =========================
-    CAMPOS
-========================= */
-
-.field {
-    margin-bottom: 1rem;
-}
-
-.field:last-child {
-    margin-bottom: 0;
-}
-
-.field label {
-    display: block;
-    margin-bottom: 0.35rem;
-    font-size: 0.85rem;
-    color: #bbb;
-}
-
-
-/* =========================
-    GRID
-========================= */
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-
-/* =========================
-    ATRIBUTOS
-========================= */
-
-.attribute {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-    background: #1c1c1c;
-}
-
-/* =========================
-    RECURSOS
-========================= */
-
-.resource {
-    padding: 1rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-    background: #1c1c1c;
-}
-
-.resource-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.75rem;
-}
-
-.resource-value {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.resource-value input {
-    width: 70px;
-    text-align: center;
-}
-
-.resource-value .menos, .mais {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    color: white;
-    font-size: 1.2rem;
-}
-
-.resource-value .menos {
-    background-color: red;
-}
-
-.resource-value .mais {
-    background-color: limegreen;
-}
-
-.resource-value .menos:hover {
-    background-color: #ff0000dc;
-}
-
-.resource-value .mais:hover {
-    background-color: #2bd02bdc;
-}
-
-.aplicar {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.button-aplicar-dano, .button-aplicar-cura {
-    background-color: #1C1C1C;
-    border: 1px solid #777;
-    font-family: 'Algerian';
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-    box-shadow: 0 1px 0 white;
-}
-
-.button-aplicar-dano {
-    color: red;
-    text-shadow: 0 0 8px red;
-}
-
-.button-aplicar-cura {
-    color: limegreen;
-    text-shadow: 0 0 8px limegreen;
-}
-
-.button-aplicar-dano:active, .button-aplicar-cura:active {
-    font-weight: bold;
-    transform: translateY(4px);
-    box-shadow: 0 0 0 white;
-}
-
-/* =========================
-    ALMAS
-========================= */
-
-#afinidade-alma {
-    font-family: 'Algerian';
-}
-
-#descricao-alma p {
-    background-color: #1c1c1c;
-    gap: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-}
-
-/* =========================
-    PERÍCIAS
-========================= */
-
-.skill, .proficiencia {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.75rem;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #333;
-}
-
-.skill:last-child, .proficiencia:last-child {
-    border-bottom: none;
-}
-
-/* =========================
-    SELECT
-========================= */
-
-select {
-    background-color: #222222;
-    gap: 1rem;
-    padding: 0.65rem;
-    border: 1px solid #555;
-    border-radius: 6px;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-/* =========================
-    HABILIDADES
-========================= */
-
-#habilidade {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.ability {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #444;
-    border-radius: 10px;
-    background: #1c1c1c;
-}
-
-.ability:last-child {
-    margin-bottom: 0;
-}
-
-.usar-habilidade, .button-remover {
-    font-family: 'Algerian';
-    background-color: #1a1a1a;
-    border: 1px solid #777;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-    box-shadow: 0 1px 0 white;
-}
-
-.usar-habilidade {
-    color: blue;
-    text-shadow: 0 0 8px blue;
-}
-
-.button-remover {
-    color: red;
-    text-shadow: 0 0 8px red;
-}
-
-.usar-habilidade:active, .button-remover:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 white;
-    font-weight: bold;
-}
-
-/* =========================
-    MODAL
-========================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-
-.modal-content {
-    width: min(90%, 400px);
-    padding: 1.5rem;
-    border: 1px solid #444;
-    border-radius: 12px;
-    background: #222;
-    text-align: center;
-}
-
-.modal-content h3 {
-    margin-bottom: 0.75rem;
-}
-
-.modal-content p {
-    margin-bottom: 1.25rem;
-    color: #bbb;
-}
-
-#entendi {
-    font-family: 'Algerian';
-    color: #2bd02b;
-    box-shadow: 0px 1px 0px white;
-    background-color: #1a1a1a;
-    border: solid 1px #777;
-}
-
-#entendi:active {
-    transform: translateY(4px);
-    box-shadow: 0 0 0 white;
-    font-weight: bold;
-}
-
-/* =========================
-    BOTÕES
-========================= */
 
 .button {
-    background: #444;
-    color: white;
+  background: var(--border-color);
+  color: #ffffff;
 }
 
 .button:hover {
-    background: #555;
+  background: var(--border-light);
 }
 
-.button-menos {
-    background-color: red;
+/* ESTILO BASE RPG (Aplicado diretamente nas SUAS classes do HTML) */
+.adicionar,
+.button-aplicar-dano,
+.button-aplicar-cura,
+.usar-habilidade,
+.button-remover,
+#adicionar-ritual,
+#entendi {
+  background-color: var(--bg-inner);
+  border: 1px solid #777777;
+  font-family: var(--font-heading);
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 0 1px 0 #ffffff;
+  transition: all 0.05s ease;
 }
 
-/* =========================
-    INVENTÁRIO
-========================= */
+/* Efeito de Pressionar para todos os botões estilizados */
+.adicionar:active,
+.button-aplicar-dano:active,
+.button-aplicar-cura:active,
+.usar-habilidade:active,
+.button-remover:active,
+#adicionar-ritual:active,
+#entendi:active {
+  font-weight: bold;
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #ffffff;
+}
 
+/* VARIAÇÕES DE COR E GLOW (Suas classes originais mantidas) */
+.adicionar {
+  color: #ffffff;
+  text-shadow: 0 0 4px #ffffff;
+}
+
+.button-aplicar-dano,
+.button-remover {
+  color: var(--color-danger);
+  text-shadow: 0 0 8px var(--color-danger);
+}
+
+.button-aplicar-cura {
+  color: var(--color-success);
+  text-shadow: 0 0 8px var(--color-success);
+}
+
+.usar-habilidade {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px var(--color-accent);
+}
+
+#adicionar-ritual {
+  color: var(--color-warning);
+  text-shadow: 0 0 8px var(--color-warning);
+}
+
+#entendi {
+  color: var(--color-success);
+  box-shadow: 0 1px 0 #ffffff;
+}
+
+/* Botão 3D Especial */
+.btn-3d {
+  background-color: var(--bg-inner);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-heading);
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  padding: 7px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #ffffff;
+  transition: all 0.05s ease;
+}
+
+.btn-3d:active {
+  text-shadow: 0 0 8px var(--color-danger);
+  color: var(--color-danger);
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #ffffff;
+}
+
+/* ==========================================================================
+   5. ESTRUTURA & LAYOUT
+   ========================================================================== */
+.container {
+  width: min(100% - 2rem, 1000px);
+  margin: 1rem auto 3rem;
+}
+
+.header,
+.section {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.header h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.1rem;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   6. MÓDULOS ESPECÍFICOS (Ficha de RPG)
+   ========================================================================== */
+/* Atributos */
+.attribute {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-inner);
+}
+
+/* Recursos (Vida, Sanidade, etc) */
+.resource {
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-inner);
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.resource-value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.resource-value input {
+  width: 70px;
+  text-align: center;
+}
+
+.resource-value .menos,
+.resource-value .mais {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.resource-value .menos {
+  background-color: var(--color-danger);
+}
+
+.resource-value .mais {
+  background-color: var(--color-success);
+}
+
+.resource-value .menos:hover {
+  background-color: #d30000;
+}
+
+.resource-value .mais:hover {
+  background-color: #23a923;
+}
+
+.aplicar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Almas e Descrições */
+#afinidade-alma {
+  font-family: var(--font-heading);
+}
+
+#descricao-alma p {
+  background-color: var(--bg-inner);
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+/* Perícias e Proficiências */
+.skill,
+.proficiencia {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.skill:last-child,
+.proficiencia:last-child {
+  border-bottom: none;
+}
+
+/* Habilidades */
+#habilidade {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ability {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-inner);
+}
+
+.ability:last-child {
+  margin-bottom: 0;
+}
+
+.ability-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* Inventário & Armas */
 .inventory-item {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #333;
-}
-
-.arma {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #444;
-    border-radius: 8px;
-    background: #1c1c1c;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-dark);
 }
 
 .inventory-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
-
-/* =========================
-    ANOTAÇÕES
-========================= */
-
-textarea {
-    min-height: 180px;
-    resize: vertical;
+.arma {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-inner);
 }
 
-
-/* =========================
-    AÇÕES
-========================= */
-
-.actions {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-}
-
-#salvar-ficha:active {
-    text-shadow: 0 0 8px white;
-    color: white;
-}
-
-.btn-3d {
-    background-color: #1C1C1C;
-    border: 1px solid #444;
-    font-family: 'Algerian';
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 7px;
-    cursor: pointer;
-    box-shadow: 0px 4px 0px white;
-    transition: all 0.05s ease;
-}
-
-.btn-3d:active{
-    text-shadow: 0 0 8px rgba(255, 0, 0);
-    color: #ff0000;
-    transform: translateY(4px);
-    box-shadow: 0 0 0 white; 
-}
-
-/* =========================
-    RITUAIS
-========================= */
+/* Rituais */
 .dados-ritual .field {
-    background-color: #1c1c1c;
-    gap: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #444;
-    border-radius: 10px;
+  background-color: var(--bg-inner);
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
 }
 
-.requisito-verdadeiro, .requisito-discente {
-    font-style: italic;
-    font-weight: bold;
-    color: red;
+.requisito-verdadeiro,
+.requisito-discente {
+  font-style: italic;
+  font-weight: bold;
+  color: var(--color-danger);
 }
 
 #button-ritual-page {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* =========================
-    TABLET / DESKTOP
-========================= */
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.modal-content {
+  width: min(90%, 400px);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 0.75rem;
+}
+
+.modal-content p {
+  margin-bottom: 1.25rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   7. LAYOUT RESPONSIVO (Grids)
+   ========================================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
 
 .grid-attributes {
-    grid-template-columns: 1fr;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 @media (min-width: 600px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    .grid-3 {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .grid-attributes {
+    grid-template-columns: repeat(6, 1fr);
+  }
 
-    .grid-attributes {
-        grid-template-columns: repeat(6, 1fr);
-    }
+  .grid-attributes .attribute:nth-child(1),
+  .grid-attributes .attribute:nth-child(2),
+  .grid-attributes .attribute:nth-child(3) {
+    grid-column: span 2;
+  }
 
-    .grid-attributes .attribute:nth-child(1) {
-        grid-column: span 2;
-    }
+  .grid-attributes .attribute:nth-child(4) {
+    grid-column: 2 / span 2;
+  }
 
-    .grid-attributes .attribute:nth-child(2) {
-        grid-column: span 2;
-    }
-
-    .grid-attributes .attribute:nth-child(3) {
-        grid-column: span 2;
-    }
-
-    .grid-attributes .attribute:nth-child(4) {
-        grid-column: 2 / span 2;
-    }
-
-    .grid-attributes .attribute:nth-child(5) {
-        grid-column: 4 / span 2;
-    }
+  .grid-attributes .attribute:nth-child(5) {
+    grid-column: 4 / span 2;
+  }
 }
