@@ -172,73 +172,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Classe
 
-    campoClasse.addEventListener(
-        "change",
-        () => {
-            const classe =
-                campoClasse.value;
+    campoClasse.addEventListener("change", () => {
 
-            const listaTrilhas =
-                document.getElementById(
-                    "lista-trilhas"
-                );
+        const classe = campoClasse.value;
 
-            const listaProficiencias = 
-                document.getElementById("lista-proficiencias");
+        const listaTrilhas = document.getElementById("lista-trilhas");
+        const listaProficiencias = document.getElementById("lista-proficiencias");
 
-            listaTrilhas.innerHTML = "";
+        listaTrilhas.innerHTML = "";
+        listaProficiencias.innerHTML = "";
 
-            listaProficiencias.innerHTML = "";
+        campoTrilha.value = "";
 
-            campoTrilha.value = "";
+        if (!classes[classe]) {
+            campoTrilha.disabled = true;
 
+            document.getElementById("lista-pericias").innerHTML = "";
+            document.getElementById("pericias-iniciais").innerHTML = "";
 
-            if (!classes[classe]) {
-                campoTrilha.disabled = true;
-
-                document.getElementById(
-                    "lista-pericias"
-                ).innerHTML = "";
-
-                document.getElementById(
-                    "pericias-iniciais"
-                ).innerHTML = "";
-
-                document.getElementById(
-                    "lista-proficiencias"
-                ).innerHTML = "";
-
-                return;
-            }
-
-
-            classes[classe].trilhas.forEach(
-                trilha => {
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value = trilha;
-
-                    listaTrilhas.appendChild(
-                        option
-                    );
-                }
-            );
-
-
-            campoTrilha.disabled = false;
-
-            calcularStatus();
-
-            carregarPericiasIniciais();
-
-            criarSlotsPericias();
-
-            carregarProficienciasClasse();
+            return;
         }
-    );
+
+        const trilhasDaClasse = classes[classe].trilhas;
+
+        Object.keys(trilhasDaClasse).forEach(nomeTrilha => {
+
+            const option = document.createElement("option");
+
+            option.value = nomeTrilha;
+            option.textContent = nomeTrilha;
+
+            listaTrilhas.appendChild(option);
+        });
+
+        campoTrilha.disabled = false;
+
+        calcularStatus();
+        carregarPericiasIniciais();
+        criarSlotsPericias();
+        carregarProficienciasClasse();
+    });
 
 
     // Eventos de status
@@ -402,6 +375,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const arquivoFicha =
         document.getElementById("arquivo-ficha");
 
+    const botaoPoderesTrilha = 
+        document.getElementById("poderes-trilha");
+
     botaoImportar.addEventListener("click", () => {
         arquivoFicha.click();
     });
@@ -409,6 +385,21 @@ document.addEventListener("DOMContentLoaded", () => {
     arquivoFicha.addEventListener("change", async () => {
         await importarFicha(arquivoFicha.files[0]);
         arquivoFicha.value = "";
+    });
+
+    botaoPoderesTrilha.addEventListener("click", () => {
+        const classe = campoClasse.value;
+        const trilha = campoTrilha.value;
+
+        localStorage.setItem(
+            "trilha-selecionada",
+            JSON.stringify({
+                classe: classe,
+                trilha: trilha
+            })
+        );
+
+        window.location.href = "./trilha.html";
     });
 
     // Estado inicial

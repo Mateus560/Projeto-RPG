@@ -387,7 +387,7 @@ button:active {
   gap: 10px;
 }
 
-.ability {
+.ability, .card-trilha {
   margin-bottom: 1rem;
   padding: 1rem;
   border: 1px solid var(--border-color);
@@ -395,7 +395,13 @@ button:active {
   background: var(--bg-inner);
 }
 
-.ability:last-child {
+.epeem-trilha {
+  font-weight: bold;
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.ability:last-child, .card-trilha:last-child {
   margin-bottom: 0;
 }
 
