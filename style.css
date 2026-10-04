@@ -395,6 +395,10 @@ button:active {
   background: var(--bg-inner);
 }
 
+.card-trilha p {
+  white-space: pre-line;
+}
+
 .epeem-trilha {
   font-weight: bold;
   font-style: italic;
