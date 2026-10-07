@@ -95,6 +95,12 @@ const classes = {
                     },
 
                     {
+                        epeem: 65,
+                        nome: "Muralha Intransponível",
+                        descricao: "Ao ficar machucado (com metade da vida) recebe seu valor de fortificação em redução de dano, além disso pode gastar 5 PE para ignorar uma condição (exceto morrendo ou enlouquecendo) ou para ignorar uma manobra de combate ou qualquer meio de te mover forçadamente de seu local."
+                    },
+
+                    {
                         epeem: 99,
                         nome: "Fortaleza",
                         descricao: "Ao entrar no estado de Morrendo você tem +1 turno para resistir à morte, e consegue fazer ações normalmente por não estar indefeso ou inconsciente, se seu personagem morrer, os seus aliados vão sofrer metade de danos físicos por 1d8+1 de turnos."
