@@ -483,6 +483,7 @@ button:active {
 }
 
 .modal-content p {
+  text-align: center;
   margin-bottom: 1.25rem;
   color: var(--text-muted);
 }
