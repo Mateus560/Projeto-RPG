@@ -1,5 +1,5 @@
-import { alterarRecurso } from "./recursos.js";
-import { mostrarAlerta } from "./ui.js";
+import { alterarRecurso } from "../domain/recursos.js";
+import { mostrarAlerta } from "./alertas.js";
 
 export function adicionarHabilidade(dados = null) {
     const lista =

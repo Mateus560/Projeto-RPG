@@ -1,4 +1,4 @@
-import almas from "../data/almas.js";
+import almas from "../../data/almas.js";
 
 export function atualizarAlma() {
     const campoAlma = document.getElementById("alma");

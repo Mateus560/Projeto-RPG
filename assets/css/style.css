@@ -36,7 +36,7 @@
    ========================================================================== */
 @font-face {
   font-family: 'Algerian';
-  src: url('fonts/algerian.ttf') format('truetype');
+  src: url('../fonts/algerian.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -146,6 +146,7 @@ button:active {
 .button-aplicar-dano,
 .button-aplicar-cura,
 .usar-habilidade,
+.usar-ritual,
 .button-remover,
 #adicionar-ritual,
 #entendi {
@@ -166,6 +167,7 @@ button:active {
 .button-aplicar-dano:active,
 .button-aplicar-cura:active,
 .usar-habilidade:active,
+.usar-ritual:active,
 .button-remover:active,
 #adicionar-ritual:active,
 #entendi:active {
@@ -191,7 +193,7 @@ button:active {
   text-shadow: 0 0 8px var(--color-success);
 }
 
-.usar-habilidade {
+.usar-habilidade, .usar-ritual {
   color: var(--color-accent);
   text-shadow: 0 0 8px var(--color-accent);
 }

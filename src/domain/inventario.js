@@ -1,12 +1,16 @@
-export function calcularEspacoInventario() {
-    const forca =
-        Number(document.getElementById("forca").value) || 0;
-
+export function calcularCapacidadeInventario(forca) {
+    forca = Number(forca) || 0;
     if (forca === 0) {
         return 2;
     }
 
     return forca * 5;
+}
+
+export function calcularEspacoInventario() {
+    return calcularCapacidadeInventario(
+        document.getElementById("forca").value
+    );
 }
 
 export function calcularEspacoUsado() {

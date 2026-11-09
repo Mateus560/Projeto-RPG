@@ -1,4 +1,4 @@
-import classes from "../data/classes.js";
+import classes from "../../data/classes.js";
 
 export function obterTrilha(nomeClasse, nomeTrilha) {
     const classe = classes[nomeClasse];

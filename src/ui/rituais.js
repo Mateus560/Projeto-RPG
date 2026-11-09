@@ -1,4 +1,5 @@
-import rituais from "../data/rituais.js";
+import rituais from "../../data/rituais.js";
+import { gravarDadosFicha, lerFichaSalva } from "../services/ficha-storage.js";
 
 export function adicionarRitual() {
 
@@ -86,8 +87,6 @@ export function adicionarRitual() {
 
                 <p class="discente-ritual"></p>
                 <p class="requisito-discente"></p>
-
-
             </div>
 
             <div class="field">
@@ -96,7 +95,6 @@ export function adicionarRitual() {
 
                 <p class="verdadeiro-ritual"></p>
                 <p class="requisito-verdadeiro"></p>
-
             </div>
             <button
                 type="button"
@@ -174,21 +172,22 @@ export function adicionarRitual() {
         
         ritual.querySelector(".requisito-verdadeiro").textContent = `Requisito: ${dados.verdadeiro?.requisito || "Sem requisito"}`;
 
-        ritual.querySelector(".custo-discente").textContent = `Discente (+${dados.discente.custo} PE)`
+        ritual.querySelector(".custo-discente").textContent =
+            dados.discente ? `Discente (+${dados.discente.custo} PE)` : "";
 
-        ritual.querySelector(".custo-verdadeiro").textContent = `Verdadeiro (+${dados.verdadeiro.custo} PE)`
+        ritual.querySelector(".custo-verdadeiro").textContent = dados.verdadeiro ? `Verdadeiro (+${dados.verdadeiro.custo} PE)` : "";
 
         dadosRitual.hidden = false;
-
         salvarRituais();
     });
 
     ritual
-    .querySelector(".button-remover")
-    .addEventListener("click", () => {
-        ritual.remove();
-        salvarRituais();
+        .querySelector(".button-remover")
+        .addEventListener("click", () => {
+            ritual.remove();
+            salvarRituais();
     });
+
 }
 
 export function coletarRituais() {
@@ -220,13 +219,8 @@ export function coletarRituais() {
 }
 
 export function carregarRituais() {
-
-    const dados =
-        localStorage.getItem("ficha-personagem");
-
-    if (!dados) return;
-
-    const ficha = JSON.parse(dados);
+    const ficha = lerFichaSalva();
+    if (!ficha) return;
 
     if (!ficha.rituais) return;
 
@@ -257,18 +251,6 @@ export function carregarRituais() {
 }
 
 export function salvarRituais() {
-
-    const dados =
-        localStorage.getItem("ficha-personagem");
-
-    if (!dados) return;
-
-    const ficha = JSON.parse(dados);
-
-    ficha.rituais = coletarRituais();
-
-    localStorage.setItem(
-        "ficha-personagem",
-        JSON.stringify(ficha)
-    );
+    if (!lerFichaSalva()) return;
+    gravarDadosFicha({ rituais: coletarRituais() });
 }

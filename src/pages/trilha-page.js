@@ -1,5 +1,5 @@
-import { obterTrilha } from "./modules/trilhas.js";
-import { renderizarTrilha } from "./modules/cards-trilhas.js";
+import { obterTrilha } from "../ui/trilhas.js";
+import { renderizarTrilha } from "../ui/cards-trilhas.js";
 
 const listaTrilha = document.getElementById("lista-trilha");
 

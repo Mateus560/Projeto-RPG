@@ -1,4 +1,4 @@
-import classes from "../data/classes.js";
+import classes from "../../data/classes.js";
 
 export function carregarProficienciasClasse() {
     const campoClasse = document.getElementById("classe");

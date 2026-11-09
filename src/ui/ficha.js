@@ -4,7 +4,7 @@ import {
     carregarPericiasOrigem,
     criarSlotsPericias,
     carregarPericias
-} from "./pericias.js";
+} from "../domain/pericias.js";
 
 import {
     coletarHabilidades,
@@ -17,20 +17,21 @@ import {
     carregarArmas,
     carregarItens,
     atualizarInventario
-} from "./inventario.js";
+} from "../domain/inventario.js";
 
 import {
     calcularStatus
-} from "./status.js";
+} from "../domain/status.js";
 
 import {
     mostrarAlerta
-} from "./ui.js";
+} from "./alertas.js";
 
 import {
     coletarProficiencias,
     carregarProficienciasClasse 
-} from "../modules/proficiencias.js";
+} from "./proficiencias.js";
+import { gravarDadosFicha, lerFichaSalva } from "../services/ficha-storage.js";
 
 
 // ============================================================
@@ -141,25 +142,7 @@ export function coletarFicha() {
 // ============================================================
 
 export function salvarFicha() {
-
-    const fichaAtual =
-        JSON.parse(
-            localStorage.getItem("ficha-personagem")
-        ) || {};
-
-    const novaFicha =
-        coletarFicha();
-
-    const ficha =
-        {
-            ...fichaAtual,
-            ...novaFicha
-        };
-
-    localStorage.setItem(
-        "ficha-personagem",
-        JSON.stringify(ficha)
-    );
+    gravarDadosFicha(coletarFicha());
 
     mostrarAlerta(
         "Salvar",
@@ -173,13 +156,9 @@ export function salvarFicha() {
 // ============================================================
 
 export function carregarFicha() {
+    const ficha = lerFichaSalva();
 
-    const dados =
-        localStorage.getItem(
-            "ficha-personagem"
-        );
-
-    if (!dados) {
+    if (!ficha) {
 
         mostrarAlerta(
             "Carregar",
@@ -188,10 +167,6 @@ export function carregarFicha() {
 
         return;
     }
-
-
-    const ficha =
-        JSON.parse(dados);
 
 
     // ========================================================

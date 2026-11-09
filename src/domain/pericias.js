@@ -1,5 +1,5 @@
-import classes from "../data/classes.js";
-import origens from "../data/origens.js";
+import classes from "../../data/classes.js";
+import origens from "../../data/origens.js";
 
 export function carregarPericiasIniciais() {
     const campoClasse = document.getElementById("classe");

@@ -1,7 +1,7 @@
 import { 
     adicionarRitual,
     carregarRituais
-} from "./modules/rituais.js";
+} from "../ui/rituais.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 

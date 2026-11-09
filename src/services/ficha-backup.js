@@ -1,12 +1,12 @@
-export function exportarFicha() {
-    const dados = localStorage.getItem("ficha-personagem");
+import { gravarFicha, lerFichaSalva } from "./ficha-storage.js";
 
-    if (!dados) {
+export function exportarFicha() {
+    const ficha = lerFichaSalva();
+
+    if (!ficha) {
         alert("Nenhuma ficha encontrada.");
         return;
     }
-
-    const ficha = JSON.parse(dados);
 
     const arquivo = new Blob(
         [JSON.stringify(ficha, null, 4)],
@@ -47,10 +47,7 @@ export async function importarFicha(arquivo) {
 
         if (!confirmar) return;
 
-        localStorage.setItem(
-            "ficha-personagem",
-            JSON.stringify(ficha)
-        );
+        gravarFicha(ficha);
 
         alert("Ficha importada com sucesso!");
 
