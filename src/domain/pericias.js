@@ -133,7 +133,7 @@ export function criarSlotsPericias() {
         conhecimento;
 
     const slots =
-        lista.querySelectorAll(".skill");
+        lista.querySelectorAll('.skill:not([data-manual="true"])');
 
     const slotsAtuais = slots.length;
 
@@ -162,7 +162,7 @@ export function criarSlotsPericias() {
 
     if (slotsAtuais > limite) {
         const todos =
-            lista.querySelectorAll(".skill");
+            lista.querySelectorAll('.skill:not([data-manual="true"])');
 
         for (
             let i = todos.length - 1;
@@ -174,6 +174,38 @@ export function criarSlotsPericias() {
     }
 }
 
+export function criarSlotsPericiasManual() {
+    const lista =
+        document.getElementById("lista-pericias");
+
+    if (!lista) return;
+
+    const campo = document.createElement("div");
+    campo.classList.add("skill");
+    campo.dataset.manual = "true";
+    campo.innerHTML = `
+        <input
+            type="text"
+            list="lista-pericias-disponiveis"
+            placeholder="Escolha uma perícia"
+        >
+
+        <select>
+            <option value="5">+5</option>
+            <option value="10">+10</option>
+            <option value="15">+15</option>
+        </select>
+
+        <button type="button" class="button-remover">
+            Remover
+        </button>
+    `;
+
+    lista.appendChild(campo);
+    campo.querySelector(".button-remover").addEventListener("click", () => {
+        campo.remove();
+    });
+}
 
 export function coletarPericias() {
     const periciasIniciais = [];
@@ -254,12 +286,22 @@ export function carregarPericias(pericias) {
     });
 
 
+    const listaAdicionais = document.getElementById("lista-pericias");
+    const periciasAdicionaisSalvas = pericias.adicionais || [];
+    const slotsManuaisAtuais = listaAdicionais?.querySelectorAll('.skill[data-manual="true"]') || [];
+    slotsManuaisAtuais.forEach(slot => slot.remove());
+    const slotsAutomaticos = listaAdicionais?.querySelectorAll('.skill:not([data-manual="true"])').length || 0;
+
+    for (let i = slotsAutomaticos; i < periciasAdicionaisSalvas.length; i++) {
+        criarSlotsPericiasManual();
+    }
+
     const adicionais =
         document.querySelectorAll(
             "#lista-pericias .skill"
         );
 
-    pericias.adicionais?.forEach((pericia, index) => {
+    periciasAdicionaisSalvas.forEach((pericia, index) => {
         const skill = adicionais[index];
 
         if (!skill) return;

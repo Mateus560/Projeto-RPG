@@ -352,6 +352,40 @@ const classes = {
                         descricao: "Sempre que reduzir um inimigo a 0 PV, você recupera 2 PE e pode realizar uma ação bônus imediata (como movimento, ataque ou ritual).  Além disso, enquanto tiver menos de 50% de PV, recebe +4 em testes de ataque, aparar e rituais — mas sofre +5 de dano recebido. Suas armas ficam com os bônus das duas formas ativadas ao mesmo tempo."
                     }
                 ]
+            },
+            "Retalhador": {
+                descricao: "Sem descrição. Requisito: Ser da Ordo Animarum",
+                poderes: [
+                    {
+                        epeem: 10,
+                        nome: "Guerra Físico-Espiritual",
+                        descricao: "Você recebe 1 Ritual de Círculo que você conhece, receba +1 ritual a cada habilidade adquirida da Trilha, esta inclusa. Recebe treinamento em Ritualismo, ou se já for treinado, recebe +2 na perícia. Ao alcançar 35% você se torna Veterano na Perícia Ritualismo, e em 70% se torna Expert."
+                    },
+
+                    {
+                        epeem: 25,
+                        nome: "Marcas Precisas",
+                        descricao: "Ao atacar um inimigo você é capaz de usar a sua precisão Paranormal para lentamente fazer gravuras de Rituais de primeiro círculo em seus alvos, mas a cada círculo superior ao primeiro, adicione +1 marca. Cada acerto crítico adiciona 1 marca no seu alvo, ao chegar em 3 marcas você conjura 1 ritual de um círculo que você conhece como ação livre, você apenas paga o custo. Você pode se livrar de 1x multiplicador de crítico e/ou +1 dado de dano do seu crítico para reduzir a margem de crítico de sua arma."
+                    },
+
+                    {
+                        epeem: 40,
+                        nome: "Raiva Sombria",
+                        descricao: "Ao derrubar um inimigo, executar ele, ou se um aliado seu for derrubado, você pode atacar um inimigo em alcance corpo-a-corpo ou até 4 metros e adicionar uma marca sem precisar causar dano crítico. Diminua sua margem de crítico em 2."
+                    },
+
+                    {
+                        epeem: 65,
+                        nome: "Encantamento Preciso",
+                        descricao: "Caso utilize Marcas Precisas contra um ser, ele receberá -3 para resistir fisicamente ou mentalmente efeitos do ritual realizado, e se ele estiver Machucado, ele receberá -6. Qualquer arma que você empunhar receberá a modificação Malevolente sem aumentar a categoria."
+                    },
+
+                    {
+                        epeem: 99,
+                        nome: "Armamento Paranormal",
+                        descricao: "Você adiciona uma marca a cada 3 ataques em um alvo. O Número de Marcas necessárias diminui em 1 e o custo do PE do ritual também. Rituais de dano também podem adicionar marcas em inimigos."
+                    }
+                ]
             }
         },
         vidaBase: 20,
@@ -1047,6 +1081,83 @@ const classes = {
                         descricao: "Através de Transcendência Adaptativa, escolha um Ritual de Iluminação que possa conjurar e utilize sua versão Discente. Além disso, recebe o Ritual de Maldição Correntes da Tormenta."
                     }
                 ]
+            },
+            "Exorcista": {
+                descricao: "Você aprendeu que o Paranormal não pode ser enfrentado apenas com força. Para expulsá-lo, é preciso compreender suas manifestações, reconhecer sua presença e ter convicção suficiente para resistir a ela. Exorcistas estudam religiões, símbolos, doutrinas e fenômenos sobrenaturais para encontrar formas de confrontar o Outro Lado. Alguns acreditam em uma divindade, outros em princípios próprios, mas todos compartilham uma mesma certeza: a Realidade não pertence ao Paranormal. Sua fé permite que você toque a Aura sem ser consumido por ela, transformando essa energia em proteção, poder e uma arma contra as próprias criaturas do Outro Lado. Você não busca dominar o Paranormal. Você o força a recuar. Requisito: Ser da Ordo Animarum",
+                poderes: [
+                    {
+                        epeem: 10,
+                        nome: "Revelação e Canalização",
+                        descricao: `Você aprendeu a reconhecer as marcas deixadas pelo Paranormal e a utilizar a Aura sem permitir que ela domine sua mente. Você recebe treinamento em Religião ou, caso já seja treinado, recebe +2 nessa perícia. Além disso, pode usar Religião no lugar de Investigação, Percepção e Ritualismo para perceber, encontrar ou compreender seres, rastros, manifestações e pistas relacionadas ao Paranormal. Você também consegue identificar o estado da Barreira Espiritual de uma área. Por fim, aprendeu a Canalizar Aura. Fazer isso exige uma ação padrão e o gasto de 2d6 de Sanidade. Ao canalizar, seu corpo passa a emitir uma forte luz e você recebe um benefício de acordo com o estado atual da Barreira Espiritual. Caso entre em uma área com outro estado, o benefício se adapta imediatamente.
+
+                        ESTÁVEL. Você recebe +1d20 em testes de resisttir até o fim da cena.
+                        
+                        DANIFICADA. Você recebe PV temporários iguais ao Conhecimento + sua Influência, além dos benefícios anteriores.
+                        
+                        ARRUINADA. Você recebe +2 em testes ataque, além dos benefícios anteriores.
+                        
+                        ROMPIDA. Você recebe RD 10 físico, além de todos os benefícios anteriores. Você pode encerrar a Canalização voluntariamente.
+`
+                    },
+
+                    {
+                        epeem: 25,
+                        nome: "Rito de Consagração",
+                        descricao: `Você aprendeu a preparar a Realidade para que a Aura responda à sua vontade. Como uma ação completa, você pode gastar 1 PE para consagrar uma área de até 3m de raio ao seu redor. A área permanece até o fim da cena. Você pode gastar +1 de PE para aumentar a área em +2m. Ao criar a área, escolha uma das formas de consagração:
+                        
+                        PROTEÇÃO. Você e seus aliados dentro da área recebem +2 em testes de Defesa (esquivar, aparar e defender)
+                        
+                        PURIFICAÇÃO. Toda vez que um aliado sofrer dano Elemental Paranormal você adiciona sua INF e reduza o dano recebido a eles e a você.
+                        
+                        CONDUÇÃO. Enquanto estiver dentro da área, você reduz em 1d6 o custo de Sanidade da sua próxima Canalização de Aura e adiciona o valor rolado para o próximo ritual conjurado como bônus.
+                        
+                        REPULSÃO. Criaturas Paranormais que estiverem sobre a área consagrada, terão -3 em testes de resistência contra danos e efeitos paranormais. A área é desfeita caso você fique inconsciente.
+`
+                    },
+
+                    {
+                        epeem: 40,
+                        nome: "Círculo da Convicção",
+                        descricao: `Sua exposição ao Paranormal fortaleceu sua convicção em vez de destruí-la. Você se torna veterano em Religião ou, caso já seja veterano, recebe +5 nessa perícia. Quando falha em um teste de resistir, pode gastar 2 PE para refazer o teste usando Religião no lugar da perícia original. Você deve aceitar o segundo resultado, mesmo que seja pior. Além disso, enquanto estiver com Canalizar Aura ativo, você pode gastar 1d6 de Sanidade para criar, em alcance médio, um Círculo de Exorcismo com 1,5m de raio. O Círculo permanece até o fim da cena. Dentro dele, a Barreira Espiritual é considerada um estado pior para efeitos de rituais e habilidades relacionadas ao Paranormal. Além disso, escolha um dos efeitos abaixo ao criar o Círculo:
+                        
+                        CONDENAÇÃO. Seus rituais contra criaturas dentro do Círculo recebem o valor da sua INF na DT ou no dano.
+                        
+                        REVELAÇÃO. Criaturas Paranormais dentro do Círculo não podem se beneficiar de camuflagem ou invisibilidade sobrenatural, além de limitar o deslocamento para metade caso saia do círculo.
+                        
+                        PROTEÇÃO. Aliados dentro do Círculo recebem sua INF em testes de resistência contra habilidades de criaturas Paranormais. Você pode possuir apenas um Círculo de Exorcismo ativo por vez.
+`
+                    },
+
+                    {
+                        epeem: 65,
+                        nome: "Liturgia Paranormal",
+                        descricao: `Sua fé, seus rituais e sua compreensão da Aura tornaram-se uma única coisa. Palavras, símbolos e orações são capazes de moldar a própria manifestação do Paranormal. Enquanto estiver com Canalizar Aura ativo, quando conjurar um ritual de alcance pessoal ou toque, pode gastar 1d6 de Sanidade para fazer o ritual também afetar uma criatura adicional adjacente ao alvo original, desde que seja um aliado. Por fim, sempre que utilizar Liturgia Paranormal dentro de um Círculo de Exorcismo, você pode alterar o efeito escolhido para o Círculo até o início do seu próximo turno.
+`
+                    },
+
+                    {
+                        epeem: 99,
+                        nome: "Exorcismo Final",
+                        descricao: `Você não expulsa apenas uma criatura. Você força o Outro Lado a reconhecer que este mundo não pertence a ele. Você alcançou o limite entre a fé e o Paranormal. A Aura que antes ameaçava sua mente agora responde à sua vontade. Enquanto estiver com Canalizar Aura ativo, você pode gastar uma ação completa e 2d6 de Sanidade para tentar romper a ligação de uma criatura Paranormal com a Realidade. Escolha um alvo em alcance médio. Ela deve realizar um teste de Resistir contra a DT de seus rituais. Se passar, resiste ao exorcismo. Se falhar, sua conexão com o Outro Lado é suprimida. Até o início de seu próximo turno, o alvo:
+
+                        Perde benefícios da Barreira;
+
+                        –3 na DT das habilidades e rituais paranormais;
+
+                        Não pode utilizar habilidades dependentes da Barreira;
+
+                        Não pode evoluir;
+
+                        Recebe apenas metade da recuperação de recursos Paranormais;
+
+                        Transformações são suprimidas;
+
+                        Benefícios do Híbrido são ignorados.
+
+                        Se o alvo falhar no teste por 5 ou mais, sua conexão é profundamente rompida e o efeito permanece até o final da cena. Um alvo afetado pode repetir o teste de Resistir no início de cada um de seus turnos, encerrando o efeito em caso de sucesso. Se o alvo estiver dentro de um Círculo de Exorcismo, ela sofre –2 no teste de Resistir contra este poder. Após utilizar Exorcismo Final, você sofre 1d10+2 de dano permanente de Sanidade.
+`
+                    }
+                ]                
             }
         },
         vidaBase: 15,

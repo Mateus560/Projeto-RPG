@@ -7,7 +7,8 @@ import { exportarFicha, importarFicha } from "../services/ficha-backup.js";
 import {
     carregarPericiasIniciais,
     carregarPericiasOrigem,
-    criarSlotsPericias
+    criarSlotsPericias,
+    criarSlotsPericiasManual
 } from "../domain/pericias.js";
 import { adicionarHabilidade } from "../ui/habilidades.js";
 import {
@@ -106,6 +107,7 @@ function vincularEventosDaFicha() {
         obterElemento(id).addEventListener("input", calcularStatus)
     );
     obterElemento("conhecimento").addEventListener("input", criarSlotsPericias);
+    obterElemento("adicionar-pericia").addEventListener("click", criarSlotsPericiasManual);
     obterElemento("forca").addEventListener("input", atualizarInventario);
 
     obterElemento("adicionar-habilidade").addEventListener("click", () => adicionarHabilidade());
