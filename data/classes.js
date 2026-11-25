@@ -114,7 +114,7 @@ const classes = {
                     {
                         epeem: 10,
                         nome: "Armado e Preparado",
-                        descricao: "Você recebe +5 de iniciativa e percepção, pode recarregar armas de fogo como ação livre e pode escolher uma arma simples ou marcial para ter seu custo reduzido em 1."
+                        descricao: "Você recebe +5 de iniciativa e percepção, pode recarregar armas de fogo como ação livre e pode escolher uma arma simples ou marcial para ter seu custo reduzido em 1. Você consegue trocar a modificação de uma arma corpo a corpo para sua arma a distância com uma ação de movimento, o modificador volta para a arma original no final da cena, se alguma modificação for incompatível com a arma à distância ou corpo a corpo, você ignora ela."
                     },
                     
                     {
