@@ -405,7 +405,6 @@ const classes = {
             "Armas Simples", "Armas Pesadas", "Proteções Leves", "Proteções Pesadas"
         ]
     },
-
     Especialista: {
         trilhas: {
             "Técnico de Combate": {
@@ -655,7 +654,6 @@ const classes = {
             "Armas Simples", "Armas Marciais", "Proteções Leves"
         ]
     },
-
     Profeta: {
         trilhas: {
             "Destemido": {
@@ -900,10 +898,9 @@ const classes = {
             "Armas Simples", "Armas Exóticas"
         ]
     },
-
     Ascetico: {
         trilhas: {
-            "Devorador": {
+            "Devorador": {  
                 descricao: "No seu primeiro encontro com o Paranormal deu terrivelmente errado, você sente que algo estranho se instaurou em seu sangue, na sua força vital, algo se emaranhou. Uma sede de sangue não natural e uma fome anormal colocou uma vontade primitiva em sua mente, a de devorar e de lutar.",
 
                 poderes: [
@@ -993,8 +990,7 @@ const classes = {
 
                         Executor: 4 PE, Ação Padrão: Você realiza um avanço monstruosamente rápido em linha reta, atravessando paredes e levando consigo qualquer objeto ou criatura que esteja em seu caminho. Ao atingir uma criatura, causa 3d4 de dano de sua Afinidade Elemental e a arremessa 1d6+2 metros. O alvo também fica impedido de utilizar Rituais por 2 turno. 40%: O dano aumenta para 3d6+3, o deslocamento forçado para 1d8+3 metros e a duração da incapacidade de utilizar Rituais passa para 3 turnos. 65%: O dano aumenta para 3d8+4, o alvo fica impedido de utilizar Rituais por 4 turnos e o avanço passa a ignorar RD Física.
 
-                        Modelo: Morcegos Irritantes - 2 PE, Ação Padrão: Você invoca uma nuvem de morcegos sobrenaturais que permanece em uma área de alcance médio por até 5 turnos. Você pode enxergar e ouvir através deles enquanto estiverem ativos. Os morcegos podem procurar criaturas, seguir rastros e servir para intimidar ou dispersar pessoas. 40%: Os morcegos podem se concentrar em uma criatura, causando 2d6+2 de um elemento de sua Afinidade durante sua duração. A criatura também recebe esta quantidade para contrariar a cura que ela receber enquanto estiver sendo perseguida. 65%: Você pode dividir os morcegos entre até 3 criaturas. Cada uma sofre o dano normalmente e recebe a redução de cura. Além disso, os morcegos ignoram camuflagem e escuridão não sobrenatural para localizar seus alvos.
-`
+                        Modelo: Morcegos Irritantes - 2 PE, Ação Padrão: Você invoca uma nuvem de morcegos sobrenaturais que permanece em uma área de alcance médio por até 5 turnos. Você pode enxergar e ouvir através deles enquanto estiverem ativos. Os morcegos podem procurar criaturas, seguir rastros e servir para intimidar ou dispersar pessoas. 40%: Os morcegos podem se concentrar em uma criatura, causando 2d6+2 de um elemento de sua Afinidade durante sua duração. A criatura também recebe esta quantidade para contrariar a cura que ela receber enquanto estiver sendo perseguida. 65%: Você pode dividir os morcegos entre até 3 criaturas. Cada uma sofre o dano normalmente e recebe a redução de cura. Além disso, os morcegos ignoram camuflagem e escuridão não sobrenatural para localizar seus alvos.`
                     },
 
                     {
@@ -1096,8 +1092,7 @@ const classes = {
                         
                         ARRUINADA. Você recebe +2 em testes ataque, além dos benefícios anteriores.
                         
-                        ROMPIDA. Você recebe RD 10 físico, além de todos os benefícios anteriores. Você pode encerrar a Canalização voluntariamente.
-`
+                        ROMPIDA. Você recebe RD 10 físico, além de todos os benefícios anteriores. Você pode encerrar a Canalização voluntariamente.`
                     },
 
                     {
@@ -1111,8 +1106,7 @@ const classes = {
                         
                         CONDUÇÃO. Enquanto estiver dentro da área, você reduz em 1d6 o custo de Sanidade da sua próxima Canalização de Aura e adiciona o valor rolado para o próximo ritual conjurado como bônus.
                         
-                        REPULSÃO. Criaturas Paranormais que estiverem sobre a área consagrada, terão -3 em testes de resistência contra danos e efeitos paranormais. A área é desfeita caso você fique inconsciente.
-`
+                        REPULSÃO. Criaturas Paranormais que estiverem sobre a área consagrada, terão -3 em testes de resistência contra danos e efeitos paranormais. A área é desfeita caso você fique inconsciente.`
                     },
 
                     {
@@ -1124,15 +1118,13 @@ const classes = {
                         
                         REVELAÇÃO. Criaturas Paranormais dentro do Círculo não podem se beneficiar de camuflagem ou invisibilidade sobrenatural, além de limitar o deslocamento para metade caso saia do círculo.
                         
-                        PROTEÇÃO. Aliados dentro do Círculo recebem sua INF em testes de resistência contra habilidades de criaturas Paranormais. Você pode possuir apenas um Círculo de Exorcismo ativo por vez.
-`
+                        PROTEÇÃO. Aliados dentro do Círculo recebem sua INF em testes de resistência contra habilidades de criaturas Paranormais. Você pode possuir apenas um Círculo de Exorcismo ativo por vez.`
                     },
 
                     {
                         epeem: 65,
                         nome: "Liturgia Paranormal",
-                        descricao: `Sua fé, seus rituais e sua compreensão da Aura tornaram-se uma única coisa. Palavras, símbolos e orações são capazes de moldar a própria manifestação do Paranormal. Enquanto estiver com Canalizar Aura ativo, quando conjurar um ritual de alcance pessoal ou toque, pode gastar 1d6 de Sanidade para fazer o ritual também afetar uma criatura adicional adjacente ao alvo original, desde que seja um aliado. Por fim, sempre que utilizar Liturgia Paranormal dentro de um Círculo de Exorcismo, você pode alterar o efeito escolhido para o Círculo até o início do seu próximo turno.
-`
+                        descricao: `Sua fé, seus rituais e sua compreensão da Aura tornaram-se uma única coisa. Palavras, símbolos e orações são capazes de moldar a própria manifestação do Paranormal. Enquanto estiver com Canalizar Aura ativo, quando conjurar um ritual de alcance pessoal ou toque, pode gastar 1d6 de Sanidade para fazer o ritual também afetar uma criatura adicional adjacente ao alvo original, desde que seja um aliado. Por fim, sempre que utilizar Liturgia Paranormal dentro de um Círculo de Exorcismo, você pode alterar o efeito escolhido para o Círculo até o início do seu próximo turno.`
                     },
 
                     {
@@ -1154,8 +1146,7 @@ const classes = {
 
                         Benefícios do Híbrido são ignorados.
 
-                        Se o alvo falhar no teste por 5 ou mais, sua conexão é profundamente rompida e o efeito permanece até o final da cena. Um alvo afetado pode repetir o teste de Resistir no início de cada um de seus turnos, encerrando o efeito em caso de sucesso. Se o alvo estiver dentro de um Círculo de Exorcismo, ela sofre –2 no teste de Resistir contra este poder. Após utilizar Exorcismo Final, você sofre 1d10+2 de dano permanente de Sanidade.
-`
+                        Se o alvo falhar no teste por 5 ou mais, sua conexão é profundamente rompida e o efeito permanece até o final da cena. Um alvo afetado pode repetir o teste de Resistir no início de cada um de seus turnos, encerrando o efeito em caso de sucesso. Se o alvo estiver dentro de um Círculo de Exorcismo, ela sofre –2 no teste de Resistir contra este poder. Após utilizar Exorcismo Final, você sofre 1d10+2 de dano permanente de Sanidade.`
                     }
                 ]                
             }
