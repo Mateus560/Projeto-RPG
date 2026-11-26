@@ -354,7 +354,7 @@ const classes = {
                 ]
             },
             "Retalhador": {
-                descricao: "Sem descrição. Requisito: Ser da Ordo Animarum",
+                descricao: "Outros usam papel, giz ou sangue para traçar rituais. O Retalhador usa a lâmina e a carne do inimigo. Cada corte não é um ferimento... é a primeira linha de um selo mortal. Requisito: Ser da Ordo Animarum",
                 poderes: [
                     {
                         epeem: 10,
