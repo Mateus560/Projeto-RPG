@@ -26,7 +26,7 @@ const almas = {
         antonimo:
             "Complacência. A satisfação absoluta com aquilo que já possui, recusando-se a evoluir porque acredita que não há mais nada a conquistar.",
         poder:
-            "Ganância Mecânica: Uma vez por cena você pode transformar o resultado do dado ao seu favor. Falha crítica se torna uma falha comum, Falha comum se torna sucesso."
+            "Ganância Mecânica: Uma vez por cena você pode transformar o resultado do dado ao seu favor. Falha crítica se torna uma falha comum, Falha comum se torna sucesso, não pode ser utilizada em combate."
     },
 
     "Alma Desesperada - Coragem": {

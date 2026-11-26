@@ -33,8 +33,11 @@ export function carregarPericiasIniciais() {
 
                 <select>
                     <option value="5">+5</option>
+                    <option value="7">+7</option>
                     <option value="10">+10</option>
+                    <option value="12">+12</option>
                     <option value="15">+15</option>
+                    <option value="17">+17</option>
                 </select>
             `;
         } else {
@@ -56,7 +59,6 @@ export function carregarPericiasIniciais() {
         lista.appendChild(campo);
     });
 }
-
 
 export function carregarPericiasOrigem(periciasSalvas = null) {
     const campoOrigem = document.getElementById("origem");
@@ -94,8 +96,11 @@ export function carregarPericiasOrigem(periciasSalvas = null) {
 
             <select>
                 <option value="5">+5</option>
+                <option value="7">+7</option>
                 <option value="10">+10</option>
+                <option value="12">+12</option>
                 <option value="15">+15</option>
+                <option value="17">+17</option>
             </select>
         `;
 
@@ -107,7 +112,6 @@ export function carregarPericiasOrigem(periciasSalvas = null) {
         }
     });
 }
-
 
 export function criarSlotsPericias() {
     const campoClasse = document.getElementById("classe")
@@ -152,8 +156,11 @@ export function criarSlotsPericias() {
 
             <select>
                 <option value="5">+5</option>
+                <option value="7">+7</option>
                 <option value="10">+10</option>
+                <option value="12">+12</option>
                 <option value="15">+15</option>
+                <option value="17">+17</option>
             </select>
         `;
 
@@ -192,8 +199,11 @@ export function criarSlotsPericiasManual() {
 
         <select>
             <option value="5">+5</option>
+            <option value="7">+7</option>
             <option value="10">+10</option>
+            <option value="12">+12</option>
             <option value="15">+15</option>
+            <option value="17">+17</option>
         </select>
 
         <button type="button" class="button-remover">
