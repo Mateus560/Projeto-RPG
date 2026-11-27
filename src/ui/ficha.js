@@ -7,16 +7,12 @@ import {
 } from "../domain/pericias.js";
 
 import {
-    coletarHabilidades,
-    carregarHabilidades
+    coletarHabilidades
 } from "./habilidades.js";
 
 import {
     coletarArmas,
     coletarItens,
-    carregarArmas,
-    carregarItens,
-    atualizarInventario
 } from "../domain/inventario.js";
 
 import {
@@ -102,10 +98,12 @@ export function coletarFicha() {
         // ANOTAÇÕES
         // ====================================================
 
-        anotacoes:
-            document.querySelector(
-                ".anotacoes"
-            )?.value || "",
+        anotacoes: document.getElementById("lista-anotacoes")
+            ? Array.from(
+                document.querySelectorAll("#lista-anotacoes textarea"),
+                campo => campo.value
+            )
+            : (lerFichaSalva()?.anotacoes ?? []),
 
 
         // ====================================================
@@ -116,13 +114,19 @@ export function coletarFicha() {
             coletarPericias(),
 
         habilidades:
-            coletarHabilidades(),
+            document.getElementById("lista-habilidades")
+                ? coletarHabilidades()
+                : lerFichaSalva()?.habilidades || [],
 
         armas:
-            coletarArmas(),
+            document.getElementById("lista-armas")
+                ? coletarArmas()
+                : lerFichaSalva()?.armas || [],
 
         itens:
-            coletarItens(),
+            document.getElementById("lista-itens")
+                ? coletarItens()
+                : lerFichaSalva()?.itens || [],
 
         proficiencias:
             coletarProficiencias(),
@@ -264,14 +268,6 @@ export function carregarFicha() {
         ficha.recursos?.sanidade ?? 0;
 
     // ========================================================
-    // ANOTAÇÕES
-    // ========================================================
-
-    document.querySelector(".anotacoes").value =
-        ficha.anotacoes || "";
-
-
-    // ========================================================
     // PERÍCIAS
     // ========================================================
 
@@ -286,29 +282,6 @@ export function carregarFicha() {
     carregarPericiasOrigem(
         ficha.pericias?.origem
     );
-
-
-    // ========================================================
-    // HABILIDADES
-    // ========================================================
-
-    carregarHabilidades(
-        ficha.habilidades
-    );
-
-    // ========================================================
-    // INVENTÁRIO
-    // ========================================================
-
-    carregarArmas(
-        ficha.armas
-    );
-
-    carregarItens(
-        ficha.itens
-    );
-
-    atualizarInventario();
 
 
     // ========================================================

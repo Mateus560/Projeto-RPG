@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Habilidades</title>
+</head>
+<body>
+    <main class="container">
+        <div id="modal-alerta" class="modal">
+            <div class="modal-content">
+                <h3>PE insuficiente</h3>
+                <p>Você não possui PE suficiente para usar esta habilidade.</p>
+                <button type="button" id="entendi" class="button">Entendi</button>
+            </div>
+        </div>
+
+        <header class="header">
+            <h1>Habilidades</h1>
+        </header>
+
+        <section class="section">
+            <div class="resource">
+                <div class="resource-header">
+                    <label for="pe-atual">Pontos de Esforço</label>
+                    <span>/ <span id="pe-max">0</span></span>
+                </div>
+                <div class="resource-value">
+                    <input type="number" id="pe-atual" min="0" value="0" aria-label="PE atual">
+                </div>
+            </div>
+            <p>As alterações nas habilidades e o gasto de PE são salvos automaticamente.</p>
+        </section>
+
+        <section class="section">
+            <div id="lista-habilidades"></div>
+            <div class="actions">
+                <button type="button" id="adicionar-habilidade" class="btn-3d">
+                    + Adicionar habilidade
+                </button>
+            </div>
+        </section>
+        <div class="actions">
+            <a class="btn-3d" href="index.html">Voltar para a Ficha</a>
+        </div>
+    </main>
+    <script type="module" src="src/pages/habilidades-page.js"></script>
+</body>
+</html>

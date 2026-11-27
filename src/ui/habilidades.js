@@ -1,5 +1,25 @@
 import { alterarRecurso } from "../domain/recursos.js";
 import { mostrarAlerta } from "./alertas.js";
+import { gravarDadosFicha, lerFichaSalva } from "../services/ficha-storage.js";
+
+function salvarAlteracoesAutomaticamente() {
+    const ficha = lerFichaSalva();
+    if (!ficha) return;
+
+    const peAtual = document.getElementById("pe-atual");
+    const atualizacoes = {
+        habilidades: coletarHabilidades()
+    };
+
+    if (peAtual) {
+        atualizacoes.recursos = {
+            ...ficha.recursos,
+            pe: peAtual.value
+        };
+    }
+
+    gravarDadosFicha(atualizacoes);
+}
 
 export function adicionarHabilidade(dados = null) {
     const lista =
@@ -63,7 +83,6 @@ export function adicionarHabilidade(dados = null) {
             >
                 Usar Habilidade
             </button>
-
             <button
                 type="button"
                 class="button-remover"
@@ -100,6 +119,13 @@ export function adicionarHabilidade(dados = null) {
         ).value = dados.descricao || "";
     }
 
+    habilidade.querySelectorAll("input, textarea").forEach(campo => {
+        campo.addEventListener("input", salvarAlteracoesAutomaticamente);
+        campo.addEventListener("change", salvarAlteracoesAutomaticamente);
+    });
+
+    salvarAlteracoesAutomaticamente();
+
 
     // ========================================================
     // EVENTOS
@@ -119,6 +145,7 @@ export function adicionarHabilidade(dados = null) {
         .addEventListener("click", () => {
 
             habilidade.remove();
+            salvarAlteracoesAutomaticamente();
 
         });
 }
@@ -160,6 +187,8 @@ export function usarHabilidade(habilidade) {
         "pe-atual",
         -custo
     );
+
+    salvarAlteracoesAutomaticamente();
 }
 
 

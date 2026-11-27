@@ -10,7 +10,6 @@ import {
     criarSlotsPericias,
     criarSlotsPericiasManual
 } from "../domain/pericias.js";
-import { adicionarHabilidade } from "../ui/habilidades.js";
 import {
     alterarRecurso,
     limitarRecursoAtual,
@@ -20,14 +19,9 @@ import {
 import { atualizarAlma } from "../ui/alma.js";
 import { carregarProficienciasClasse } from "../ui/proficiencias.js";
 import { fecharAlerta } from "../ui/alertas.js";
-import {
-    adicionarArma,
-    adicionarItem,
-    atualizarInventario
-} from "../domain/inventario.js";
 import { calcularStatus } from "../domain/status.js";
-import { carregarFicha, salvarFicha } from "../ui/ficha.js";
-import { lerFichaSalva } from "../services/ficha-storage.js";
+import { carregarFicha, coletarFicha, salvarFicha } from "../ui/ficha.js";
+import { gravarDadosFicha, lerFichaSalva } from "../services/ficha-storage.js";
 
 const obterElemento = id => document.getElementById(id);
 
@@ -108,11 +102,6 @@ function vincularEventosDaFicha() {
     );
     obterElemento("conhecimento").addEventListener("input", criarSlotsPericias);
     obterElemento("adicionar-pericia").addEventListener("click", criarSlotsPericiasManual);
-    obterElemento("forca").addEventListener("input", atualizarInventario);
-
-    obterElemento("adicionar-habilidade").addEventListener("click", () => adicionarHabilidade());
-    obterElemento("adicionar-arma").addEventListener("click", adicionarArma);
-    obterElemento("adicionar-item").addEventListener("click", adicionarItem);
     obterElemento("entendi").addEventListener("click", fecharAlerta);
 
     obterElemento("pv-dano").addEventListener("click", () => receberDano("vida-atual", "dano-pv"));
@@ -146,6 +135,18 @@ function vincularEventosDaFicha() {
         }));
         window.location.href = "./trilha.html";
     });
+
+    obterElemento("abrir-habilidades")?.addEventListener("click", () => {
+        gravarDadosFicha(coletarFicha());
+    });
+
+    obterElemento("abrir-inventario")?.addEventListener("click", () => {
+        gravarDadosFicha(coletarFicha());
+    });
+
+    obterElemento("abrir-anotacoes")?.addEventListener("click", () => {
+        gravarDadosFicha(coletarFicha());
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -153,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ["vida-atual", "pe-atual", "sanidade-atual"].forEach(limitarRecursoAtual);
     vincularEventosDaFicha();
 
-    atualizarInventario();
     calcularStatus();
 
     if (lerFichaSalva()) carregarFicha();

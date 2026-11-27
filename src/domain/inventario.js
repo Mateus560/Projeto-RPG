@@ -1,3 +1,5 @@
+import { gravarDadosFicha, lerFichaSalva } from "../services/ficha-storage.js";
+
 export function calcularCapacidadeInventario(forca) {
     forca = Number(forca) || 0;
     if (forca === 0) {
@@ -9,7 +11,7 @@ export function calcularCapacidadeInventario(forca) {
 
 export function calcularEspacoInventario() {
     return calcularCapacidadeInventario(
-        document.getElementById("forca").value
+        document.getElementById("forca")?.value
     );
 }
 
@@ -25,7 +27,6 @@ export function calcularEspacoUsado() {
     return usado;
 }
 
-
 export function atualizarInventario() {
     const usado = calcularEspacoUsado();
     const maximo = calcularEspacoInventario();
@@ -39,8 +40,32 @@ export function atualizarInventario() {
         `Espaço: ${usado}/${maximo}`;
 }
 
+function salvarInventarioAutomaticamente() {
+    if (!lerFichaSalva()) return;
 
-export function adicionarArma(dados = null) {
+    gravarDadosFicha({
+        armas: coletarArmas(),
+        itens: coletarItens()
+    });
+}
+
+function vincularEventosInventario(elemento) {
+    elemento.querySelector(".button-remover")
+        .addEventListener("click", () => {
+            elemento.remove();
+            atualizarInventario();
+            salvarInventarioAutomaticamente();
+        });
+
+    elemento.querySelectorAll("input, textarea").forEach(campo => {
+        campo.addEventListener("input", () => {
+            atualizarInventario();
+            salvarInventarioAutomaticamente();
+        });
+    });
+}
+
+export function adicionarArma(dados = null, salvarAutomaticamente = true) {
     const lista =
         document.getElementById("lista-armas");
 
@@ -96,13 +121,14 @@ export function adicionarArma(dados = null) {
                     placeholder="Descrição da arma"
                 ></textarea>
             </div>
-
-            <button
-                type="button"
-                class="button-remover"
-            >
-                Remover
-            </button>
+            <div class="actions">
+                <button
+                    type="button"
+                    class="button-remover"
+                >
+                    Remover
+                </button>
+            </div>
     `;
 
     lista.appendChild(arma);
@@ -118,25 +144,19 @@ export function adicionarArma(dados = null) {
             dados.critico || "";
 
         arma.querySelector(".espaco-inventario").value =
-            dados.espaco || 1;
+            dados.espaco ?? 1;
 
         arma.querySelector(".descricao-arma").value =
             dados.descricao || "";
     }
 
-    arma.querySelector(".button-remover")
-        .addEventListener("click", () => {
-            arma.remove();
-            atualizarInventario();
-        });
-
-    arma.querySelector(".espaco-inventario")
-        .addEventListener("input", atualizarInventario);
+    vincularEventosInventario(arma);
 
     atualizarInventario();
+    if (salvarAutomaticamente) salvarInventarioAutomaticamente();
 }
 
-export function adicionarItem(dados = null) {
+export function adicionarItem(dados = null, salvarAutomaticamente = true) {
     const lista =
         document.getElementById("lista-itens");
 
@@ -192,24 +212,17 @@ export function adicionarItem(dados = null) {
             dados.nome || "";
 
         item.querySelector(".espaco-inventario").value =
-            dados.espaco || 1;
+            dados.espaco ?? 1;
 
         item.querySelector(".descricao-item").value =
             dados.descricao || "";
     }
 
-    item.querySelector(".button-remover")
-        .addEventListener("click", () => {
-            item.remove();
-            atualizarInventario();
-        });
-
-    item.querySelector(".espaco-inventario")
-        .addEventListener("input", atualizarInventario);
+    vincularEventosInventario(item);
 
     atualizarInventario();
+    if (salvarAutomaticamente) salvarInventarioAutomaticamente();
 }
-
 
 export function coletarArmas() {
     const armas = [];
@@ -267,29 +280,26 @@ export function coletarItens() {
     return itens;
 }
 
-
 export function carregarArmas(armas) {
-    if (!armas) return;
-
     const lista =
         document.getElementById("lista-armas");
+    if (!lista) return;
 
-    lista.innerHTML = "";
+    lista.replaceChildren();
 
-    armas.forEach(adicionarArma);
+    (armas || []).forEach(arma => adicionarArma(arma, false));
 
     atualizarInventario();
 }
 
 export function carregarItens(itens) {
-    if (!itens) return;
-
     const lista =
         document.getElementById("lista-itens");
+    if (!lista) return;
 
-    lista.innerHTML = "";
+    lista.replaceChildren();
 
-    itens.forEach(adicionarItem);
+    (itens || []).forEach(item => adicionarItem(item, false));
 
     atualizarInventario();
 }
