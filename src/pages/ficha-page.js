@@ -61,6 +61,13 @@ function inicializarListas() {
         .forEach(preencherAtributo);
 }
 
+function salvarCamposPrincipaisAutomaticamente(evento) {
+    const campo = evento.target;
+
+    if (!campo.matches("input:not([type='file']), select, textarea")) return;
+    gravarDadosFicha(coletarFicha());
+}
+
 function atualizarTrilhasDaClasse() {
     const campoClasse = obterElemento("classe");
     const campoTrilha = obterElemento("trilha");
@@ -157,4 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
     calcularStatus();
 
     if (lerFichaSalva()) carregarFicha();
+
+    document.addEventListener("input", salvarCamposPrincipaisAutomaticamente);
+    document.addEventListener("change", salvarCamposPrincipaisAutomaticamente);
 });
