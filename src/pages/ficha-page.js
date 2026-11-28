@@ -135,14 +135,6 @@ function vincularEventosDaFicha() {
         arquivoFicha.value = "";
     });
 
-    obterElemento("poderes-trilha").addEventListener("click", () => {
-        localStorage.setItem("trilha-selecionada", JSON.stringify({
-            classe: obterElemento("classe").value,
-            trilha: obterElemento("trilha").value
-        }));
-        window.location.href = "./trilha.html";
-    });
-
     obterElemento("abrir-habilidades")?.addEventListener("click", () => {
         gravarDadosFicha(coletarFicha());
     });
