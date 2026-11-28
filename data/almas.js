@@ -16,7 +16,7 @@ const almas = {
         antonimo:
             "Estagnação. A incapacidade de mudar ou se adaptar, permitindo que a deterioração consuma lentamente tudo aquilo que existe.",
         poder:
-            "Sobrevivência Degenerativa: Toda vez que você ficar Machucado, recupera 1 PE no início do seu turno. Ao atingir 50% ou menos dos PV, recupera 1d3 PE em vez disso."
+            "Sobrevivência Degenerativa: Você recebe 1 de PE a cada rodada. Caso esteja machucado você recupera 1d3 de PE toda vez que for seu turno."
     },
 
     "Alma Áurica - Ambição": {
