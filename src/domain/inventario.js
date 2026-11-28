@@ -196,13 +196,14 @@ export function adicionarItem(dados = null, salvarAutomaticamente = true) {
                 class="descricao-item"
             ></textarea>
         </div>
-
-        <button
-            type="button"
-            class="button-remover"
-        >
-            Remover
-        </button>
+        <div class="actions">
+            <button
+                type="button"
+                class="button-remover"
+            >
+                Remover
+            </button>
+        </div>
     `;
 
     lista.appendChild(item);

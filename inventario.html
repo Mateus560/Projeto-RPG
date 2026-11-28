@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Inventário</title>
 </head>
@@ -11,7 +11,6 @@
         <header class="header">
             <h1>Inventário</h1>
             <h2 id="espaco">Espaço: 0/0</h2>
-            <p>A capacidade do inventário é calculada com base na Força da ficha.</p>
         </header>
 
         <input type="hidden" id="forca" value="0">
@@ -36,14 +35,23 @@
             </div>
         </section>
 
-        <section class="section">
-            <p>Armas, itens e seus espaços são salvos automaticamente.</p>
-        </section>
-
         <div class="actions">
             <a class="btn-3d" href="index.html">Voltar para a Ficha</a>
         </div>
     </main>
+    <nav class="site-nav" aria-label="Navegação principal">
+        <a href="index.html">Ficha</a>
+        <a href="habilidades.html">Habilidades</a>
+        <a href="inventario.html" aria-current="page">Inventário</a>
+        <a href="anotacoes.html">Anotações</a>
+        <details class="site-nav-more">
+            <summary>Mais</summary>
+            <div class="site-nav-menu">
+                <a href="rituais.html">Rituais</a>
+                <a href="trilha.html">Trilhas</a>
+            </div>
+        </details>
+    </nav>
     <script type="module" src="src/pages/inventario-page.js"></script>
 </body>
 </html>

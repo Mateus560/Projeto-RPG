@@ -21,7 +21,7 @@ export function adicionarAnotacao(texto = "", salvarAutomaticamente = true) {
     anotacao.innerHTML = `
         <textarea class="anotacao" placeholder="Escreva sua anotação..."></textarea>
         <div class="actions">
-            <button type="button" class="button-remover">Remover</button>
+            <button type="button" class="button-remover" id="button-remover-anotacao">Remover</button>
         </div>
     `;
 

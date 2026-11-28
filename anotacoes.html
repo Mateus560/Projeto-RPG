@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Anotações</title>
 </head>
@@ -11,16 +11,11 @@
         <header class="header">
             <h1>Anotações</h1>
         </header>
-
-        <section class="section">
-            <p>Suas anotações são salvas automaticamente.</p>
-        </section>
-
         <section class="section">
             <div id="lista-anotacoes"></div>
             <div class="actions">
                 <button type="button" id="adicionar-anotacao" class="btn-3d">
-                    + Criar nova área de texto
+                    Criar Anotação
                 </button>
             </div>
         </section>
@@ -28,6 +23,19 @@
             <a class="btn-3d" href="index.html">Voltar para a Ficha</a>
         </div>
     </main>
+    <nav class="site-nav" aria-label="Navegação principal">
+        <a href="index.html">Ficha</a>
+        <a href="habilidades.html">Habilidades</a>
+        <a href="inventario.html">Inventário</a>
+        <a href="anotacoes.html" aria-current="page">Anotações</a>
+        <details class="site-nav-more">
+            <summary>Mais</summary>
+            <div class="site-nav-menu">
+                <a href="rituais.html">Rituais</a>
+                <a href="trilha.html">Trilhas</a>
+            </div>
+        </details>
+    </nav>
     <script type="module" src="src/pages/anotacoes-page.js"></script>
 </body>
 </html>
